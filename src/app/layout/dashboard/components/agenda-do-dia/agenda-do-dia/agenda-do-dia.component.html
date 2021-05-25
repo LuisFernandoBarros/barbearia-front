@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col col-xl-12 col-lg-12">
+        <div class="card mb-3">
+            <div class="card-header col-xl-12">
+                <div class="row d-flex justify-content-between">
+                    <button type="button" class="btn btn-secondary btn-sm">Ver anterior</button>
+                    <span>Agenda do dia {{dataFormated}}</span>
+                    <button type="button" class="btn btn-secondary btn-sm">Ver anterior</button>
+                </div>
+            </div>
+            <div class="card-body table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Horário</th>
+                            <th>Nome</th>
+                            <th>Serviço</th>
+                            <th>Valor</th>
+                            <th>Telefone</th>
+                            <th>Opções</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let agendamento of agendamentos">
+                            <tr app-item-agendamento [agendamento]="agendamento"></tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
