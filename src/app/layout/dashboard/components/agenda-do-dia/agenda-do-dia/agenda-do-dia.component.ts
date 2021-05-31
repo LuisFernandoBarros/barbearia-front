@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Agendamento } from '../item-agendamento/agendamento';
+import { AgendaDoDiaService } from './agenda-do-dia-service';
 
 @Component({
   selector: 'app-agenda-do-dia',
@@ -8,28 +9,14 @@ import { Agendamento } from '../item-agendamento/agendamento';
 })
 export class AgendaDoDiaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private agendaDoDiaService: AgendaDoDiaService) { }
 
   public dataFormated: string;
   public agendamentos: Array<Agendamento> = [];
 
   ngOnInit(): void {
     this.setToday();
-
-    this.agendamentos.push({
-      horario: "08:00",
-      nome: "Luis Fernando",
-      servico: "Barba e Cabelo",
-      valor: 35,
-      telefone: "51998887411"
-    },
-    {
-      horario: "08:00",
-      nome: "Luis Fernando",
-      servico: "Barba e Cabelo",
-      valor: 35,
-      telefone: "51998887411"
-    })
+    this.agendaDoDiaService.getAgendamentosDia().subscribe(response => this.agendamentos = response);
   }
 
   private setToday() {    

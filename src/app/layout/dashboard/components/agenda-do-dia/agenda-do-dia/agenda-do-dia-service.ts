@@ -1,32 +1,18 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Agendamento } from '../item-agendamento/agendamento';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AgendaDoDiaService {
 
-    private agendamentosUrl = 'dashboard/get-agendamentos-dia=27/08/2021';
+    constructor(private httpClient: HttpClient) { }
+
+    private agendamentosUrl = 'http://localhost:8080/agendamentos/2021-10-10';
 
     public agendamentos: Array<Observable<Agendamento>> = [];
 
-    getAgendamentosDia(): Observable<Agendamento>[] {
-        
-        new Observable<Agendamento>((observer) => {
-
-            var eventSource = new EventSource(this.agendamentosUrl, {
-                withCredentials: true
-            });
-
-
-            eventSource.onmessage = function (event) {
-                let json = JSON.parse(event.data);                
-                observer.next(new Dashboard(json.id, json.totalClientes));
-                eventSource.close();
-                observer.complete();
-            }
-        });
-
-        return this.agendamentos;
-
+    getAgendamentosDia() {
+        return this.httpClient.get<Agendamento[]>(this.agendamentosUrl);
     }
 }
