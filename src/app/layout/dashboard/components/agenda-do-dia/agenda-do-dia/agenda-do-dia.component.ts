@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Agendamento } from '../item-agendamento/agendamento';
+import { ModalService } from '../service/modal-service';
 import { AgendaDoDiaService } from './agenda-do-dia-service';
 
 @Component({
@@ -9,7 +10,8 @@ import { AgendaDoDiaService } from './agenda-do-dia-service';
 })
 export class AgendaDoDiaComponent implements OnInit {
 
-  constructor(private agendaDoDiaService: AgendaDoDiaService) { }
+  constructor(private agendaDoDiaService: AgendaDoDiaService,
+    private modalService: ModalService) { }
 
   public dataFormated: string;
   public agendamentos: Array<Agendamento> = [];
@@ -19,9 +21,14 @@ export class AgendaDoDiaComponent implements OnInit {
     this.agendaDoDiaService.getAgendamentosDia().subscribe(response => this.agendamentos = response);
   }
 
-  private setToday() {    
+  private setToday() {
     let data = new Date();
     this.dataFormated = ((data.getDate())) + "/" + ((data.getMonth() + 1)) + "/" + data.getFullYear();
   }
+
+  openModal(id: number) {
+    this.modalService.open(id.toString());
+  }
+
 
 }

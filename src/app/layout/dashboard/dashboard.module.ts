@@ -8,9 +8,10 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { AgendaDoDiaComponent } from './components/agenda-do-dia/agenda-do-dia/agenda-do-dia.component';
 import { ItemAgendamentoComponent } from './components/agenda-do-dia/item-agendamento/item-agendamento.component';
+import { AgendamentoDetalhesComponent } from './components/agenda-do-dia/agendamento-detalhes/agendamento-detalhes.component';
 
 @NgModule({
     imports: [CommonModule, NgbCarouselModule, NgbAlertModule, DashboardRoutingModule, StatModule],
-    declarations: [DashboardComponent, TimelineComponent, NotificationComponent, ChatComponent, AgendaDoDiaComponent, ItemAgendamentoComponent]
+    declarations: [DashboardComponent, TimelineComponent, NotificationComponent, ChatComponent, AgendaDoDiaComponent, ItemAgendamentoComponent, AgendamentoDetalhesComponent]
 })
 export class DashboardModule {}
