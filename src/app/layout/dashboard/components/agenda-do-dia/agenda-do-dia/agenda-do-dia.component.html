@@ -22,11 +22,13 @@
                     </thead>
                     <tbody>
                         <ng-container *ngFor="let agendamento of agendamentos">
-                            <tr app-item-agendamento [agendamento]="agendamento"></tr>
+                            <tr (click)="openModal(agendamento.id)" app-item-agendamento [agendamento]="agendamento"></tr>
+                            <app-agendamento-detalhes id="{{agendamento.id}}"></app-agendamento-detalhes>
                         </ng-container>
                     </tbody>
                 </table>
             </div>
+            
         </div>
     </div>
 </div>
