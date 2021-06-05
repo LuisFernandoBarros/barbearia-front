@@ -1,5 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AlertService } from '../../../../../shared/alerts/service/alert-service';
+
 import { Agendamento } from '../item-agendamento/agendamento';
 import { ModalService } from '../service/modal-service';
 import { AgendamentoDetalhesService } from './agendamento-detlahes-service';
@@ -17,7 +19,8 @@ export class AgendamentoDetalhesComponent implements OnInit {
   @ViewChild("detalhes") detalhes;
 
   constructor(private modalService: ModalService, private ngModal: NgbModal,
-    private agendamentoDetalhesService: AgendamentoDetalhesService) { }
+    private agendamentoDetalhesService: AgendamentoDetalhesService,
+    private alertService: AlertService) { }
 
   ngOnInit(): void {
     let modal = this;
@@ -31,12 +34,31 @@ export class AgendamentoDetalhesComponent implements OnInit {
 
   compareceu(id: number) {
     this.agendamentoDetalhesService.atender(id)
-      .subscribe(response => console.log(response));
+      .subscribe(
+        response => {
+          console.log(response);
+          this.handleSucess("Comparecimento salvo com sucesso")
+        },
+        (err) => { this.handleError("Erro ao salvar comparecimento") });
+
   }
 
-  cancelou(id: number) {    
+  cancelou(id: number) {
     this.agendamentoDetalhesService.cancelar(id)
-      .subscribe(response => console.log(response));
+      .subscribe(
+        response => {
+          console.log(response);
+          this.handleSucess("Agendamento cancelado com sucesso")
+        },
+        (err) => { this.handleError("Erro ao cancelar do agendamento") });
   }
+
+  handleSucess(message: string) {
+    this.alertService.showAlertSucess(message);
+  }
+  handleError(message: string) {
+    this.alertService.showAlertDanger(message);
+  }
+
 
 }
