@@ -9,6 +9,9 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 import { LanguageTranslationModule } from './shared/modules/language-translation/language-translation.module';
 
+import { NgbActiveModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+
+
 @NgModule({
     imports: [
         CommonModule,
@@ -16,10 +19,11 @@ import { LanguageTranslationModule } from './shared/modules/language-translation
         BrowserAnimationsModule,
         HttpClientModule,
         LanguageTranslationModule,
-        AppRoutingModule
+        AppRoutingModule,
+        NgbModalModule
     ],
     declarations: [AppComponent],
-    providers: [AuthGuard],
+    providers: [AuthGuard, NgbActiveModal],
     bootstrap: [AppComponent]
 })
 export class AppModule {}
