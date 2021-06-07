@@ -15,13 +15,13 @@ export class ModalService {
 
     open(id: string) {
         let modal: any = this.modals.filter(x => x.id === id)[0];
-        console.log(this.modals);
         modal.open();
     }
 
     close(id: string) {
         let modal: any = this.modals.filter(x => x.id === id)[0];
         modal.close();
+
     }
 
 }
