@@ -3,9 +3,9 @@
         <div class="card mb-3">
             <div class="card-header col-xl-12">
                 <div class="row d-flex justify-content-between">
-                    <button type="button" class="btn btn-secondary btn-sm">Ver anterior</button>
-                    <span>Agenda do dia {{dataFormated}}</span>
-                    <button type="button" class="btn btn-secondary btn-sm">Ver anterior</button>
+                    <button type="button" class="btn btn-secondary btn-sm" (click)="previusDay()"><</button>
+                    <span>{{data | date:"dd/MM/yyyy" }}</span>
+                    <button type="button" class="btn btn-secondary btn-sm" (click)="nextDay()">></button>
                 </div>
             </div>
             <div class="card-body table-responsive">
@@ -14,10 +14,7 @@
                         <tr>
                             <th>Horário</th>
                             <th>Nome</th>
-                            <th>Serviço</th>
-                            <th>Valor</th>
-                            <th>Telefone</th>
-                            <th>Opções</th>
+                            <th>Serviço</th>                          
                         </tr>
                     </thead>
                     <tbody>
