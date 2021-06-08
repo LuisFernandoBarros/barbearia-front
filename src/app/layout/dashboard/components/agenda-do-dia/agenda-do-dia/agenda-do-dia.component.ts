@@ -13,22 +13,37 @@ export class AgendaDoDiaComponent implements OnInit {
   constructor(private agendaDoDiaService: AgendaDoDiaService,
     private modalService: ModalService) { }
 
-  public dataFormated: string;
   public agendamentos: Array<Agendamento> = [];
+  public data = new Date();
+  //private dataIso: string;
 
   ngOnInit(): void {
-    this.setToday();
-    this.agendaDoDiaService.getAgendamentosDia().subscribe(response => this.agendamentos = response);
-  }
-
-  private setToday() {
-    let data = new Date();
-    this.dataFormated = ((data.getDate())) + "/" + ((data.getMonth() + 1)) + "/" + data.getFullYear();
+    this.getAgendamentos();
   }
 
   openModal(id: number) {
     this.modalService.open(id.toString());
   }
 
+  getDataIso() {
+    return ((this.data.getFullYear())) + "-" + ((this.data.getMonth() + 1)) + "-" + this.data.getDate();
+  }
 
+  nextDay() {
+    const tomorrow = new Date(this.data);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    this.data = tomorrow;
+    this.getAgendamentos();
+  }
+  
+  previusDay() {
+    const yesterday = new Date(this.data);
+    yesterday.setDate(yesterday.getDate() - 1);
+    this.data = yesterday;
+    this.getAgendamentos();
+  }
+
+  getAgendamentos() {
+    this.agendaDoDiaService.getAgendamentosDia(this.getDataIso()).subscribe(response => this.agendamentos = response);
+  }
 }

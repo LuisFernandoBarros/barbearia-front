@@ -8,11 +8,11 @@ export class AgendaDoDiaService {
 
     constructor(private httpClient: HttpClient) { }
 
-    private agendamentosUrl = 'http://localhost:8080/agendamentos/2021-10-10';
+    private agendamentosUrl = 'http://localhost:8080/agendamentos';
 
     public agendamentos: Array<Observable<Agendamento>> = [];
 
-    getAgendamentosDia() {
-        return this.httpClient.get<Agendamento[]>(this.agendamentosUrl);
+    getAgendamentosDia(data: string) {        
+        return this.httpClient.get<Agendamento[]>(this.agendamentosUrl + "/" + data);
     }
 }
