@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { AlertService } from '../../../../../shared/alerts/service/alert-service';
+import { ToastrService } from 'ngx-toastr';
 
 import { Agendamento } from '../item-agendamento/agendamento';
 import { ModalService } from '../service/modal-service';
@@ -20,7 +20,7 @@ export class AgendamentoDetalhesComponent implements OnInit {
 
   constructor(private modalService: ModalService, private ngModal: NgbModal, 
     private agendamentoDetalhesService: AgendamentoDetalhesService,
-    private alertService: AlertService) { }
+    private toastr: ToastrService) { }
 
     modal: NgbModalRef;
 
@@ -41,11 +41,11 @@ export class AgendamentoDetalhesComponent implements OnInit {
     this.agendamentoDetalhesService.atender(id)
       .subscribe(
         response => {
-          console.log(response);
-          this.handleSucess("Comparecimento salvo com sucesso");
+          console.log(response);          
+          this.toastr.success('Salvo com Sucesso', '');
           this.modalService.close(this.id);
         },
-        (err) => { this.handleError("Erro ao salvar comparecimento") });
+        (err) => { this.toastr.error('Salvo com Sucesso', '') });
 
   }
 
@@ -54,18 +54,9 @@ export class AgendamentoDetalhesComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
-          this.handleSucess("Agendamento cancelado com sucesso");
+          this.toastr.success('Salvo com Sucesso', '');
           this.modalService.close(this.id);
         },
-        (err) => { this.handleError("Erro ao cancelar do agendamento") });
+        (err) => { this.toastr.error('Salvo com Sucesso', '') });
   }
-
-  handleSucess(message: string) {
-    this.alertService.showAlertSucess(message);
-  }
-  handleError(message: string) {
-    this.alertService.showAlertDanger(message);
-  }
-
-
 }

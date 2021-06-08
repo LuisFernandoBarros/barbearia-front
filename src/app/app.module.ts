@@ -10,6 +10,7 @@ import { AuthGuard } from './shared';
 import { LanguageTranslationModule } from './shared/modules/language-translation/language-translation.module';
 
 import { NgbActiveModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -20,10 +21,14 @@ import { NgbActiveModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
         HttpClientModule,
         LanguageTranslationModule,
         AppRoutingModule,
-        NgbModalModule
+        NgbModalModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot({
+            progressBar: true
+        })
     ],
     declarations: [AppComponent],
     providers: [AuthGuard, NgbActiveModal],
     bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
