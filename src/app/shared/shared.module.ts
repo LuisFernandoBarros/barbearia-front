@@ -1,15 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ErrorMsgComponent } from './error-msg/error-msg.component';
 
 
 
 @NgModule({
-    imports: [CommonModule],
-    declarations: [
-
-    ],
-    exports: [
-
-    ]
+  imports: [CommonModule],
+  declarations: [    
+    ErrorMsgComponent
+  ],
+  exports: [    
+  ]
 })
 export class SharedModule { }
