@@ -1,1 +1,25 @@
-<p>cadastro-barbearia worksaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!</p>
+<div class="container">
+    <h4 class="text-muted mb-4">Minha Barbearia</h4>
+    <div class="row">
+        <div class="col col-sm-6">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Cadastro
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="formulario">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Nome da Barbearia</label>
+                            <input type="text" class="form-control" formControlName="nomeBarbearia">
+                        </div>
+                        <div class="form-group">
+                            <label>Telefone</label>
+                            <input type="text" class="form-control" formControlName="telefone">
+                        </div>                        
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
