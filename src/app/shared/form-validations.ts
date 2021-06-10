@@ -28,7 +28,11 @@ export class FormValidations {
       return validatexto.test(texto) ? null : { textoInvalido : true };
     }
     return null;
-  }  
+  }
+
+  static isFormValido(form: FormGroup){
+      return form.status != "INVALID";
+  }
 /*
   static equalsTo(otherField: string) {
     const validator = (formControl: FormControl) => {

@@ -2,33 +2,17 @@
     <h4 class="text-muted mb-4">Minha Barbearia</h4>
     <div class="row">
         <div class="col col-sm-6">
-            <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
-
-                <!-- CONTATO-->
+            <form [formGroup]="formulario" (ngSubmit)="onSubmit()">                
                 <div class="card mb-3">
                     <div class="card-header">
-                        Contato
+                        Editar Informações
                     </div>
                     <div class="card-body">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Nome da Barbearia</label>
                             <input type="text" class="form-control" formControlName="nomeBarbearia">
                             <app-error-msg [control]="formulario.get('nomeBarbearia')" label="Nome da Barbearia"></app-error-msg>
-                        </div>
-                        <div class="form-group">
-                            <label>WhatsApp da Barbearia</label>
-                            <input type="text" class="form-control" formControlName="whatsapp">
-                            <app-error-msg [control]="formulario.get('whatsapp')" label="WhatsApp"></app-error-msg>
-                        </div>
-                    </div>
-                </div>
-
-                <!--ENDERECO-->
-                <div class="card mb-3">
-                    <div class="card-header">
-                        Endereço
-                    </div>
-                    <div class="card-body">
+                        </div>                                                
                         <div class="form-group">
                             <label>Cep</label>
                             <input type="text" class="form-control" formControlName="cep" (blur)="onBlurCep()">
@@ -38,8 +22,7 @@
                         <div class="row">
                             <div class="form-group col-sm-8">
                                 <label>Rua</label>
-                                <input type="text" class="form-control" formControlName="rua">
-                                <app-error-msg [control]="formulario.get('rua')" label="Rua"></app-error-msg>
+                                <input type="text" class="form-control" formControlName="rua" readonly>                                
                             </div>
                             <div class="form-group col-sm-4">
                                 <label>Número</label>
@@ -56,13 +39,11 @@
                         <div class="row">
                             <div class="form-group col-sm-8">
                                 <label>Cidade</label>
-                                <input type="text" class="form-control" formControlName="cidade">
-                                <app-error-msg [control]="formulario.get('cidade')" label="Cidade"></app-error-msg>
+                                <input type="text" class="form-control" formControlName="cidade" readonly>                                
                             </div>
                             <div class="form-group col-sm-4">
                                 <label>Estado</label>
-                                <input type="text" class="form-control" formControlName="estado">
-                                <app-error-msg [control]="formulario.get('estado')" label="Estado"></app-error-msg>
+                                <input type="text" class="form-control" formControlName="estado" readonly>                                
                             </div>
                         </div>
                     </div>
