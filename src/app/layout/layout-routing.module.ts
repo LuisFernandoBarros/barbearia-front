@@ -13,6 +13,7 @@ const routes: Routes = [
                 loadChildren: () => import('./dashboard/dashboard.module').then((m) => m.DashboardModule)
             },
             { path: 'barbearia', loadChildren: () => import('./setttings/cadastro-barbearia/cadastro-barbearia.module').then((m) => m.CadastroBarbeariaModule) },
+            { path: 'profissional', loadChildren: () => import('./setttings/cadastro-profissional/cadastro-profissional.module').then((m) => m.CadastroProfissionalModule) },
             { path: 'charts', loadChildren: () => import('./charts/charts.module').then((m) => m.ChartsModule) },
             { path: 'tables', loadChildren: () => import('./tables/tables.module').then((m) => m.TablesModule) },
             { path: 'forms', loadChildren: () => import('./form/form.module').then((m) => m.FormModule) },
