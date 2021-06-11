@@ -15,7 +15,8 @@ export class AgendaDoDiaComponent implements OnInit {
 
   public agendamentos: Array<Agendamento> = [];
   public data = new Date();
-  //private dataIso: string;
+  public hasError = false;
+  public isLoading = true;
 
   ngOnInit(): void {
     this.getAgendamentos();
@@ -35,7 +36,7 @@ export class AgendaDoDiaComponent implements OnInit {
     this.data = tomorrow;
     this.getAgendamentos();
   }
-  
+
   previusDay() {
     const yesterday = new Date(this.data);
     yesterday.setDate(yesterday.getDate() - 1);
@@ -43,7 +44,22 @@ export class AgendaDoDiaComponent implements OnInit {
     this.getAgendamentos();
   }
 
+  isEmptyAgendamentos(){
+    return !this.hasError && !this.isLoading && this.agendamentos.length == 0;
+  }
+
   getAgendamentos() {
-    this.agendaDoDiaService.getAgendamentosDia(this.getDataIso()).subscribe(response => this.agendamentos = response);
+    this.hasError = false;
+    this.isLoading = true;
+    this.agendaDoDiaService.getAgendamentosDia(this.getDataIso())
+      .subscribe(response => {
+        this.agendamentos = response,
+          this.hasError = false;
+          this.isLoading = false;
+      },
+        (err) => {
+          this.hasError = true;
+          this.isLoading = false;
+        });
   }
 }

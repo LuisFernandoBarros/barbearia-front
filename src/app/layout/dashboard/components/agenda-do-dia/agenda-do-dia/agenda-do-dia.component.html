@@ -2,7 +2,7 @@
     <div class="col col-xl-12 col-lg-12">
         <div class="card mb-3">
             <div class="card-header col-xl-12">
-                <div class="row d-flex justify-content-between">
+                <div class="d-flex justify-content-between">
                     <button type="button" class="btn btn-secondary btn-sm" (click)="previusDay()"><</button>
                     <span>{{data | date:"dd/MM/yyyy" }}</span>
                     <button type="button" class="btn btn-secondary btn-sm" (click)="nextDay()">></button>
@@ -20,12 +20,23 @@
                     <tbody>
                         <ng-container *ngFor="let agendamento of agendamentos">
                             <tr (click)="openModal(agendamento.id)" app-item-agendamento [agendamento]="agendamento"></tr>
-                            <app-agendamento-detalhes id="{{agendamento.id}}" [agendamento]="agendamento"></app-agendamento-detalhes>
+                            <app-agendamento-detalhes id="{{agendamento.id}}" [agendamento]="agendamento"></app-agendamento-detalhes>                            
                         </ng-container>
+                        
                     </tbody>
                 </table>
-            </div>
-            
+                <div class="alert alert-danger" role="alert" *ngIf="hasError">
+                    Não foi possível buscar os agendamentos. Entre em contato com o suporte.
+                </div>
+                <div class="alert alert-info" role="alert" *ngIf="isEmptyAgendamentos()">
+                    Você não possui agendamentos para este dia.
+                </div>                  
+                <div class="text-center">
+                    <div class="spinner-border" role="status" *ngIf="isLoading">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>            
         </div>
     </div>
 </div>
