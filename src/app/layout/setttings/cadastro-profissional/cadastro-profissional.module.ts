@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ErrorMsgComponent } from '../../../shared/error-msg/error-msg.component';
+import { SharedModule } from '../../../shared/shared.module';
+
 
 import { CadastroProfissionalRoutingModule } from '../cadastro-profissional/cadastro-profissional-routing.module';
 
@@ -9,7 +10,7 @@ import { CadastroProfissionalComponent } from '../cadastro-profissional/componen
 
 
 @NgModule({
-    imports: [CommonModule, CadastroProfissionalRoutingModule,FormsModule, ReactiveFormsModule],
-    declarations: [CadastroProfissionalComponent, ErrorMsgComponent]
+    imports: [CommonModule, CadastroProfissionalRoutingModule,FormsModule, ReactiveFormsModule, SharedModule],
+    declarations: [CadastroProfissionalComponent]
 })
 export class CadastroProfissionalModule {}
