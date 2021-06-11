@@ -27,7 +27,6 @@ export class ErrorMsgComponent implements OnInit {
           return FormValidations.getErrorMsg(this.label, propertyName, this.control.errors[propertyName]);
         }
     }
-
     return null;
   }
 

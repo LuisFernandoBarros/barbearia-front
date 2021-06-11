@@ -3,10 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ToastrService } from 'ngx-toastr';
-import { FormValidations } from '../../../../shared/form-validations';
-import { ConsultaCepResponse } from '../../../../shared/model/consulta-cep-response';
-import { ConsultaCepService } from '../../../../shared/services/consulta-cep.service';
-import { CadastroBarbeariaService } from '../cadastro-barbearia.service';
+import { FormValidations } from '../../../../../shared/form-validations';
+import { ConsultaCepResponse } from '../../../../../shared/model/consulta-cep-response';
+import { ConsultaCepService } from '../../../../../shared/services/consulta-cep.service';
+import { CadastroBarbeariaService } from '../../cadastro-barbearia.service';
 
 @Component({
   selector: 'app-cadastro-barbearia',
@@ -26,7 +26,6 @@ export class CadastroBarbeariaComponent implements OnInit {
 
     this.formulario = this.formBuilder.group({
       nomeBarbearia: [null, [Validators.required]],
-      whatsapp: [null, [FormValidations.onlyNumbersValidator]],
       cep: [null, [Validators.required, FormValidations.cepValidator]],
       rua: [null, [Validators.required]],
       cidade: [null, [Validators.required, FormValidations.onlyCharsValidator]],
@@ -37,18 +36,33 @@ export class CadastroBarbeariaComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.formulario);
-    this.service.save(this.formulario.value)
-      .subscribe(resp => {
-        console.log(resp),
-          this.toastr.success("", "Salvo com sucesso!");
-      },
-        (err) => { this.toastr.error("mensagem", "Erro") });
+    if (FormValidations.isFormValido(this.formulario)) {
+      this.service.save(this.formulario.value)
+        .subscribe(resp => {
+          console.log(resp),
+            this.toastr.success("", "Salvo com sucesso!");
+        },
+          (err) => { this.toastr.error("mensagem", "Erro") });
+    } else {
+      this.toastr.error("Preencha os campos obrigatórios", "")
+    }
   }
 
   onBlurCep() {
-    this.cepService.search("96835778").subscribe(resp => this.setEndereco(resp));
+    let cep = this.formulario.value["cep"];
+    const validacep = /^[0-9]{8}$/;
+    if (cep && cep !== '' && validacep.test(cep)) {
+      this.cepService.search(cep).subscribe(resp => {
+        this.verifyConsultaCep(resp);
+        this.setEndereco(resp);
+      });
+    }
+  }
 
+  verifyConsultaCep(resp: any) {
+    if (resp.erro) {
+      this.toastr.error("CEP está correto?", "Erro");
+    }
   }
 
   setEndereco(consultaCepResponse: ConsultaCepResponse) {

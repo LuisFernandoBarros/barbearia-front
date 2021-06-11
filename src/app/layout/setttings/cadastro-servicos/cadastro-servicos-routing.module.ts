@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CadastroBarbeariaComponent } from './component/cadastro-barbearia/cadastro-barbearia.component';
+import { CadastroServicosComponent } from './component/cadastro-servicos/cadastro-servicos.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: CadastroBarbeariaComponent
+        component: CadastroServicosComponent
     }
 ];
 
@@ -13,4 +13,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class CadastroBarbeariaRoutingModule {}
+export class CadastroServicosRoutingModule {}

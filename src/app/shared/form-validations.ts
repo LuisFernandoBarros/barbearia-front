@@ -24,11 +24,15 @@ export class FormValidations {
   static onlyCharsValidator(control: FormControl){
     const texto = control.value;
     if (texto && texto !== '') {
-      const validatexto = /^[A-Za-z," "]+$/;
+      const validatexto = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/;
       return validatexto.test(texto) ? null : { textoInvalido : true };
     }
     return null;
-  }  
+  }
+
+  static isFormValido(form: FormGroup){
+      return form.status != "INVALID";
+  }
 /*
   static equalsTo(otherField: string) {
     const validator = (formControl: FormControl) => {
