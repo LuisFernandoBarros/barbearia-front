@@ -6,7 +6,7 @@ import { SharedModule } from '../../../shared/shared.module';
 
 import { CadastroProfissionalRoutingModule } from '../cadastro-profissional/cadastro-profissional-routing.module';
 
-import { CadastroProfissionalComponent } from '../cadastro-profissional/component/cadastro-profissional.component';
+import { CadastroProfissionalComponent } from '../cadastro-profissional/component/cadastro-profissional/cadastro-profissional.component';
 
 
 @NgModule({

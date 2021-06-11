@@ -3,10 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ToastrService } from 'ngx-toastr';
-import { FormValidations } from '../../../../shared/form-validations';
-import { ConsultaCepResponse } from '../../../../shared/model/consulta-cep-response';
-import { ConsultaCepService } from '../../../../shared/services/consulta-cep.service';
-import { CadastroBarbeariaService } from '../cadastro-barbearia.service';
+import { FormValidations } from '../../../../../shared/form-validations';
+import { ConsultaCepResponse } from '../../../../../shared/model/consulta-cep-response';
+import { ConsultaCepService } from '../../../../../shared/services/consulta-cep.service';
+import { CadastroBarbeariaService } from '../../cadastro-barbearia.service';
 
 @Component({
   selector: 'app-cadastro-barbearia',

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../../shared/shared.module';
 import { CadastroBarbeariaRoutingModule } from './cadastro-barbearia-routing.module';
-import { CadastroBarbeariaComponent } from './component/cadastro-barbearia.component';
+import { CadastroBarbeariaComponent } from './component/cadastro-barbearia/cadastro-barbearia.component'
 
 
 @NgModule({

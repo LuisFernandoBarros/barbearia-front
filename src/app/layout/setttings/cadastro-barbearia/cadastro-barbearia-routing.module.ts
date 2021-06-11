@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CadastroBarbeariaComponent } from './component/cadastro-barbearia.component';
+import { CadastroBarbeariaComponent } from './component/cadastro-barbearia/cadastro-barbearia.component';
 
 const routes: Routes = [
     {

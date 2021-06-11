@@ -2,8 +2,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { FormValidations } from '../../../../shared/form-validations';
-import { CadastroProfissionalService } from '../cadastro-profissional.service';
+import { FormValidations } from '../../../../../shared/form-validations';
+import { CadastroProfissionalService } from '../../cadastro-profissional.service';
 
 
 @Component({
