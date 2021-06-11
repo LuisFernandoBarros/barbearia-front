@@ -24,7 +24,7 @@ export class FormValidations {
   static onlyCharsValidator(control: FormControl){
     const texto = control.value;
     if (texto && texto !== '') {
-      const validatexto = /^[A-Za-z," "]+$/;
+      const validatexto = /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/;
       return validatexto.test(texto) ? null : { textoInvalido : true };
     }
     return null;
