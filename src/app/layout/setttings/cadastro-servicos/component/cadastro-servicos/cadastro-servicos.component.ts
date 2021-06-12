@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Servico } from '../../servico';
 
 @Component({
@@ -8,7 +9,7 @@ import { Servico } from '../../servico';
 })
 export class CadastroServicosComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   public servicos: Array<Servico> = [];
 
@@ -32,6 +33,10 @@ export class CadastroServicosComponent implements OnInit {
         valor: 35.0,
         tempo: 45.0
       });
+  }
+
+  goToEditar(id: number) {
+    this.router.navigate([`servicos/${id}/editar`]);
   }
 
 }
