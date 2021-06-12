@@ -4,15 +4,22 @@ import { CadastroServicosComponent } from './component/cadastro-servicos/cadastr
 
 import { CadastroServicosRoutingModule } from './cadastro-servicos-routing.module';
 import { EditarComponent } from './component/editar/editar.component';
+import { SharedModule } from '../../../shared/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormComponent } from './component/form/form.component';
 
 @NgModule({
   declarations: [
     CadastroServicosComponent,
-    EditarComponent
+    EditarComponent,
+    FormComponent
   ],
   imports: [
     CommonModule,
-    CadastroServicosRoutingModule  
+    CadastroServicosRoutingModule,
+    FormsModule, 
+    ReactiveFormsModule, 
+    SharedModule
   ]
 })
 export class CadastroServicosModule { }
