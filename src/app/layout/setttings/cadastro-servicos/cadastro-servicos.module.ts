@@ -7,12 +7,14 @@ import { EditarComponent } from './component/editar/editar.component';
 import { SharedModule } from '../../../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormComponent } from './component/form/form.component';
+import { NovoComponent } from './component/novo/novo.component';
 
 @NgModule({
   declarations: [
     CadastroServicosComponent,
     EditarComponent,
-    FormComponent
+    FormComponent,
+    NovoComponent
   ],
   imports: [
     CommonModule,

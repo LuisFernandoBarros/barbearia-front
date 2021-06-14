@@ -32,4 +32,8 @@ export class FormComponent implements OnInit {
     this.router.navigate([`servicos`]);
   }
 
+  getTitle(){
+    return !!this.servico.id ? "Editar" : "Novo";
+  }
+
 }

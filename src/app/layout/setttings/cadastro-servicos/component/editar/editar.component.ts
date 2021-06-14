@@ -14,7 +14,6 @@ export class EditarComponent implements OnInit {
   constructor(private activedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-
     this.activedRoute.params.subscribe(
       (param: any) => { this.servico = this.getServico(param['id']) }
     )
