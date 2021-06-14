@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { FormValidations } from '../../../../../shared/form-validations';
+import { Service } from '../../service';
 import { Servico } from '../../servico';
 
 @Component({
@@ -17,7 +19,9 @@ export class FormComponent implements OnInit {
   servico: Servico;
 
   constructor(private formBuilder: FormBuilder,
-    private router: Router) { }
+    private router: Router,
+    private service: Service,
+    private toast: ToastrService) { }
 
   ngOnInit(): void {
     this.formulario = this.formBuilder.group({
@@ -28,12 +32,26 @@ export class FormComponent implements OnInit {
   }
 
   onSubmit() {
-    // CRIAR UMA SERVICE QUE SALVA OS SERVICOS ANTES DE REDIRECIONAR PRA LISTA
-    this.router.navigate([`servicos`]);
+    this.service.save(this.toServico()).subscribe(
+      (resp) => {
+        this.toast.success("", "Sucesso!");
+        this.router.navigate([`servicos`]);
+      },
+      (err) => { this.toast.error("Tente novamente mais tarde", "Erro") }
+    );
   }
 
-  getTitle(){
+  getTitle() {
     return !!this.servico.id ? "Editar" : "Novo";
+  }
+
+  toServico(): Servico {
+    return {
+      id: null,
+      descricao: this.formulario.value['nome'],
+      tempo: this.formulario.value['tempo'],
+      valor: this.formulario.value['valor']
+    };
   }
 
 }

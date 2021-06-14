@@ -25,7 +25,7 @@ export class EditarComponent implements OnInit {
     return {
       id: 5,
       valor: 15,
-      nome: "BlaBla",
+      descricao: "BlaBla",
       tempo: 85
     }
   }
