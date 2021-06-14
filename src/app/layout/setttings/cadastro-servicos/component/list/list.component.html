@@ -17,12 +17,15 @@
                         </thead>
                         <tbody>
                             <tr class="font-12" *ngFor="let servico of servicos" (click)="goToEditar(servico.id)">
-                                <td>{{ servico.nome }}</td>
+                                <td>{{ servico.descricao }}</td>
                                 <td class="text-center">{{ servico.tempo }}</td>
                                 <td class="text-center">{{ servico.valor | currency:'R$ ' }}</td>
                             </tr>
                         </tbody>
                     </table>
+                    <div class="d-flex justify-content-center">
+                        <button type="button" class="btn btn-success" routerLink="novo">Adicionar</button>
+                    </div>
                 </div>
             </div>
         </div>
