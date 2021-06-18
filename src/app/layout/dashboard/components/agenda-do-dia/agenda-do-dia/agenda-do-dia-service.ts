@@ -13,32 +13,10 @@ export class AgendaDoDiaService {
 
     public agendamentos: Array<Observable<Agendamento>> = [];
 
-    getAgendamentosDia(data: string) {
-        this.migueLogin().subscribe();
-        //return null;
+    getAgendamentosDia(data: string) {        
         return this.httpClient.get<Agendamento[]>(this.agendamentosUrl + "/" + data,
             {
                 withCredentials: true
             });
-    }
-
-    migueLogin() {
-        let url = `${environment.API}/login/`;
-        let body = {
-            email: "lala@lala.com",
-            password: "teste"
-        }
-        return this.httpClient.post(url, body, {
-            headers: { 'Content-Type': 'application/json; charset=utf-8' },
-            withCredentials: true            
-        })
-
-        /*        let params = new HttpParams().set("login", "Login").set("password", "Password");        
-                return this.httpClient.post(url, null, {            
-                    headers: { 'Content-Type': 'application/json; charset=utf-8'},
-                    withCredentials: true,
-                    params: params
-                })
-        */
     }
 }
