@@ -11,6 +11,8 @@ import { LanguageTranslationModule } from './shared/modules/language-translation
 
 import { NgbActiveModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
+import { CookieService } from 'ngx-cookie-service';
+
 
 
 @NgModule({
@@ -28,7 +30,7 @@ import { ToastrModule } from 'ngx-toastr';
         })
     ],
     declarations: [AppComponent],
-    providers: [AuthGuard, NgbActiveModal],
+    providers: [AuthGuard, NgbActiveModal, CookieService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
