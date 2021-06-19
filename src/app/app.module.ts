@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,6 +12,7 @@ import { LanguageTranslationModule } from './shared/modules/language-translation
 import { NgbActiveModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie-service';
+import { RequestInterceptor } from './shared/services/request-interceptor';
 
 
 
@@ -30,7 +31,15 @@ import { CookieService } from 'ngx-cookie-service';
         })
     ],
     declarations: [AppComponent],
-    providers: [AuthGuard, NgbActiveModal, CookieService],
+    providers: [
+        AuthGuard,
+        NgbActiveModal,
+        CookieService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: RequestInterceptor,
+            multi: true,
+        }],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

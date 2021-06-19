@@ -2,7 +2,7 @@
     <h4 class="text-muted mb-4">Minhas Informações</h4>
     <div class="row">
         <div class="col col-sm-6">
-            <form [formGroup]="formulario" (ngSubmit)="onSubmit()">                
+            <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
                 <div class="card mb-3">
                     <div class="card-header">
                         Editar
@@ -13,23 +13,15 @@
                             <input type="text" class="form-control" formControlName="nome">
                             <app-error-msg [control]="formulario.get('nome')" label="Nome"></app-error-msg>
                         </div>
-
                         <div class="form-group">
-                            <label>Telefone</label>
-                            <input type="text" class="form-control" formControlName="telefone">
-                            <app-error-msg [control]="formulario.get('telefone')" label="Telefone"></app-error-msg>
+                            <label>Email</label>
+                            <input type="text" class="form-control" formControlName="email">
+                            <app-error-msg [control]="formulario.get('email')" label="Email"></app-error-msg>
                         </div>
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" formControlName="isWhastapp">
-                            <label class="form-check-label">
-                            Este número tem WhatsApp
-                            </label>
-                          </div>                        
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-success btn-lg">Salvar</button>
+                    <button type="submit" class="btn btn-success btn-lg" [disabled]="!formulario.valid">Salvar</button>
                 </div>
             </form>
         </div>

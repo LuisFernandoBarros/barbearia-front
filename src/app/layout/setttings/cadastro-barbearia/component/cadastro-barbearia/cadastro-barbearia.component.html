@@ -2,7 +2,7 @@
     <h4 class="text-muted mb-4">Minha Barbearia</h4>
     <div class="row">
         <div class="col col-sm-6">
-            <form [formGroup]="formulario" (ngSubmit)="onSubmit()">                
+            <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
                 <div class="card mb-3">
                     <div class="card-header">
                         Editar Informações
@@ -11,8 +11,9 @@
                         <div class="form-group">
                             <label for="exampleInputEmail1">Nome da Barbearia</label>
                             <input type="text" class="form-control" formControlName="nomeBarbearia">
-                            <app-error-msg [control]="formulario.get('nomeBarbearia')" label="Nome da Barbearia"></app-error-msg>
-                        </div>                                                
+                            <app-error-msg [control]="formulario.get('nomeBarbearia')" label="Nome da Barbearia">
+                            </app-error-msg>
+                        </div>
                         <div class="form-group">
                             <label>Cep</label>
                             <input type="text" class="form-control" formControlName="cep" (blur)="onBlurCep()">
@@ -22,7 +23,7 @@
                         <div class="row">
                             <div class="form-group col-sm-8">
                                 <label>Rua</label>
-                                <input type="text" class="form-control" formControlName="rua" readonly>                                
+                                <input type="text" class="form-control" formControlName="rua" readonly>
                             </div>
                             <div class="form-group col-sm-4">
                                 <label>Número</label>
@@ -39,13 +40,32 @@
                         <div class="row">
                             <div class="form-group col-sm-8">
                                 <label>Cidade</label>
-                                <input type="text" class="form-control" formControlName="cidade" readonly>                                
+                                <input type="text" class="form-control" formControlName="cidade" readonly>
                             </div>
                             <div class="form-group col-sm-4">
                                 <label>Estado</label>
-                                <input type="text" class="form-control" formControlName="estado" readonly>                                
+                                <input type="text" class="form-control" formControlName="estado" readonly>
                             </div>
                         </div>
+
+
+
+                        <div class="form-group">
+                            <label>Telefone</label>
+                            <input type="text" class="form-control" formControlName="telefone">
+                            <app-error-msg [control]="formulario.get('telefone')" label="Telefone"></app-error-msg>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" formControlName="isWhastapp">
+                            <label class="form-check-label">
+                                Este número tem WhatsApp
+                            </label>
+                        </div>
+
+
+
+
                     </div>
 
                 </div>
