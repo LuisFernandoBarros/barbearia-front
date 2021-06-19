@@ -2,30 +2,24 @@
     <div class="row justify-content-md-center">
         <div class="col-md-4">
             <img class="user-avatar" src="assets/images/logo.png" width="150px" />
-            <h1>SB Admin BS4 Angular9</h1>
-            <form role="form">
+            <h1>Barber Agenda</h1>
+            <form role="form" [formGroup]="formulario" (ngSubmit)="onSubmit()">
                 <div class="form-content">
                     <div class="form-group">
-                        <input
-                            [placeholder]="'Email' | translate"
-                            class="form-control input-underline input-lg"
-                            type="text"
-                        />
+                        <input placeholder="Email" class="form-control input-underline input-lg" type="text" 
+                        formControlName="email"/>
+                        <app-error-msg [control]="formulario.get('email')" label="Email"></app-error-msg>
                     </div>
 
                     <div class="form-group">
-                        <input
-                            [placeholder]="'Password' | translate"
-                            class="form-control input-underline input-lg"
-                            type="password"
-                        />
+                        <input placeholder="Senha" class="form-control input-underline input-lg" type="password" 
+                        formControlName="senha"/>
+                        <app-error-msg [control]="formulario.get('senha')" label="Senha"></app-error-msg>
                     </div>
                 </div>
-                <a (click)="onLoggedin()" [routerLink]="['/dashboard']" class="btn rounded-btn">{{
-                    'Log in' | translate
-                }}</a>
+                <button type="submit" class="btn rounded-btn">Entrar</button>
                 &nbsp;
-                <a [routerLink]="['/signup']" class="btn rounded-btn">{{ 'Register' | translate }}</a>
+                <a [routerLink]="['/signup']" class="btn rounded-btn">Registre-se</a>
             </form>
         </div>
     </div>

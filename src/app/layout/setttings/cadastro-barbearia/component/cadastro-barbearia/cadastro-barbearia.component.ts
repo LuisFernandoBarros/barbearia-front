@@ -31,7 +31,9 @@ export class CadastroBarbeariaComponent implements OnInit {
       cidade: [null, [Validators.required, FormValidations.onlyCharsValidator]],
       estado: [null, [Validators.required, FormValidations.onlyCharsValidator]],
       numero: [null, [Validators.required]],
-      complemento: [null]
+      complemento: [null],          
+      telefone: [null, [Validators.required, FormValidations.onlyNumbersValidator]],
+      isWhastapp: [false]
     });
   }
 
