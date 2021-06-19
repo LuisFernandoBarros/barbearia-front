@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { routerTransition } from '../router.animations';
 import { FormValidations } from '../shared/form-validations';
 import { ExtractMessageService } from '../shared/services/extract-message.service';
+import { MSG_PADRAO } from '../shared/services/msg-padrao.enum';
 import { SignupService } from './signup.service';
 
 @Component({
@@ -33,7 +34,7 @@ export class SignupComponent implements OnInit {
     onSubmit() {
         this.service.save(this.toNewCadastro()).subscribe(
             (resp) => this.toastService.success("", "Cadastrado com sucesso!"),
-            (err) => this.toastService.error("", this.msgExtractService.extractMessageFromError(err))
+            (err) => this.toastService.error("", this.msgExtractService.extractMessageFromError(err, MSG_PADRAO.SIGNUP_ERROR))
         )
     }
 

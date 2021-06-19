@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { routerTransition } from '../router.animations';
 import { ExtractMessageService } from '../shared/services/extract-message.service';
+import { MSG_PADRAO } from '../shared/services/msg-padrao.enum';
 import { LoginService } from './login.service';
 
 @Component({
@@ -42,7 +43,7 @@ export class LoginComponent implements OnInit {
                 },
                 (err) => {
                     this.toastService.error(
-                        this.extractMessageService.extractMessageFromError(err)
+                        this.extractMessageService.extractMessageFromError(err, MSG_PADRAO.LOGIN_ERROR)
                     )
                 }
             )

@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MSG_PADRAO } from '../../../../../shared/services/msg-padrao.enum';
 import { FormValidations } from '../../../../../shared/form-validations';
 import { CadastroProfissionalService } from '../../cadastro-profissional.service';
+import { ExtractMessageService } from '../../../../../shared/services/extract-message.service';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class CadastroProfissionalComponent implements OnInit {
   isLoading: boolean = true;
   constructor(private formBuilder: FormBuilder,
     private toastr: ToastrService,
-    private service: CadastroProfissionalService) { }
+    private service: CadastroProfissionalService,
+    private exctratMsgService: ExtractMessageService) { }
 
   ngOnInit(): void {
     this.getProfissional();
@@ -38,7 +40,7 @@ export class CadastroProfissionalComponent implements OnInit {
           this.isLoading = false;
         },
           (err) => {
-            this.toastr.error(MSG_PADRAO.USER_NOT_SAVE);
+            this.toastr.error(this.exctratMsgService.extractMessageFromError(err, MSG_PADRAO.USER_NOT_SAVE));
             this.isLoading = false;
           });
     } else {
@@ -63,7 +65,7 @@ export class CadastroProfissionalComponent implements OnInit {
     )
   }
 
-  isFormValidAndNotLoading(): boolean {    
+  isFormValidAndNotLoading(): boolean {
     return this.formulario.valid && !this.isLoading
   }
 }
