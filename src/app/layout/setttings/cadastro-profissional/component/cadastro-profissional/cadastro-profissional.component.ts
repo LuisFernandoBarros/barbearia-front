@@ -16,7 +16,7 @@ import { CadastroProfissionalService } from '../../cadastro-profissional.service
 export class CadastroProfissionalComponent implements OnInit {
 
   formulario: FormGroup;
-
+  isLoading: boolean = true;
   constructor(private formBuilder: FormBuilder,
     private toastr: ToastrService,
     private service: CadastroProfissionalService) { }
@@ -31,25 +31,39 @@ export class CadastroProfissionalComponent implements OnInit {
 
   onSubmit() {
     if (FormValidations.isFormValido(this.formulario)) {
+      this.isLoading = true;
       this.service.save(this.formulario.value)
         .subscribe(resp => {
           this.toastr.success(MSG_PADRAO.SAVE_SUCCESS);
+          this.isLoading = false;
         },
-          (err) => { this.toastr.error(MSG_PADRAO.USER_NOT_SAVE) });
+          (err) => {
+            this.toastr.error(MSG_PADRAO.USER_NOT_SAVE);
+            this.isLoading = false;
+          });
     } else {
       this.toastr.error(MSG_PADRAO.ALL_FIELDS_REQUIRED)
     }
   }
 
   getProfissional() {
+    this.isLoading = true;
     this.service.get().subscribe(
       (resp) => {
         this.formulario.patchValue({
           nome: resp.nome,
           email: resp.email
-        })
+        });
+        this.isLoading = false;
       },
-      (err) => this.toastr.error(MSG_PADRAO.USER_ERROR_SEARCH)
+      (err) => {
+        this.toastr.error(MSG_PADRAO.USER_ERROR_SEARCH);
+        this.isLoading = false;
+      }
     )
+  }
+
+  isFormValidAndNotLoading(): boolean {    
+    return this.formulario.valid && !this.isLoading
   }
 }
