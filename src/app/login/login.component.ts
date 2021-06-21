@@ -16,6 +16,7 @@ import { LoginService } from './login.service';
 export class LoginComponent implements OnInit {
 
     formulario: FormGroup;
+    isLoading: boolean;
 
     constructor(public router: Router,
         private formBuilder: FormBuilder,
@@ -28,26 +29,29 @@ export class LoginComponent implements OnInit {
             email: [null, [Validators.required]],
             senha: [null, [Validators.required]]
         });
-    }
-
-    onLoggedin() {
-        localStorage.setItem('isLoggedin', 'true');
+        this.isLoading = false;
     }
 
     onSubmit() {
+        this.isLoading = true;
         this.service.logar(this.formulario.value["email"], this.formulario.value["senha"])
             .subscribe(
                 (resp) => { 
                     this.toastService.info("", "Bem vindo!");
                     this.router.navigate(['dashboard']);
+                    this.isLoading = false;
                 },
                 (err) => {
                     this.toastService.error(
-                        this.extractMessageService.extractMessageFromError(err, MSG_PADRAO.LOGIN_ERROR)
-                    )
+                        this.extractMessageService.extractMessageFromError(err, MSG_PADRAO.LOGIN_ERROR)                        
+                    );
+                    this.isLoading = false;
                 }
             )
     }
 
+    isFormValidAndNotLoading(): boolean {
+        return this.formulario.valid && !this.isLoading
+      }
 
 }

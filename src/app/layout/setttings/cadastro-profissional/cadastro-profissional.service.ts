@@ -10,7 +10,6 @@ export class CadastroProfissionalService {
     constructor(private httpClient: HttpClient) { }
 
     save(body: Object) {
-        console.log(body);
         return this.httpClient.post(`${this.url}/profissional`, JSON.stringify(body))
     }
 
