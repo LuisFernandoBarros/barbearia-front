@@ -6,17 +6,19 @@
             <app-error-msg [control]="formulario.get('nome')" label="Nome"></app-error-msg>
         </div>
 
-        <div class="form-group">
-            <label>Tempo</label>
+        <div class="row">
+        <div class="form-group col-sm-6">
+            <label>Tempo (em minutos)</label>
             <input type="text" class="form-control" formControlName="tempo">
             <app-error-msg [control]="formulario.get('tempo')" label="Tempo"></app-error-msg>
         </div>
 
-        <div class="form-group">
+        <div class="form-group col-sm-6">
             <label>Valor</label>
             <input type="text" class="form-control" formControlName="valor">
             <app-error-msg [control]="formulario.get('valor')" label="Valor"></app-error-msg>
         </div>
+    </div>
         <div class="d-flex justify-content-center">
             <button type="submit" class="btn btn-success btn-lg">Salvar</button>
         </div>
