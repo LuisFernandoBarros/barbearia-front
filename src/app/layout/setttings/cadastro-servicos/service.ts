@@ -21,4 +21,8 @@ export class Service {
     getServico(id: number){
         return this.httpClient.get<Servico>(`${this.url}/${id}`);
     }
+
+    getAll(){
+        return this.httpClient.get<Array<Servico>>(this.url);
+    }    
 }

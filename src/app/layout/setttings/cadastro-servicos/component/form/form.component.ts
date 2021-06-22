@@ -59,7 +59,7 @@ export class FormComponent implements OnInit {
 
   toServico(): Servico {
     return {
-      id: this.servico.id ? this.servico.id : null,
+      id: this.isUpdate() ? this.servico.id : null,
       descricao: this.formulario.value['nome'],
       tempo: this.formulario.value['tempo'],
       valor: this.formulario.value['valor']
@@ -67,7 +67,7 @@ export class FormComponent implements OnInit {
   }
 
   isUpdate(): boolean {
-    return this.servico.id != undefined;
+    return  this.servico != undefined;
   }
 
   getUpdateRequest(): Observable<Servico> {
