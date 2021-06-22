@@ -7,10 +7,17 @@ import { SharedModule } from '../../../shared/shared.module';
 import { CadastroProfissionalRoutingModule } from '../cadastro-profissional/cadastro-profissional-routing.module';
 
 import { CadastroProfissionalComponent } from '../cadastro-profissional/component/cadastro-profissional/cadastro-profissional.component';
+import { ListComponent } from './component/list/list.component';
 
 
 @NgModule({
-    imports: [CommonModule, CadastroProfissionalRoutingModule,FormsModule, ReactiveFormsModule, SharedModule],
-    declarations: [CadastroProfissionalComponent]
+    imports: [
+        CommonModule,
+        CadastroProfissionalRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        SharedModule
+    ],
+    declarations: [CadastroProfissionalComponent, ListComponent]
 })
-export class CadastroProfissionalModule {}
+export class CadastroProfissionalModule { }
