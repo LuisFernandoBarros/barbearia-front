@@ -30,8 +30,8 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
     this.formulario = this.formBuilder.group({
       nome: [null, [Validators.required, FormValidations.onlyCharsValidator]],
-      valor: [null, [Validators.required, FormValidations.onlyNumbersValidator]],
-      tempo: [null, [Validators.required, FormValidations.onlyNumbersValidator]]
+      valor: [null, [Validators.required]],
+      tempo: [null, [Validators.required]]
     });
   }
 
@@ -86,5 +86,9 @@ export class FormComponent implements OnInit {
         tempo: this.servico.tempo,
       })
     }
+  }
+
+  isFormValido() {
+    return FormValidations.isFormValido(this.formulario);
   }
 }

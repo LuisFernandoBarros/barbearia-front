@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormComponent } from './component/form/form.component';
 import { NovoComponent } from './component/novo/novo.component';
 import { Service } from './service';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { Service } from './service';
     CadastroServicosRoutingModule,
     FormsModule, 
     ReactiveFormsModule, 
-    SharedModule
+    SharedModule,
+    NgxMaskModule.forRoot()
   ],
   providers: [
     Service
