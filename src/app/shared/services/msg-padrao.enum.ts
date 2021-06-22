@@ -6,6 +6,7 @@ export enum MSG_PADRAO {
     ALL_FIELDS_REQUIRED = "Todos os campos são obrigatórios",
     LOGIN_ERROR = "Erro ao fazer login. Contate o suporte.",
     SIGNUP_ERROR = "Erro ao cadastrar. Contate o suporte.",
+    ERROR_SERVER = "Erro no servidor. Contate o suporte.",
 
     // SUCCESS
     SAVE_SUCCESS = "Salvo com sucesso!",

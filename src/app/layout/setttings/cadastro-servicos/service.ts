@@ -6,13 +6,19 @@ import { Servico } from "./servico";
 @Injectable()
 export class Service {
 
-    private saveUrl = `${environment.API}/servicos`;
+    private url = `${environment.API}/servicos`;
 
     constructor(private httpClient: HttpClient) { }
 
     save(servico: Servico) {
-        return this.httpClient.post(this.saveUrl, JSON.stringify(servico), {
-            headers: { 'Content-Type': 'application/json; charset=utf-8' }
-        })
+        return this.httpClient.post<Servico>(this.url, JSON.stringify(servico));
+    }
+
+    update(servico: Servico) {
+        return this.httpClient.patch<Servico>(`${this.url}/${servico.id}`, JSON.stringify(servico));
+    }    
+
+    getServico(id: number){
+        return this.httpClient.get<Servico>(`${this.url}/${id}`);
     }
 }

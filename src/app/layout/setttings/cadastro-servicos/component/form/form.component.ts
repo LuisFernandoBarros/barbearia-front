@@ -2,6 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
+import { ExtractMessageService } from '../../../../../shared/services/extract-message.service';
+import { MSG_PADRAO } from '../../../../../shared/services/msg-padrao.enum';
 import { FormValidations } from '../../../../../shared/form-validations';
 import { Service } from '../../service';
 import { Servico } from '../../servico';
@@ -21,7 +24,8 @@ export class FormComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private router: Router,
     private service: Service,
-    private toast: ToastrService) { }
+    private toast: ToastrService,
+    private extractMsgService: ExtractMessageService) { }
 
   ngOnInit(): void {
     this.formulario = this.formBuilder.group({
@@ -31,27 +35,56 @@ export class FormComponent implements OnInit {
     });
   }
 
+  ngOnChanges(): void {
+    this.updateForm();
+  }
+
   onSubmit() {
-    this.service.save(this.toServico()).subscribe(
+    let request;
+    if (this.isUpdate()) {
+      request = this.getUpdateRequest();
+    } else {
+      request = this.getSaveRequest();
+    }
+
+    request.subscribe(
       (resp) => {
-        this.toast.success("", "Sucesso!");
+        this.toast.success(MSG_PADRAO.SAVE_SUCCESS);
         this.router.navigate([`servicos`]);
       },
-      (err) => { this.toast.error("Tente novamente mais tarde", "Erro") }
+      (err) => { this.toast.error(this.extractMsgService.extractMessageFromError(err, MSG_PADRAO.ERROR_SERVER)) }
     );
   }
 
-  getTitle() {
-    return !!this.servico.id ? "Editar" : "Novo";
-  }
 
   toServico(): Servico {
     return {
-      id: null,
+      id: this.servico.id ? this.servico.id : null,
       descricao: this.formulario.value['nome'],
       tempo: this.formulario.value['tempo'],
       valor: this.formulario.value['valor']
     };
   }
 
+  isUpdate(): boolean {
+    return this.servico.id != undefined;
+  }
+
+  getUpdateRequest(): Observable<Servico> {
+    return this.service.update(this.toServico());
+  }
+
+  getSaveRequest(): Observable<Servico> {
+    return this.service.save(this.toServico());
+  }
+
+  updateForm() {
+    if (this.formulario != undefined) {
+      this.formulario.patchValue({
+        nome: this.servico.descricao,
+        valor: this.servico.valor,
+        tempo: this.servico.tempo,
+      })
+    }
+  }
 }
