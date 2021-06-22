@@ -1,25 +1,28 @@
 <div [@routerTransition] class="login-page">
     <div class="row justify-content-md-center">
         <div class="col-md-4">
-            <img class="user-avatar" src="assets/images/logo.png" width="150px" />
-            <h1>Barber Agenda</h1>
+            <img class="user-avatar" src="assets/images/logo.png" width="200px" />
             <form role="form" [formGroup]="formulario" (ngSubmit)="onSubmit()">
                 <div class="form-content">
                     <div class="form-group">
-                        <input placeholder="Email" class="form-control input-underline input-lg" type="text" 
-                        formControlName="email"/>
+                        <input placeholder="Email" class="form-control input-underline input-lg" type="text"
+                            formControlName="email" />
                         <app-error-msg [control]="formulario.get('email')" label="Email"></app-error-msg>
                     </div>
 
                     <div class="form-group">
-                        <input placeholder="Senha" class="form-control input-underline input-lg" type="password" 
-                        formControlName="senha"/>
+                        <input placeholder="Senha" class="form-control input-underline input-lg" type="password"
+                            formControlName="senha" />
                         <app-error-msg [control]="formulario.get('senha')" label="Senha"></app-error-msg>
                     </div>
                 </div>
-                <button type="submit" class="btn rounded-btn">Entrar</button>
+                <div class="spinner-border text-warning" *ngIf="isLoading"></div>
+                <button type="submit" class="btn rounded-btn" *ngIf="!isLoading"
+                    [disabled]="!isFormValidAndNotLoading()">Entrar</button>
                 &nbsp;
-                <a [routerLink]="['/signup']" class="btn rounded-btn">Registre-se</a>
+                <a [routerLink]="['/signup']" class="btn rounded-btn" *ngIf="!isLoading">
+                    Registre-se
+                </a>
             </form>
         </div>
     </div>
