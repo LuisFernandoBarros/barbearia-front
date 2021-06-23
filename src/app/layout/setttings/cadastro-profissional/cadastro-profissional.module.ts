@@ -8,6 +8,7 @@ import { CadastroProfissionalRoutingModule } from '../cadastro-profissional/cada
 
 import { CadastroProfissionalComponent } from '../cadastro-profissional/component/cadastro-profissional/cadastro-profissional.component';
 import { ListComponent } from './component/list/list.component';
+import { DetalhesComponent } from './component/detalhes/detalhes.component';
 
 
 @NgModule({
@@ -18,6 +19,6 @@ import { ListComponent } from './component/list/list.component';
         ReactiveFormsModule,
         SharedModule
     ],
-    declarations: [CadastroProfissionalComponent, ListComponent]
+    declarations: [CadastroProfissionalComponent, ListComponent, DetalhesComponent]
 })
 export class CadastroProfissionalModule { }
