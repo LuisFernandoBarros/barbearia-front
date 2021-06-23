@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { ExtractMessageService } from '../../../../../shared/services/extract-message.service';
+import { MSG_PADRAO } from '../../../../../shared/services/msg-padrao.enum';
+import { Service } from '../../service';
 import { Servico } from '../../servico';
 
 @Component({
@@ -9,34 +13,31 @@ import { Servico } from '../../servico';
 })
 export class CadastroServicosComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    private service: Service,
+    private extractMsgService: ExtractMessageService,
+    private toast: ToastrService) { }
 
   public servicos: Array<Servico> = [];
+  private isLoading = false;
 
   ngOnInit(): void {
-
-    this.servicos.push({
-      id: 1,
-      descricao: "Corte com Máquina",
-      valor: 35.0,
-      tempo: 45.0
-    },
-      {
-        id: 2,
-        descricao: "Corte com Máquina",
-        valor: 35.0,
-        tempo: 45.0
+    this.isLoading = true;
+    this.service.getAll().subscribe(
+      (resp) => {
+        this.servicos = resp;
+        this.isLoading = false
       },
-      {
-        id: 3,
-        descricao: "Corte com Máquina",
-        valor: 35.0,
-        tempo: 45.0
-      });
+      (err) => {
+        this.isLoading = false;
+        this.toast.error(this.extractMsgService.extractMessageFromError(err, MSG_PADRAO.ERROR_SERVER));
+      }
+    );
   }
 
   goToEditar(id: number) {
     this.router.navigate([`servicos/${id}/editar`]);
   }
+
 
 }

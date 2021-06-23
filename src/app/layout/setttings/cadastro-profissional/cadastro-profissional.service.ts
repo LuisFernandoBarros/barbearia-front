@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../../../environments/environment";
+import { Profissional } from "./profissional";
 
 @Injectable({ providedIn: 'root' })
 export class CadastroProfissionalService {
@@ -16,4 +17,12 @@ export class CadastroProfissionalService {
     get() {
         return this.httpClient.get<any>(`${this.url}/profissional`)
     }
+
+    getByID(id: number) {
+        return this.httpClient.get<Profissional>(`${this.url}/profissional/${id}`)
+    }
+    
+    update(id: number, body: Object) {
+        return this.httpClient.patch<Profissional>(`${this.url}/profissional/${id}`, JSON.stringify(body))
+    }     
 }

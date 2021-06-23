@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Service } from '../../service';
 import { Servico } from '../../servico';
 
 @Component({
@@ -11,22 +12,18 @@ export class EditarComponent implements OnInit {
 
   public servico: Servico;
 
-  constructor(private activedRoute: ActivatedRoute) { }
+  constructor(private activedRoute: ActivatedRoute,
+    private service: Service) { }
 
   ngOnInit(): void {
     this.activedRoute.params.subscribe(
-      (param: any) => { this.servico = this.getServico(param['id']) }
+      (param: any) => { this.getServico(param['id']) }
     )
   }
 
-  getServico(id: number): Servico {
-    // AQUI TEM QUE BUSCAR A IMPLEMENTACAO DO BACK
-    console.log(id)
-    return {
-      id: 5,
-      valor: 15,
-      descricao: "BlaBla",
-      tempo: 85
-    }
+  getServico(id: number) {
+    this.service.getServico(id).subscribe(
+      (resp) => { this.servico = resp; }
+    );
   }
 }

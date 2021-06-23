@@ -1,0 +1,10 @@
+<div class="container">
+    <h4 class="text-muted mb-4">Minhas Informações</h4>
+    <!-- SPINNER -->
+    <div class="text-center m-4 col-sm-6" *ngIf="isLoading">
+        <div class="spinner-border text-warning"></div>
+    </div>    
+    <div class="row" *ngIf="!isLoading">
+        <app-cadastro-profissional [profissional]="profissional"></app-cadastro-profissional>
+    </div>
+</div>

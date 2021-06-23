@@ -1,0 +1,29 @@
+<div class="container">
+    <h4 class="text-muted">Profissionais da Barbearia</h4>
+    <div class="row mt-2"  *ngIf="!isLoading">
+        <div class="col col-sm-6">
+            <div class="card mb-3">
+                <div class="card-header">
+                    {{ profissional.nome }}
+                </div>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th scope="row">Email</th>
+                            <td>{{ profissional.email }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Telefone</th>
+                            <td>(51) 9 95155-8711</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center mb-4">
+                <a class="btn btn-primary btn-lg" [routerLink]="['editar']">Editar</a>
+                &nbsp;
+                <a class="btn btn-light btn-lg" [routerLink]="['/profissional']">Voltar</a>
+            </div>
+        </div>
+    </div>
+</div>
