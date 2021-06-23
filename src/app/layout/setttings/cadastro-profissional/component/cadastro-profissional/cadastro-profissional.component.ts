@@ -7,6 +7,7 @@ import { MSG_PADRAO } from '../../../../../shared/services/msg-padrao.enum';
 import { FormValidations } from '../../../../../shared/form-validations';
 import { CadastroProfissionalService } from '../../cadastro-profissional.service';
 import { ExtractMessageService } from '../../../../../shared/services/extract-message.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -21,13 +22,15 @@ export class CadastroProfissionalComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private toastr: ToastrService,
     private service: CadastroProfissionalService,
-    private exctratMsgService: ExtractMessageService) { }
+    private exctratMsgService: ExtractMessageService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.getProfissional();
     this.formulario = this.formBuilder.group({
       nome: [null, [Validators.required, FormValidations.onlyCharsValidator]],
-      email: [null, [Validators.required, Validators.email]]
+      email: [null, [Validators.required, Validators.email]],
+      senha: [null, [Validators.required]]
     });
   }
 
@@ -38,6 +41,7 @@ export class CadastroProfissionalComponent implements OnInit {
         .subscribe(resp => {
           this.toastr.success(MSG_PADRAO.SAVE_SUCCESS);
           this.isLoading = false;
+          this.router.navigate(['/profissional']);
         },
           (err) => {
             this.toastr.error(this.exctratMsgService.extractMessageFromError(err, MSG_PADRAO.USER_NOT_SAVE));

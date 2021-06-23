@@ -10,6 +10,10 @@ const routes: Routes = [
     {
         path: '',
         component: ListComponent,
+    },    
+    {
+        path: 'novo',
+        component: CadastroProfissionalComponent,
     },
     {
         path: ':id',
