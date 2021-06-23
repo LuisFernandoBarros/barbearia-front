@@ -20,5 +20,9 @@ export class CadastroProfissionalService {
 
     getByID(id: number) {
         return this.httpClient.get<Profissional>(`${this.url}/profissional/${id}`)
-    }    
+    }
+    
+    update(id: number, body: Object) {
+        return this.httpClient.patch<Profissional>(`${this.url}/profissional/${id}`, JSON.stringify(body))
+    }     
 }

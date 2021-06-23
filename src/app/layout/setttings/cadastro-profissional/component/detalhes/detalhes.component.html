@@ -1,8 +1,8 @@
 <div class="container">
     <h4 class="text-muted">Profissionais da Barbearia</h4>
-    <div class="row mt-2">
+    <div class="row mt-2"  *ngIf="!isLoading">
         <div class="col col-sm-6">
-            <div class="card mb-3" *ngIf="!isLoading">
+            <div class="card mb-3">
                 <div class="card-header">
                     {{ profissional.nome }}
                 </div>
@@ -20,9 +20,9 @@
                 </table>
             </div>
             <div class="text-center mb-4">
-                <button type="submit" class="btn btn-primary btn-lg">Editar</button>
+                <a class="btn btn-primary btn-lg" [routerLink]="['editar']">Editar</a>
                 &nbsp;
-                <a type="submit" class="btn btn-light btn-lg" [routerLink]="['/profissional']">Voltar</a>
+                <a class="btn btn-light btn-lg" [routerLink]="['/profissional']">Voltar</a>
             </div>
         </div>
     </div>

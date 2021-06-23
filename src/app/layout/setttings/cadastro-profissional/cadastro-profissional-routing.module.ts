@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { CadastroProfissionalComponent } from '../cadastro-profissional/component/cadastro-profissional/cadastro-profissional.component';
 import { DetalhesComponent } from './component/detalhes/detalhes.component';
+import { EditarComponent } from './component/editar/editar.component';
 import { ListComponent } from './component/list/list.component';
+import { NovoComponent } from './component/novo/novo.component';
 
 
 const routes: Routes = [
@@ -13,7 +14,11 @@ const routes: Routes = [
     },    
     {
         path: 'novo',
-        component: CadastroProfissionalComponent,
+        component: NovoComponent,
+    },
+    {
+        path: ':id/editar',
+        component: EditarComponent
     },
     {
         path: ':id',
