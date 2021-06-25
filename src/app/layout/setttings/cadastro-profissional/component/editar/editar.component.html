@@ -4,7 +4,40 @@
     <div class="text-center m-4 col-sm-6" *ngIf="isLoading">
         <div class="spinner-border text-warning"></div>
     </div>    
-    <div class="row" *ngIf="!isLoading">
-        <app-cadastro-profissional [profissional]="profissional"></app-cadastro-profissional>
+    <div class="row">
+        <div class="col col-sm-6">
+            <form [formGroup]="formulario" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Editar
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Identificador</label>
+                            <input type="text" class="form-control" formControlName="id" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Nome</label>
+                            <input type="text" class="form-control" formControlName="nome">
+                            <app-error-msg [control]="formulario.get('nome')" label="Nome"></app-error-msg>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="text" class="form-control" formControlName="email">
+                            <app-error-msg [control]="formulario.get('email')" label="Email"></app-error-msg>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mb-4">
+                    <button type="submit" class="btn btn-success btn-lg" [disabled]="!formulario.valid">Salvar
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+                            *ngIf="isLoading"></span>
+                    </button>
+                    &nbsp;
+                    <button type="submit" class="btn btn-light btn-lg" [routerLink]="['/profissional']"
+                        [disabled]="isLoading">Voltar</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
