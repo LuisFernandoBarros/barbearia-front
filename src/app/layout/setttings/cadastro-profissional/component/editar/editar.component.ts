@@ -32,7 +32,8 @@ export class EditarComponent implements OnInit {
     this.formulario = this.formBuilder.group({
       id: [null],
       nome: [null, [Validators.required, FormValidations.onlyCharsValidator]],
-      email: [null, [Validators.required, Validators.email]]
+      email: [null, [Validators.required, Validators.email]],
+      telefone: [null, [Validators.required]]
     });
     this.activedRoute.params.subscribe(
       (param: any) => { this.getProfissional(param['id']) }
@@ -60,6 +61,7 @@ export class EditarComponent implements OnInit {
           id: resp.id,
           nome: resp.nome,
           email: resp.email,
+          telefone: resp.telefone
         })
         this.isLoading = false;
       }

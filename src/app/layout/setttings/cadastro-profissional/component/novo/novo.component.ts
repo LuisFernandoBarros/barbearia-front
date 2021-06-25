@@ -14,7 +14,7 @@ import { Profissional } from '../../profissional';
   styleUrls: ['./novo.component.css']
 })
 export class NovoComponent implements OnInit {
-  
+
   public formulario: FormGroup;
   public isLoading: boolean;
 
@@ -28,7 +28,8 @@ export class NovoComponent implements OnInit {
     this.formulario = this.formBuilder.group({
       nome: [null, [Validators.required, FormValidations.onlyCharsValidator]],
       email: [null, [Validators.required, Validators.email]],
-      senha: [null, [Validators.required]]
+      senha: [null, [Validators.required]],
+      telefone: [null, [Validators.required]]
     });
   }
 
