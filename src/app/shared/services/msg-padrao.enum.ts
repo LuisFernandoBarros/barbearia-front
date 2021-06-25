@@ -7,6 +7,7 @@ export enum MSG_PADRAO {
     LOGIN_ERROR = "Erro ao fazer login. Contate o suporte.",
     SIGNUP_ERROR = "Erro ao cadastrar. Contate o suporte.",
     ERROR_SERVER = "Erro no servidor. Contate o suporte.",
+    ERROR_SEARCH_CEP = "Erro ao buscar CEP. Contate o suporte.",
 
     // SUCCESS
     SAVE_SUCCESS = "Salvo com sucesso!",

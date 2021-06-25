@@ -10,14 +10,17 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Nome da Barbearia</label>
-                            <input type="text" class="form-control" formControlName="nomeBarbearia">
-                            <app-error-msg [control]="formulario.get('nomeBarbearia')" label="Nome da Barbearia">
+                            <input type="text" class="form-control" formControlName="nome">
+                            <app-error-msg [control]="formulario.get('nome')" label="Nome da Barbearia">
                             </app-error-msg>
                         </div>
                         <div class="form-group">
-                            <label>Cep</label>
+                            <label>Cep</label>&nbsp;
+                            <span class="spinner-grow spinner-grow-sm text-warning" role="status"
+                            *ngIf="isLoadingCep"></span>
                             <input type="text" class="form-control" formControlName="cep" (blur)="onBlurCep()"
                                 mask="00.000-0*" maxlength="15">
+
                             <app-error-msg [control]="formulario.get('cep')" label="CEP "></app-error-msg>
                         </div>
 
@@ -28,10 +31,16 @@
                             </div>
                             <div class="form-group col-sm-4">
                                 <label>Número</label>
-                                <input type="text" class="form-control" formControlName="numero" mask="0*" maxlength="10">
+                                <input type="text" class="form-control" formControlName="numero" mask="0*"
+                                    maxlength="10">
                                 <app-error-msg [control]="formulario.get('numero')" label="Número"></app-error-msg>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <label>Bairro</label>
+                            <input type="text" class="form-control" formControlName="bairro" readonly>
+                        </div>                        
 
                         <div class="form-group">
                             <label>Complemento</label>
@@ -53,26 +62,15 @@
 
                         <div class="form-group">
                             <label>Telefone</label>
-                            <input type="text" class="form-control" formControlName="telefone" mask="(00) 0 0000-0*"
-                                placeholder="(__)____-____" maxlength="20">
+                            <input type="text" class="form-control" formControlName="telefone" mask="(00) 0*"
+                                placeholder="(__)________" maxlength="20" minlength="10">
                             <app-error-msg [control]="formulario.get('telefone')" label="Telefone"></app-error-msg>
                         </div>
-
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" formControlName="isWhastapp">
-                            <label class="form-check-label">
-                                Este número tem WhatsApp
-                            </label>
-                        </div>
-
-
-
-
                     </div>
 
                 </div>
                 <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-success btn-lg">Salvar</button>
+                    <button type="submit" class="btn btn-success btn-lg" [disabled]="!formulario.valid">Salvar</button>
                 </div>
             </form>
         </div>
