@@ -42,11 +42,6 @@ export class SidebarComponent implements OnInit {
         }
     }
 
-    toggleCollapsed() {
-        this.collapsed = !this.collapsed;
-        this.collapsedEvent.emit(this.collapsed);
-    }
-
     isToggled(): boolean {
         const dom: Element = document.querySelector('body');
         return dom.classList.contains(this.pushRightClass);
@@ -55,15 +50,6 @@ export class SidebarComponent implements OnInit {
     toggleSidebar() {
         const dom: any = document.querySelector('body');
         dom.classList.toggle(this.pushRightClass);
-    }
-
-    rltAndLtr() {
-        const dom: any = document.querySelector('body');
-        dom.classList.toggle('rtl');
-    }
-
-    changeLang(language: string) {
-        this.translate.use(language);
     }
 
     onLoggedout() {
