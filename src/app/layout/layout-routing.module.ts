@@ -31,7 +31,7 @@ const routes: Routes = [
             },
             {
                 path: 'charts',
-                loadChildren: () => import('./charts/charts.module').then((m) => m.ChartsModule)
+                loadChildren: () => import('./charts/charts.module').then((m) => m.ChartsModule),
             },
         ]
     }

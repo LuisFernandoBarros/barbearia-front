@@ -1,0 +1,8 @@
+version: '2.1'
+
+services:
+  barbearia-front:
+    image: barbearia-front
+    build: .
+    ports:
+      - 8083:80

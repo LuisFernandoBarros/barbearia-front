@@ -11,8 +11,8 @@ import { Profissional } from '../../profissional';
 })
 export class DetalhesComponent implements OnInit {
 
-  private profissional: Profissional;
-  private isLoading: boolean;
+  public profissional: Profissional;
+  public isLoading: boolean;
 
   constructor(private service: CadastroProfissionalService,
     private activedRoute: ActivatedRoute) { }

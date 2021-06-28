@@ -19,7 +19,7 @@ export class CadastroServicosComponent implements OnInit {
     private toast: ToastrService) { }
 
   public servicos: Array<Servico> = [];
-  private isLoading = false;
+  public isLoading = false;
 
   ngOnInit(): void {
     this.isLoading = true;

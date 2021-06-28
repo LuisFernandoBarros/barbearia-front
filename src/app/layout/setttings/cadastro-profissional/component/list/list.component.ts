@@ -12,8 +12,8 @@ import { Profissional } from '../../profissional';
 })
 export class ListComponent implements OnInit {
 
-  private profissionais: Array<Profissional>;
-  private isLoading: boolean
+  public profissionais: Array<Profissional>;
+  public isLoading: boolean
 
   constructor(private service: CadastroProfissionalService,
     private extractMsgService: ExtractMessageService,
