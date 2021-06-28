@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { NgxMaskModule } from 'ngx-mask';
 import { SharedModule } from '../shared/shared.module';
 
 import { SignupRoutingModule } from './signup-routing.module';
@@ -14,7 +15,8 @@ import { SignupService } from './signup.service';
         TranslateModule, 
         SignupRoutingModule,
         ReactiveFormsModule,
-        SharedModule
+        SharedModule,
+        NgxMaskModule.forRoot()
     ],
     declarations: [SignupComponent],
     providers: [SignupService]
