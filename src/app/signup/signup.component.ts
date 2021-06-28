@@ -28,21 +28,14 @@ export class SignupComponent implements OnInit {
             email: [null, [Validators.required, Validators.email]],
             senha: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
             senhaRepeat: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(20), FormValidations.senhaEqualsTo('senha')]],
+            telefone: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(20), FormValidations.onlyNumbersValidator]]
         });
     }
 
     onSubmit() {
-        this.service.save(this.toNewCadastro()).subscribe(
-            (resp) => this.toastService.success("", "Cadastrado com sucesso!"),
-            (err) => this.toastService.error("", this.msgExtractService.extractMessageFromError(err, MSG_PADRAO.SIGNUP_ERROR))
+        this.service.save(this.formulario.value).subscribe(
+            (resp) => this.toastService.success(MSG_PADRAO.SAVE_SUCCESS),
+            (err) => this.toastService.error(this.msgExtractService.extractMessageFromError(err, MSG_PADRAO.SIGNUP_ERROR))
         )
-    }
-
-    toNewCadastro(): any {
-        return {
-            nome: this.formulario.value['nome'],
-            email: this.formulario.value['email'],
-            senha: this.formulario.value['senha']
-        };
     }
 }
