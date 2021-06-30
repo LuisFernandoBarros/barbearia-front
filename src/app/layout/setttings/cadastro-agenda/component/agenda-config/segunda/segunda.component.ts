@@ -16,28 +16,35 @@ export class SegundaComponent implements OnInit {
 
   public showCollapse = false;
   private formulario: FormGroup;
-  @Input() horario: Horario
+  public isLoading = false;  
+  @Input() horario: Horario  
+  
 
   constructor(private formBuilder: FormBuilder,
     private service: AgendaConfigService,
     private extractMsgService: ExtractMessageService,
     private toastService: ToastrService) { }
 
-  ngOnInit(): void {
-    this.formulario = this.formBuilder.group({      
+  ngOnInit(): void {    
+    this.formulario = this.formBuilder.group({
       inicioManha: [this.horario.inicioManha],
       fimManha: [this.horario.fimManha],
       inicioTarde: [this.horario.inicioTarde],
       fimTarde: [this.horario.fimTarde],
-      diaSemana: DIA_SEMANA.SEGUNDA
-    });    
+      diaSemana: DIA_SEMANA.SEGUNDA,
+    });
   }
 
   onSubmit() {
+    this.isLoading = true;
     this.service.update(this.formulario.value).subscribe(
-      (resp) => { this.toastService.success(MSG_PADRAO.SAVE_SUCCESS) },
+      (resp) => {
+        this.toastService.success(MSG_PADRAO.SAVE_SUCCESS)
+        this.isLoading = false;
+      },
       (err) => {
-        this.toastService.error(this.extractMsgService.extractMessageFromError(err, MSG_PADRAO.ERROR_SERVER))
+        this.toastService.error(this.extractMsgService.extractMessageFromError(err, MSG_PADRAO.ERROR_SERVER));
+        this.isLoading = false;
       }
     )
   }
@@ -48,5 +55,21 @@ export class SegundaComponent implements OnInit {
     } else {
       this.showCollapse = true;
     };
+  }
+
+  closeAtentimento(event) {
+    this.isLoading = true;
+    let isToClose = event.target.checked;
+    this.service.closeAtendimento(DIA_SEMANA.SEGUNDA, isToClose).subscribe(
+      (resp) => {
+        this.horario = resp;
+        this.toastService.success(MSG_PADRAO.SAVE_SUCCESS);
+        this.isLoading = false;
+      },
+      (err) => {
+        this.toastService.error(this.extractMsgService.extractMessageFromError(err, MSG_PADRAO.ERROR_SERVER));
+        this.isLoading = false;
+      }
+    );
   }
 }

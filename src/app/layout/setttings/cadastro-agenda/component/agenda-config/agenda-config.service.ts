@@ -16,5 +16,9 @@ export class AgendaConfigService {
 
     getAllDiasSemanaByUserLogado() {
         return this.httpClient.get<Array<Horario>>(`${this.url}/horarios`);
-    };    
+    };
+    
+    closeAtendimento(diaSemana: number, isToClose: boolean) {
+        return this.httpClient.patch<any>(`${this.url}/close/${diaSemana}`, {isToClose});
+    };      
 }
