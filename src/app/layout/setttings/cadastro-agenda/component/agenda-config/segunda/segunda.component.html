@@ -6,13 +6,14 @@
             </button>
         </h2>
         <div class="accordion-collapse collapse {{showCollapse ? 'show': ''}}">
-            <div class="accordion-body">
+            
+            <!-- SPINNER -->
+            <div class="text-center m-4" *ngIf="isLoading">
+                <div class="spinner-border text-warning"></div>
+            </div>
 
+            <div class="accordion-body" *ngIf="!isLoading">
                 <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
-
-                    <!-- IDENTIFICADOR -->
-                    <input type="text" class="form-control" formControlName="idProfissional" readonly hidden>
-
 
                     Manhã
 
@@ -20,14 +21,14 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">De</span>
                         </div>
-                        <input type="text" class="form-control" mask="00:00" placeholder="00:00" maxlength="5"
-                            minlength="5" formControlName="inicioManha">
+                        <input type="time" class="form-control" min="00:00:00" max="23:59:00"
+                            formControlName="inicioManha">
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <div class="input-group-prepend">
                             <span class="input-group-text">até</span>
                         </div>
-                        <input type="text" class="form-control" mask="00:00" placeholder="00:00" maxlength="5"
-                            minlength="5" formControlName="fimManha">
+                        <input type="time" class="form-control" min="00:00:00" max="23:59:00"
+                            formControlName="fimManha">
                     </div>
 
                     Tarde
@@ -36,24 +37,27 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">De</span>
                         </div>
-                        <input type="text" class="form-control" mask="00:00" placeholder="00:00" maxlength="5"
-                            minlength="5" formControlName="inicioTarde">
+                        <input type="time" class="form-control" min="00:00:00" max="23:59:00"
+                            formControlName="inicioTarde">
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <div class="input-group-prepend">
                             <span class="input-group-text">até</span>
                         </div>
-                        <input type="text" class="form-control" mask="00:00" placeholder="00:00" maxlength="5"
-                            minlength="5" formControlName="fimTarde">
+                        <input type="time" class="form-control" min="00:00:00" max="23:59:00"
+                            formControlName="fimTarde">
                     </div>
 
                     <div class="row">
                         <div class="input-group d-flex justify-content-between">
 
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" checked>
-                                <label class="form-check-label">Barbearia Aberta</label>
+                                <input class="form-check-input" type="checkbox" [checked]="horario.atendendo"
+                                    (change)="closeAtentimento($event)">
+                                <label class="form-check-label">{{ horario.atendendo ? 'Estou' : 'Não estou' }}
+                                    atendendo</label>
                             </div>
-                            <button type="submit" class="btn btn-success btn-md">Salvar</button>
+                            <button type="submit" class="btn btn-success btn-md"
+                                [disabled]="!formulario.valid">Salvar</button>
                         </div>
                     </div>
                 </form>

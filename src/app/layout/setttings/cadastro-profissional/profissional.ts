@@ -1,4 +1,4 @@
-import { Horario } from "./component/agenda-config/horario";
+import { Horario } from "../cadastro-agenda/component/agenda-config/horario";
 
 export class Profissional {
     id: number;
