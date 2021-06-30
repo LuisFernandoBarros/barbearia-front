@@ -34,7 +34,7 @@ export class SegundaComponent implements OnInit {
   }
 
   onSubmit() {
-    this.service.save(this.formulario.value).subscribe(
+    this.service.update(this.formulario.value).subscribe(
       (resp) => { this.toastService.success(MSG_PADRAO.SAVE_SUCCESS) },
       (err) => {
         this.toastService.error(this.extractMsgService.extractMessageFromError(err, MSG_PADRAO.ERROR_SERVER))

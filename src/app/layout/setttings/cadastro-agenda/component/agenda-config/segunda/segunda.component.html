@@ -16,14 +16,14 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">De</span>
                         </div>
-                        <input type="text" class="form-control" mask="00:00" placeholder="00:00" maxlength="5"
-                            minlength="5" formControlName="inicioManha">
+                        <input type="time" class="form-control" min="00:00:00" max="23:59:00"
+                            formControlName="inicioManha">
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <div class="input-group-prepend">
                             <span class="input-group-text">até</span>
                         </div>
-                        <input type="text" class="form-control" mask="00:00" placeholder="00:00" maxlength="5"
-                            minlength="5" formControlName="fimManha">
+                        <input type="time" class="form-control" min="00:00:00" max="23:59:00"
+                            formControlName="fimManha">
                     </div>
 
                     Tarde
@@ -32,14 +32,14 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">De</span>
                         </div>
-                        <input type="text" class="form-control" mask="00:00" placeholder="00:00" maxlength="5"
-                            minlength="5" formControlName="inicioTarde">
+                        <input type="time" class="form-control" min="00:00:00" max="23:59:00"
+                            formControlName="inicioTarde">
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <div class="input-group-prepend">
                             <span class="input-group-text">até</span>
                         </div>
-                        <input type="text" class="form-control" mask="00:00" placeholder="00:00" maxlength="5"
-                            minlength="5" formControlName="fimTarde">
+                        <input type="time" class="form-control" min="00:00:00" max="23:59:00"
+                            formControlName="fimTarde">
                     </div>
 
                     <div class="row">
@@ -49,7 +49,7 @@
                                 <input class="form-check-input" type="checkbox" checked>
                                 <label class="form-check-label">Barbearia Aberta</label>
                             </div>
-                            <button type="submit" class="btn btn-success btn-md">Salvar</button>
+                            <button type="submit" class="btn btn-success btn-md" [disabled]="!formulario.valid">Salvar</button>
                         </div>
                     </div>
                 </form>

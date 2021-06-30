@@ -10,9 +10,9 @@ export class AgendaConfigService {
 
     constructor(private httpClient: HttpClient) { }
 
-    save(body: Object) {
-        return this.httpClient.post<any>(`${this.url}/servico`, JSON.stringify(body))
-    };
+    update(body: Object) {
+        return this.httpClient.patch<Horario>(`${this.url}/horario`, JSON.stringify(body))
+    };    
 
     getAllDiasSemanaByUserLogado() {
         return this.httpClient.get<Array<Horario>>(`${this.url}/horarios`);
