@@ -30,6 +30,11 @@ const routes: Routes = [
                 canActivate: [AuthGuard]
             },
             {
+                path: 'config-agenda',
+                loadChildren: () => import('./setttings/cadastro-agenda/cadastro-agenda.module').then((m) => m.CadastroAgendaModule),
+                canActivate: [AuthGuard]
+            },
+            {
                 path: 'charts',
                 loadChildren: () => import('./charts/charts.module').then((m) => m.ChartsModule),
             },
