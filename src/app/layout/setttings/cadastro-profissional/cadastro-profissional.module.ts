@@ -11,6 +11,8 @@ import { DetalhesComponent } from './component/detalhes/detalhes.component';
 import { EditarComponent } from './component/editar/editar.component';
 import { NovoComponent } from './component/novo/novo.component';
 import { NgxMaskModule } from 'ngx-mask';
+import { AgendaConfigComponent } from './component/agenda-config/agenda-config.component';
+import { ConfigSegundaComponent } from './component/agenda-config/segunda/segunda.component';
 
 
 @NgModule({
@@ -22,6 +24,6 @@ import { NgxMaskModule } from 'ngx-mask';
         SharedModule,
         NgxMaskModule.forRoot()
     ],
-    declarations: [ListComponent, DetalhesComponent, EditarComponent, NovoComponent]
+    declarations: [ListComponent, DetalhesComponent, EditarComponent, NovoComponent, AgendaConfigComponent, ConfigSegundaComponent]
 })
 export class CadastroProfissionalModule { }
