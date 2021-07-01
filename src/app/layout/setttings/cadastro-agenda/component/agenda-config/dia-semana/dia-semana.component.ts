@@ -8,11 +8,11 @@ import { Horario } from '../horario';
 import { DiaSemana } from '../../../../../../shared/services/dia-semana';
 
 @Component({
-  selector: 'app-segunda',
-  templateUrl: './segunda.component.html',
-  styleUrls: ['./segunda.component.css']
+  selector: 'app-dia-semana',
+  templateUrl: './dia-semana.component.html',
+  styleUrls: ['./dia-semana.component.css']
 })
-export class SegundaComponent implements OnInit {
+export class DiaSemanaComponent implements OnInit {
 
   public showCollapse = false;
   private formulario: FormGroup;
