@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { routerTransition } from '../router.animations';
 import { FormValidations } from '../shared/form-validations';
@@ -20,7 +21,8 @@ export class SignupComponent implements OnInit {
     constructor(private formBuilder: FormBuilder,
         private service: SignupService,
         private toastService: ToastrService,
-        private msgExtractService: ExtractMessageService) { }
+        private msgExtractService: ExtractMessageService,
+        private router: Router) { }
 
     ngOnInit(): void {
         this.formulario = this.formBuilder.group({
@@ -34,7 +36,10 @@ export class SignupComponent implements OnInit {
 
     onSubmit() {
         this.service.save(this.formulario.value).subscribe(
-            (resp) => this.toastService.success(MSG_PADRAO.SAVE_SUCCESS),
+            (resp) => {
+                this.toastService.success(MSG_PADRAO.SAVE_SUCCESS);
+                this.router.navigate(['/login']);
+            },
             (err) => this.toastService.error(this.msgExtractService.extractMessageFromError(err, MSG_PADRAO.SIGNUP_ERROR))
         )
     }

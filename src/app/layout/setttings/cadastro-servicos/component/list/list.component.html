@@ -22,7 +22,7 @@
                         <tbody>
                             <tr class="font-12" *ngFor="let servico of servicos" (click)="goToEditar(servico.id)">
                                 <td>{{ servico.descricao }}</td>
-                                <td class="text-center">{{ servico.tempo }} min</td>
+                                <td class="text-center">{{ servico.tempo | mask: '00:00'}}h</td>
                                 <td class="text-center">{{ servico.valor | currency:'R$ ' }}</td>
                             </tr>
                         </tbody>
