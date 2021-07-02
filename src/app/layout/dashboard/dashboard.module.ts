@@ -8,9 +8,19 @@ import { DashboardComponent } from './dashboard.component';
 import { AgendaDoDiaComponent } from './components/agenda-do-dia/agenda-do-dia/agenda-do-dia.component';
 import { ItemAgendamentoComponent } from './components/agenda-do-dia/item-agendamento/item-agendamento.component';
 import { AgendamentoDetalhesComponent } from './components/agenda-do-dia/agendamento-detalhes/agendamento-detalhes.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-    imports: [CommonModule, NgbCarouselModule, NgbAlertModule, DashboardRoutingModule, StatModule, SharedPipesModule],
+    imports: [
+        CommonModule, 
+        NgbCarouselModule, 
+        NgbAlertModule, 
+        DashboardRoutingModule, 
+        StatModule, 
+        SharedPipesModule,
+        FormsModule,
+        ReactiveFormsModule,
+    ],
     declarations: [DashboardComponent, AgendaDoDiaComponent, ItemAgendamentoComponent, AgendamentoDetalhesComponent]
 })
 export class DashboardModule { }

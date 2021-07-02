@@ -4,7 +4,9 @@
             <div class="card-header col-xl-12">
                 <div class="d-flex justify-content-between">
                     <button type="button" class="btn btn-secondary btn-sm" (click)="previusDay()"><</button>
-                    <span>{{data | date:"dd/MM/yyyy" }}</span>
+                    <div>
+                        <input type="date" class="form-control" [(ngModel)]="dataAgenda" (change)="specificDay()">                    
+                    </div>
                     <button type="button" class="btn btn-secondary btn-sm" (click)="nextDay()">></button>
                 </div>
             </div>
