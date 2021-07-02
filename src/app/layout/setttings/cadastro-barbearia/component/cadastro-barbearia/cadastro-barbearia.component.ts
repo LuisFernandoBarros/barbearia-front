@@ -9,6 +9,7 @@ import { ConsultaCepResponse } from '../../../../../shared/model/consulta-cep-re
 import { ConsultaCepService } from '../../../../../shared/services/consulta-cep.service';
 import { CadastroBarbeariaService } from '../../cadastro-barbearia.service';
 import { ExtractMessageService } from '../../../../../shared/services/extract-message.service';
+import { Barbearia } from '../../barbearia';
 
 @Component({
   selector: 'app-cadastro-barbearia',
@@ -19,6 +20,8 @@ export class CadastroBarbeariaComponent implements OnInit {
 
   public formulario: FormGroup;
   public isLoadingCep = false;
+  public isLoading = false;
+  public barbearia = new Barbearia(null, null, null, null, null, null, null, null, null, null, null);
 
   constructor(private formBuilder: FormBuilder,
     private service: CadastroBarbeariaService,
@@ -27,6 +30,19 @@ export class CadastroBarbeariaComponent implements OnInit {
     private extractService: ExtractMessageService) { }
 
   ngOnInit(): void {
+
+    this.isLoading = true;
+    this.service.get().subscribe(
+      (resp) => {
+        this.barbearia = resp;
+        this.updateForm();
+        this.isLoading = false;
+      },
+      (err) => {
+        this.isLoading = false;
+        this.toastr.error(this.extractService.extractMessageFromError(err, MSG_PADRAO.ERROR_SERVER));
+      }
+    )
 
     this.formulario = this.formBuilder.group({
       nome: [null, [Validators.required]],
@@ -41,11 +57,25 @@ export class CadastroBarbeariaComponent implements OnInit {
     });
   }
 
+  updateForm() {
+    this.formulario.patchValue({
+      nome: this.barbearia.nome,
+      cep: this.barbearia.cep,
+      rua: this.barbearia.rua,
+      bairro: this.barbearia.bairro,
+      cidade: this.barbearia.cidade,
+      estado: this.barbearia.estado,
+      numero: this.barbearia.numero,
+      complemento: this.barbearia.complemento,
+      telefone: this.barbearia.telefone,
+    });
+  }
+
   onSubmit() {
     if (FormValidations.isFormValido(this.formulario)) {
       this.service.save(this.formulario.value)
-        .subscribe(resp => {          
-            this.toastr.success(MSG_PADRAO.SAVE_SUCCESS);
+        .subscribe(resp => {
+          this.toastr.success(MSG_PADRAO.SAVE_SUCCESS);
         },
           (err) => { this.toastr.error(this.extractService.extractMessageFromError((err), MSG_PADRAO.ERROR_SERVER)) });
     } else {

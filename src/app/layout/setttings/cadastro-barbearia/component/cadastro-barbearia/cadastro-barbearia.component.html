@@ -8,7 +8,7 @@
                         Editar Informações
                     </div>
                     <div class="card-body">
-                        <div class="form-group">
+                        <div class="form-group" *ngIf="!isLoading">
                             <label for="exampleInputEmail1">Nome da Barbearia</label>
                             <input type="text" class="form-control" formControlName="nome">
                             <app-error-msg [control]="formulario.get('nome')" label="Nome da Barbearia">
