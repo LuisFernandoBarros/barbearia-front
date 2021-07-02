@@ -10,6 +10,7 @@ import { ConsultaCepService } from '../../../../../shared/services/consulta-cep.
 import { CadastroBarbeariaService } from '../../cadastro-barbearia.service';
 import { ExtractMessageService } from '../../../../../shared/services/extract-message.service';
 import { Barbearia } from '../../barbearia';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cadastro-barbearia',
@@ -40,11 +41,16 @@ export class CadastroBarbeariaComponent implements OnInit {
       },
       (err) => {
         this.isLoading = false;
-        this.toastr.error(this.extractService.extractMessageFromError(err, MSG_PADRAO.ERROR_SERVER));
+        if (err.status == 404) {
+          this.toastr.info("Cadastre sua barbearia.");
+        } else {
+          this.toastr.error(this.extractService.extractMessageFromError(err, MSG_PADRAO.ERROR_SERVER));
+        }
       }
     )
 
     this.formulario = this.formBuilder.group({
+      id: [null],
       nome: [null, [Validators.required]],
       cep: [null, [Validators.required, FormValidations.cepValidator]],
       rua: [null, [Validators.required]],
@@ -59,6 +65,7 @@ export class CadastroBarbeariaComponent implements OnInit {
 
   updateForm() {
     this.formulario.patchValue({
+      id: this.barbearia.id,
       nome: this.barbearia.nome,
       cep: this.barbearia.cep,
       rua: this.barbearia.rua,
@@ -73,7 +80,7 @@ export class CadastroBarbeariaComponent implements OnInit {
 
   onSubmit() {
     if (FormValidations.isFormValido(this.formulario)) {
-      this.service.save(this.formulario.value)
+      this.getRequest()
         .subscribe(resp => {
           this.toastr.success(MSG_PADRAO.SAVE_SUCCESS);
         },
@@ -82,6 +89,20 @@ export class CadastroBarbeariaComponent implements OnInit {
       this.toastr.error("Preencha os campos obrigatórios", "")
     }
   }
+
+  getRequest(): Observable<Barbearia> {
+    if (this.isUpdate()) {
+      return this.service.update(this.formulario.value);
+    } else {
+      return this.service.save(this.formulario.value);
+    }
+  }
+
+  isUpdate(): boolean {
+    return this.barbearia.id != null;
+  }
+
+
 
   onBlurCep() {
     let cep = this.formulario.value["cep"];
