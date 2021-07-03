@@ -13,6 +13,7 @@ import { NgbActiveModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie-service';
 import { RequestInterceptor } from './shared/services/request-interceptor';
+import { ConfiguracaoBarbeariaGuard } from './shared/guard/configuracao-barbearia.guard';
 
 
 
@@ -35,6 +36,7 @@ import { RequestInterceptor } from './shared/services/request-interceptor';
         AuthGuard,
         NgbActiveModal,
         CookieService,
+        ConfiguracaoBarbeariaGuard,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: RequestInterceptor,

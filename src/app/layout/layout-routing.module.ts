@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../shared';
+import { ConfiguracaoBarbeariaGuard } from '../shared/guard/configuracao-barbearia.guard';
 import { LayoutComponent } from './layout.component';
 
 const routes: Routes = [
@@ -12,7 +13,7 @@ const routes: Routes = [
             {
                 path: 'dashboard',
                 loadChildren: () => import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
-                canActivate: [AuthGuard]
+                canActivate: [AuthGuard, ConfiguracaoBarbeariaGuard]
             },
             {
                 path: 'barbearia',
@@ -22,21 +23,22 @@ const routes: Routes = [
             {
                 path: 'profissional',
                 loadChildren: () => import('./setttings/cadastro-profissional/cadastro-profissional.module').then((m) => m.CadastroProfissionalModule),
-                canActivate: [AuthGuard]
+                canActivate: [AuthGuard, ConfiguracaoBarbeariaGuard]
             },
             {
                 path: 'servicos',
                 loadChildren: () => import('./setttings/cadastro-servicos/cadastro-servicos.module').then((m) => m.CadastroServicosModule),
-                canActivate: [AuthGuard]
+                canActivate: [AuthGuard, ConfiguracaoBarbeariaGuard]
             },
             {
                 path: 'config-agenda',
                 loadChildren: () => import('./setttings/cadastro-agenda/cadastro-agenda.module').then((m) => m.CadastroAgendaModule),
-                canActivate: [AuthGuard]
+                canActivate: [AuthGuard, ConfiguracaoBarbeariaGuard]
             },
             {
                 path: 'charts',
                 loadChildren: () => import('./charts/charts.module').then((m) => m.ChartsModule),
+                canActivate: [AuthGuard, ConfiguracaoBarbeariaGuard]
             },
         ]
     }

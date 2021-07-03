@@ -11,6 +11,8 @@ import { CadastroBarbeariaService } from '../../cadastro-barbearia.service';
 import { ExtractMessageService } from '../../../../../shared/services/extract-message.service';
 import { Barbearia } from '../../barbearia';
 import { Observable } from 'rxjs';
+import { LocalStorageService } from '../.../../../../../../shared/services/local-storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro-barbearia',
@@ -28,7 +30,9 @@ export class CadastroBarbeariaComponent implements OnInit {
     private service: CadastroBarbeariaService,
     private toastr: ToastrService,
     private cepService: ConsultaCepService,
-    private extractService: ExtractMessageService) { }
+    private extractService: ExtractMessageService,
+    private localStorageService: LocalStorageService,
+    private router: Router) { }
 
   ngOnInit(): void {
 
@@ -37,7 +41,7 @@ export class CadastroBarbeariaComponent implements OnInit {
       (resp) => {
         this.barbearia = resp;
         this.updateForm();
-        this.isLoading = false;
+        this.isLoading = false;        
       },
       (err) => {
         this.isLoading = false;
@@ -83,6 +87,8 @@ export class CadastroBarbeariaComponent implements OnInit {
       this.getRequest()
         .subscribe(resp => {
           this.toastr.success(MSG_PADRAO.SAVE_SUCCESS);
+          this.localStorageService.removeConfig("CADASTRAR_BARBEARIA");
+          this.router.navigate(['/dashboard']);
         },
           (err) => { this.toastr.error(this.extractService.extractMessageFromError((err), MSG_PADRAO.ERROR_SERVER)) });
     } else {

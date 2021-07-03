@@ -9,11 +9,24 @@ export class LocalStorageService {
     constructor() { }
 
     setProfissional(profissional: Profissional) {
-        localStorage.setItem("intro", this.getconfiguracaoProfissional(profissional.configuracoesProfissional))
+        this.setConfiguracoes(profissional.configuracoesProfissional);        
     }
 
-    private getconfiguracaoProfissional(configuracoes: Array<ConfiguracaoProfissional>): string {
-        let configuracao = configuracoes.find(it => it.vistoEm == null);
-        return configuracao.configuracao;
+    hasConfig(config: string): boolean {        
+        return localStorage.getItem(config) != null
+    }
+
+    removeConfig(config: string){
+        localStorage.removeItem(config);
+    }
+
+    private setConfiguracoes(configuracoes: Array<ConfiguracaoProfissional>){
+        configuracoes.forEach(
+            it => {
+                if(it.vistoEm == null){
+                    localStorage.setItem(it.configuracao, null)
+                }
+            }
+        )
     }
 }
