@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IntroService } from '../shared/intro/intro.service';
 
 @Component({
     selector: 'app-layout',
@@ -8,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 export class LayoutComponent implements OnInit {
     collapedSideBar: boolean;
 
-    constructor() {}
+    constructor(private introService: IntroService) {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.introService.show();
+    }
 
     receiveCollapsed($event) {
         this.collapedSideBar = $event;

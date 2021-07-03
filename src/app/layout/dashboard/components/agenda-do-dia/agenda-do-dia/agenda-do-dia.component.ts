@@ -21,7 +21,6 @@ export class AgendaDoDiaComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAgendamentos();
-    console.log(this.getDataIso());
     this.dataAgenda = this.getDataIso();
   }
 
