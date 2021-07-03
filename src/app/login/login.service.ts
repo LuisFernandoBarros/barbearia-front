@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../environments/environment";
+import { Profissional } from "../layout/setttings/cadastro-profissional/profissional";
 
 @Injectable({ providedIn: 'root' })
 export class LoginService {
@@ -16,9 +17,6 @@ export class LoginService {
             email: email,
             password: password
         }
-        return this.httpClient.post(url, body, {
-            headers: { 'Content-Type': 'application/json; charset=utf-8' },
-            withCredentials: true
-        })
+        return this.httpClient.post<Profissional>(url, body)
     }
 }

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { routerTransition } from '../router.animations';
 import { ExtractMessageService } from '../shared/services/extract-message.service';
+import { LocalStorageService } from '../shared/services/local-storage.service';
 import { MSG_PADRAO } from '../shared/services/msg-padrao.enum';
 import { LoginService } from './login.service';
 
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
         private formBuilder: FormBuilder,
         private service: LoginService,
         private toastService: ToastrService,
-        private extractMessageService: ExtractMessageService) { }
+        private extractMessageService: ExtractMessageService,
+        private localStoreService: LocalStorageService) { }
 
     ngOnInit() {
         this.formulario = this.formBuilder.group({
@@ -36,8 +38,9 @@ export class LoginComponent implements OnInit {
         this.isLoading = true;
         this.service.logar(this.formulario.value["email"], this.formulario.value["senha"])
             .subscribe(
-                (resp) => { 
-                    this.toastService.info("", "Bem vindo!");
+                (resp) => {                    
+                    this.toastService.info("Bem vindo!");
+                    this.localStoreService.setProfissional(resp);
                     this.router.navigate(['dashboard']);
                     this.isLoading = false;
                 },

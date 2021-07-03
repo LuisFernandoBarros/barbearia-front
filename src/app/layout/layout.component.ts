@@ -12,7 +12,7 @@ export class LayoutComponent implements OnInit {
     constructor(private introService: IntroService) {}
 
     ngOnInit() {
-        this.introService.show();
+        //this.introService.show();
     }
 
     receiveCollapsed($event) {

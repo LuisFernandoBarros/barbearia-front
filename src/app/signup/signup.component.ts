@@ -17,6 +17,7 @@ import { SignupService } from './signup.service';
 export class SignupComponent implements OnInit {
 
     public formulario: FormGroup;
+    public isLoading: boolean;
 
     constructor(private formBuilder: FormBuilder,
         private service: SignupService,
@@ -25,6 +26,7 @@ export class SignupComponent implements OnInit {
         private router: Router) { }
 
     ngOnInit(): void {
+        this.isLoading = false;
         this.formulario = this.formBuilder.group({
             nome: [null, [Validators.required, FormValidations.onlyCharsValidator]],
             email: [null, [Validators.required, Validators.email]],
@@ -35,12 +37,18 @@ export class SignupComponent implements OnInit {
     }
 
     onSubmit() {
+        this.isLoading = true;
         this.service.save(this.formulario.value).subscribe(
             (resp) => {
+                this.isLoading = false;
                 this.toastService.success(MSG_PADRAO.SAVE_SUCCESS);
                 this.router.navigate(['/login']);
             },
-            (err) => this.toastService.error(this.msgExtractService.extractMessageFromError(err, MSG_PADRAO.SIGNUP_ERROR))
+            (err) => {
+                this.isLoading = false;
+                this.toastService.error(this.msgExtractService.extractMessageFromError(err, MSG_PADRAO.SIGNUP_ERROR))
+            }
+
         )
     }
 }

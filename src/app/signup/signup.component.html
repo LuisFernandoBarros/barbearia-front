@@ -34,9 +34,10 @@
                        
                     </div>
                 </div>
-                <button type="submit" class="btn rounded-btn" [disabled]="!formulario.valid">Registrar</button>
+                <div class="spinner-border text-warning" *ngIf="isLoading"></div>
+                <button type="submit" class="btn rounded-btn" [disabled]="!formulario.valid" *ngIf="!isLoading">Registrar</button>
                 &nbsp;
-                <a [routerLink]="['/login']" class="btn rounded-btn">Voltar</a>
+                <a [routerLink]="['/login']" class="btn rounded-btn" *ngIf="!isLoading">Voltar</a>
             </form>
         </div>
     </div>
