@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { IntroService } from '../shared/intro/intro.service';
+import { IntroService } from '../shared/services/intro/intro.service';
+import { LocalStorageService } from '../shared/services/local-storage.service';
 
 @Component({
     selector: 'app-layout',
@@ -9,10 +10,13 @@ import { IntroService } from '../shared/intro/intro.service';
 export class LayoutComponent implements OnInit {
     collapedSideBar: boolean;
 
-    constructor(private introService: IntroService) {}
+    constructor(private introService: IntroService,
+        private localStorageService: LocalStorageService) {}
 
     ngOnInit() {
-        //this.introService.show();
+        if(this.localStorageService.hasConfig('CADASTRAR_BARBEARIA')){        
+            this.introService.show('CADASTRAR_BARBEARIA');
+        }
     }
 
     receiveCollapsed($event) {
