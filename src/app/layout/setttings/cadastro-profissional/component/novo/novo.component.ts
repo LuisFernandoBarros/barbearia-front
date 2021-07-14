@@ -6,7 +6,6 @@ import { MSG_PADRAO } from '../../../../../shared/services/msg-padrao.enum';
 import { FormValidations } from '../../../../../shared/form-validations';
 import { ExtractMessageService } from '../../../../../shared/services/extract-message.service';
 import { CadastroProfissionalService } from '../../cadastro-profissional.service';
-import { Profissional } from '../../profissional';
 
 @Component({
   selector: 'app-novo',

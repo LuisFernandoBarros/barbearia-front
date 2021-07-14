@@ -1,0 +1,75 @@
+<div class="login-page">
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <img class="user-avatar" src="assets/images/logo.png" width="200px" />
+            <h1>Barbearia Thomas</h1>
+            <form role="form" (ngSubmit)="onSubmit()">
+                <div class="form-content">
+
+                    <!-- NOME -->
+                    <div class="form-group">
+                        <input placeholder="Digite seu nome" class="form-control input-underline input-lg"
+                            type="text" />
+                    </div>
+                    
+                    <!-- TELEFONE -->
+                    <div class="form-group">
+                        <input placeholder="Digite seu telefone com DDD" class="form-control input-underline input-lg"
+                            type="text" />
+                    </div>
+
+                    <!-- BARBEIRO -->
+                    <div class="form-group">
+                        <button class="input-underline input-lg w-100 text-left color-placeholder" type="button"
+                            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            Selecione um barbeiro
+                        </button>
+                        <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item">Action</a></li>
+                            <li><a class="dropdown-item">Another action</a></li>
+                            <li><a class="dropdown-item">Something else here</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- SERVICO -->
+                    <div class="form-group">
+                        <button class="input-underline input-lg w-100 text-left color-placeholder" type="button"
+                            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            Selecione um serviço
+                        </button>
+                        <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item">Action</a></li>
+                            <li><a class="dropdown-item">Another action</a></li>
+                            <li><a class="dropdown-item">Something else here</a></li>
+                        </ul>
+                    </div> 
+
+                    <!-- DATA -->
+                    <div class="form-group">
+                        <input type="text" placeholder="Selecione uma data"
+                            class="form-control input-underline input-lg placeholder" onfocus="(this.type = 'date')"/>
+                    </div>
+                    <div class="form-group">
+                        <button class="input-underline input-lg w-100 text-left color-placeholder" type="button"
+                            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            Selecione um horário
+                        </button>
+                        <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item">Action</a></li>
+                            <li><a class="dropdown-item">Another action</a></li>
+                            <li><a class="dropdown-item">Something else here</a></li>
+                        </ul>
+                    </div>                   
+                </div>
+
+
+                <div class="spinner-border text-warning" *ngIf="false"></div>
+                <button type="submit" class="btn rounded-btn">Agendar</button>
+                &nbsp;
+                <a [routerLink]="['/signup']" class="btn rounded-btn">
+                    Limpar
+                </a>
+            </form>
+        </div>
+    </div>
+</div>

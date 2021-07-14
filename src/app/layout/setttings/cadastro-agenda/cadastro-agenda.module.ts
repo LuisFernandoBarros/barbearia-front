@@ -6,7 +6,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import { NgxMaskModule } from 'ngx-mask';
 import { CadastroAgendaRoutingModule } from './cadastro-agenda-routing.module';
 import { AgendaConfigComponent } from './component/agenda-config/agenda-config.component';
-import { SegundaComponent } from './component/agenda-config/segunda/segunda.component';
+import { DiaSemanaComponent } from './component/agenda-config/dia-semana/dia-semana.component';
  
 
 
@@ -20,7 +20,7 @@ import { SegundaComponent } from './component/agenda-config/segunda/segunda.comp
         NgxMaskModule.forRoot()
     ],
     declarations: [
-        AgendaConfigComponent, SegundaComponent
+        AgendaConfigComponent, DiaSemanaComponent
     ],
     exports: [
         

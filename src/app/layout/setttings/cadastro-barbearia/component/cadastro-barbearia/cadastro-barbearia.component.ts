@@ -9,6 +9,10 @@ import { ConsultaCepResponse } from '../../../../../shared/model/consulta-cep-re
 import { ConsultaCepService } from '../../../../../shared/services/consulta-cep.service';
 import { CadastroBarbeariaService } from '../../cadastro-barbearia.service';
 import { ExtractMessageService } from '../../../../../shared/services/extract-message.service';
+import { Barbearia } from '../../barbearia';
+import { Observable } from 'rxjs';
+import { LocalStorageService } from '../.../../../../../../shared/services/local-storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro-barbearia',
@@ -19,16 +23,38 @@ export class CadastroBarbeariaComponent implements OnInit {
 
   public formulario: FormGroup;
   public isLoadingCep = false;
+  public isLoading = false;
+  public barbearia = new Barbearia(null, null, null, null, null, null, null, null, null, null, null);
 
   constructor(private formBuilder: FormBuilder,
     private service: CadastroBarbeariaService,
     private toastr: ToastrService,
     private cepService: ConsultaCepService,
-    private extractService: ExtractMessageService) { }
+    private extractService: ExtractMessageService,
+    private localStorageService: LocalStorageService,
+    private router: Router) { }
 
   ngOnInit(): void {
 
+    this.isLoading = true;
+    this.service.get().subscribe(
+      (resp) => {
+        this.barbearia = resp;
+        this.updateForm();
+        this.isLoading = false;        
+      },
+      (err) => {
+        this.isLoading = false;
+        if (err.status == 404) {
+          this.toastr.info("Cadastre sua barbearia.");
+        } else {
+          this.toastr.error(this.extractService.extractMessageFromError(err, MSG_PADRAO.ERROR_SERVER));
+        }
+      }
+    )
+
     this.formulario = this.formBuilder.group({
+      id: [null],
       nome: [null, [Validators.required]],
       cep: [null, [Validators.required, FormValidations.cepValidator]],
       rua: [null, [Validators.required]],
@@ -41,17 +67,48 @@ export class CadastroBarbeariaComponent implements OnInit {
     });
   }
 
+  updateForm() {
+    this.formulario.patchValue({
+      id: this.barbearia.id,
+      nome: this.barbearia.nome,
+      cep: this.barbearia.cep,
+      rua: this.barbearia.rua,
+      bairro: this.barbearia.bairro,
+      cidade: this.barbearia.cidade,
+      estado: this.barbearia.estado,
+      numero: this.barbearia.numero,
+      complemento: this.barbearia.complemento,
+      telefone: this.barbearia.telefone,
+    });
+  }
+
   onSubmit() {
     if (FormValidations.isFormValido(this.formulario)) {
-      this.service.save(this.formulario.value)
-        .subscribe(resp => {          
-            this.toastr.success(MSG_PADRAO.SAVE_SUCCESS);
+      this.getRequest()
+        .subscribe(resp => {
+          this.toastr.success(MSG_PADRAO.SAVE_SUCCESS);
+          this.localStorageService.removeConfig("CADASTRAR_BARBEARIA");
+          this.router.navigate(['/dashboard']);
         },
           (err) => { this.toastr.error(this.extractService.extractMessageFromError((err), MSG_PADRAO.ERROR_SERVER)) });
     } else {
       this.toastr.error("Preencha os campos obrigatórios", "")
     }
   }
+
+  getRequest(): Observable<Barbearia> {
+    if (this.isUpdate()) {
+      return this.service.update(this.formulario.value);
+    } else {
+      return this.service.save(this.formulario.value);
+    }
+  }
+
+  isUpdate(): boolean {
+    return this.barbearia.id != null;
+  }
+
+
 
   onBlurCep() {
     let cep = this.formulario.value["cep"];

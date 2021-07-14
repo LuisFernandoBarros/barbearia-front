@@ -2,36 +2,45 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { MSG_PADRAO } from '../../../../../../shared/services/msg-padrao.enum';
-import { DIA_SEMANA } from '../../../../../../shared/services/dia-semana.enum';
 import { ExtractMessageService } from '../../../../../../shared/services/extract-message.service';
 import { AgendaConfigService } from '../agenda-config.service';
 import { Horario } from '../horario';
+import { DiaSemana } from '../../../../../../shared/services/dia-semana';
 
 @Component({
-  selector: 'app-segunda',
-  templateUrl: './segunda.component.html',
-  styleUrls: ['./segunda.component.css']
+  selector: 'app-dia-semana',
+  templateUrl: './dia-semana.component.html',
+  styleUrls: ['./dia-semana.component.css']
 })
-export class SegundaComponent implements OnInit {
+export class DiaSemanaComponent implements OnInit {
 
   public showCollapse = false;
   private formulario: FormGroup;
-  public isLoading = false;  
-  @Input() horario: Horario  
-  
+  public isLoading = false;
+  public horario: Horario;
+  @Input() horarios: Array<Horario>;
+  @Input() diaSemana: DiaSemana
+
 
   constructor(private formBuilder: FormBuilder,
     private service: AgendaConfigService,
     private extractMsgService: ExtractMessageService,
     private toastService: ToastrService) { }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
+    this.setHorario();
     this.formulario = this.formBuilder.group({
       inicioManha: [this.horario.inicioManha],
       fimManha: [this.horario.fimManha],
       inicioTarde: [this.horario.inicioTarde],
       fimTarde: [this.horario.fimTarde],
-      diaSemana: DIA_SEMANA.SEGUNDA,
+      diaSemana: this.diaSemana.id
+    });
+  }
+
+  setHorario() {
+    this.horario = this.horarios.find((it) => {
+      return it.diaSemana == this.diaSemana.id;
     });
   }
 
@@ -60,7 +69,7 @@ export class SegundaComponent implements OnInit {
   closeAtentimento(event) {
     this.isLoading = true;
     let isToClose = event.target.checked;
-    this.service.closeAtendimento(DIA_SEMANA.SEGUNDA, isToClose).subscribe(
+    this.service.closeAtendimento(this.diaSemana.id, isToClose).subscribe(
       (resp) => {
         this.horario = resp;
         this.toastService.success(MSG_PADRAO.SAVE_SUCCESS);
