@@ -10,10 +10,11 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
 import { MenuComponent } from './menu/menu.component';
+import { SimpleHeaderComponent } from './components/simple-header/simple-header.component';
 
 @NgModule({
     imports: [CommonModule, LayoutRoutingModule, TranslateModule, NgbDropdownModule],
-    declarations: [LayoutComponent, SidebarComponent, HeaderComponent, MenuComponent],
+    declarations: [LayoutComponent, SidebarComponent, HeaderComponent, MenuComponent, SimpleHeaderComponent],
     providers:[
         IntroService, ConfiguracaoService
     ]
