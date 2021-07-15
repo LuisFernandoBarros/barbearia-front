@@ -21,11 +21,15 @@ export class LocalStorageService {
         localStorage.removeItem(config);
     }
 
+    clear() {
+        localStorage.clear();
+    }
+
     private setConfiguracoes(configuracoes: Array<ConfiguracaoProfissional>) {
         configuracoes.forEach(
             it => {
                 if (it.vistoEm == null) {
-                    localStorage.setItem(it.configuracao, null)
+                    localStorage.setItem(it.configuracao, "precisa_configurar")
                 }
             }
         )
