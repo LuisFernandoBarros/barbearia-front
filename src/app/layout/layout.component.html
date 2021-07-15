@@ -1,9 +1,9 @@
 <!-- MENU COMPUTADOR (MENU ORIGINAL) -->
-<app-header *ngIf="!isMobile"></app-header>
-<app-sidebar *ngIf="!isMobile" (collapsedEvent)="receiveCollapsed($event)"></app-sidebar>
+<app-header class="menu-desktop"></app-header>
+<app-sidebar class="menu-desktop" (collapsedEvent)="receiveCollapsed($event)"></app-sidebar>
 
 <!-- MENU MOBILLE -->
-<app-simple-header *ngIf="isMobile"></app-simple-header>
+<app-simple-header class="menu-mobile"></app-simple-header>
 
 <section [ngClass]="{ collapsed: collapedSideBar }" class="main-container">
     <router-outlet></router-outlet>

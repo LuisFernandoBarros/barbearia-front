@@ -16,4 +16,8 @@ export class AgendaComponent implements OnInit {
     );
   }
 
+  onSubmit(): void{
+    // IMPLEMENTAR
+  }
+
 }

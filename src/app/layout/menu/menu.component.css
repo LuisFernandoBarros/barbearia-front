@@ -14,12 +14,18 @@
     justify-content: center;    
   }
 
-  .menu-icon {
+.menu-icon {
     display: block;
     padding-top: 30px;
     padding-bottom: 5px;
     display: flex;
     justify-content: center;
+}
+
+.user-avatar {
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  border: 2px solid #fff;
 }
 
   
