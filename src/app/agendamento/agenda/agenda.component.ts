@@ -27,7 +27,8 @@ export class AgendaComponent implements OnInit {
         this.formulario = this.formBuilder.group({
           nome: [null],
           profissonal: [''],
-          servico: ['']
+          servico: [''],
+          data: [null]
         });
         this.profissionais = resp.profissionais;
         this.isLoading = false;
@@ -35,16 +36,19 @@ export class AgendaComponent implements OnInit {
     );
   }
 
-  onChangeProfissional(e: any): void {
+  onChangeProfissional(): void {
     // AQUI FALTA MOSTRAR OS SERVICOS APOS CARREGA-LOS
     let profissionalSelected = this.formulario.value["profissonal"];
     this.service.getServicos(profissionalSelected).subscribe(
       (resp) => {
-        console.log(resp);
         this.servicos = resp;
         this.isServicoEnable = true;
       }
     )
+  }
+
+  onChangeData(){
+    console.log("DATA ALTGERADA", this.formulario.value['data']);
   }
 
   onSubmit(): void {

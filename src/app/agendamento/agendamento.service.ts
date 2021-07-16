@@ -15,10 +15,10 @@ export class AgendamentoService {
     }
 
     get(): Observable<Barbearia> {
-        return this.httpClient.get<Barbearia>(`${this.baseUrl}/barbearia/123/agendamento-cliente/`);
+        return this.httpClient.get<Barbearia>(`${this.baseUrl}/agendamento-cliente/barbearia/123/`);
     }
 
     getServicos(id: number): Observable<Array<Servico>> {        
-        return this.httpClient.get<Array<Servico>>(`${this.baseUrl}/profissional/${id}/agendamento-cliente/servicos`);        
+        return this.httpClient.get<Array<Servico>>(`${this.baseUrl}/agendamento-cliente/profissional/${id}/servicos`);        
     }
 }

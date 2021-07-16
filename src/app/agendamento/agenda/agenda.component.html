@@ -40,8 +40,9 @@
 
                     <!-- DATA -->
                     <div class="form-group">
-                        <input type="text" placeholder="Selecione uma data"
-                            class="form-control input-underline input-lg placeholder" onfocus="(this.type = 'date')" />
+                        <input type="text" placeholder="Selecione uma data" formControlName="data"
+                            class="form-control input-underline input-lg placeholder" onfocus="(this.type = 'date')" 
+                            (change)="onChangeData()"/>
                     </div>
                     <div class="form-group">
                         <button class="input-underline input-lg w-100 text-left color-placeholder" type="button"
