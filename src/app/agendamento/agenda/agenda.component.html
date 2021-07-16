@@ -29,16 +29,13 @@
                     </div>
 
                     <!-- SERVICO -->
-                    <div class="form-group">
-                        <button class="input-underline input-lg w-100 text-left color-placeholder" type="button"
-                            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            Selecione um serviço
-                        </button>
-                        <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item">Action</a></li>
-                            <li><a class="dropdown-item">Another action</a></li>
-                            <li><a class="dropdown-item">Something else here</a></li>
-                        </ul>
+                    <div class="form-group" *ngIf="isServicoEnable">
+                        <select class="input-underline input-lg w-100 text-left color-placeholder"
+                            formControlName="servico" (change)="onChangeProfissional()">
+                            <option value="" disabled selected>Selecione um Serviço</option>
+                            <option [ngValue]="servico.id" class="dropdown-item"
+                                *ngFor="let servico of servicos">{{servico.descricao}} ({{ servico.valor | currency:'R$ ' }})</option>
+                        </select>
                     </div>
 
                     <!-- DATA -->
