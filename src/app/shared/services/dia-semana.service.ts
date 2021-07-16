@@ -6,13 +6,13 @@ export class DiaSemanaService {
  
     public diasSemana: DiaSemana[] =
     [
-        {id: 0, descricao: "Domingo"},
-        {id: 1, descricao: "Segunda-Feira"},
-        {id: 2, descricao: "Terça-Feira"},
-        {id: 3, descricao: "Quarta-Feira"},
-        {id: 4, descricao: "Quinta-Feira"},
-        {id: 5, descricao: "Sexta-Feira"},
-        {id: 6, descricao: "Sábado"},
+        {id: 1, descricao: "Domingo"},
+        {id: 2, descricao: "Segunda-Feira"},
+        {id: 3, descricao: "Terça-Feira"},
+        {id: 4, descricao: "Quarta-Feira"},
+        {id: 5, descricao: "Quinta-Feira"},
+        {id: 6, descricao: "Sexta-Feira"},
+        {id: 7, descricao: "Sábado"},
     ]
 
     constructor() { }

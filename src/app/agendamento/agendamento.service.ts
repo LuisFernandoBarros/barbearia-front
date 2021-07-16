@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../src/environments/environment';
@@ -18,7 +18,18 @@ export class AgendamentoService {
         return this.httpClient.get<Barbearia>(`${this.baseUrl}/agendamento-cliente/barbearia/123/`);
     }
 
-    getServicos(id: number): Observable<Array<Servico>> {        
-        return this.httpClient.get<Array<Servico>>(`${this.baseUrl}/agendamento-cliente/profissional/${id}/servicos`);        
+    getServicos(id: number): Observable<Array<Servico>> {
+        return this.httpClient.get<Array<Servico>>(`${this.baseUrl}/agendamento-cliente/profissional/${id}/servicos`);
+    }
+
+    getHorarios(idProfissional: number, data: string, idServico: number): Observable<Array<Servico>> {
+ 
+       const params = new HttpParams()
+            .set('data', data)
+            .set('servico', idServico.toString());
+            
+        return this.httpClient.get<any>(`${this.baseUrl}/agendamento-cliente/profissional/${idProfissional}/horarios`, {
+            params: params
+        });
     }
 }

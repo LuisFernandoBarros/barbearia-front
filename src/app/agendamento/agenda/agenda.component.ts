@@ -49,6 +49,9 @@ export class AgendaComponent implements OnInit {
 
   onChangeData(){
     console.log("DATA ALTGERADA", this.formulario.value['data']);
+    this.service.getHorarios(1,"2021-07-16", 1).subscribe(
+      (resp) => console.log(resp)
+    )
   }
 
   onSubmit(): void {
