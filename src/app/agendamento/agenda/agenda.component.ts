@@ -13,8 +13,11 @@ export class AgendaComponent implements OnInit {
   private formulario: FormGroup;
   public isLoading: boolean;
   public isServicoEnable: boolean;
+  public isHorariosEnable: boolean;
+  public isDataEnable: boolean;
   public profissionais: any = ['Florida', 'South Dakota', 'Tennessee', 'Michigan'];
   public servicos: Array<Servico>;
+  public horarios: Array<string>;
 
   constructor(private service: AgendamentoService,
     private formBuilder: FormBuilder) { }
@@ -22,13 +25,17 @@ export class AgendaComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true;
     this.isServicoEnable = false;
+    this.isHorariosEnable = false;
+    this.isDataEnable = false;
     this.service.get().subscribe(
       (resp) => {
         this.formulario = this.formBuilder.group({
           nome: [null],
           profissonal: [''],
           servico: [''],
-          data: [null]
+          data: [null],
+          horario: [''],
+          telefone: [null]
         });
         this.profissionais = resp.profissionais;
         this.isLoading = false;
@@ -36,8 +43,7 @@ export class AgendaComponent implements OnInit {
     );
   }
 
-  onChangeProfissional(): void {
-    // AQUI FALTA MOSTRAR OS SERVICOS APOS CARREGA-LOS
+  onChangeProfissional(): void {    
     let profissionalSelected = this.formulario.value["profissonal"];
     this.service.getServicos(profissionalSelected).subscribe(
       (resp) => {
@@ -47,10 +53,17 @@ export class AgendaComponent implements OnInit {
     )
   }
 
+  onChangeServico(): void {    
+    this.isDataEnable = true;
+  }
+
   onChangeData(){
-    console.log("DATA ALTGERADA", this.formulario.value['data']);
-    this.service.getHorarios(1,"2021-07-16", 1).subscribe(
-      (resp) => console.log(resp)
+    let data = this.formulario.value['data'];
+    this.service.getHorarios(1, data, 3).subscribe(
+      (resp) => { 
+        this.horarios = resp;
+        this.isHorariosEnable = true;
+      }
     )
   }
 

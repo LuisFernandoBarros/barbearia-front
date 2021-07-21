@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AgendaComponent } from './agenda/agenda.component';
 import { AgendamentoRoutingModule } from './agendamento-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 
@@ -14,7 +15,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     AgendamentoRoutingModule,
     FormsModule,
-    ReactiveFormsModule,    
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot()
   ]
 })
 export class AgendamentoModule { }

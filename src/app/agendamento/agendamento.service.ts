@@ -22,13 +22,13 @@ export class AgendamentoService {
         return this.httpClient.get<Array<Servico>>(`${this.baseUrl}/agendamento-cliente/profissional/${id}/servicos`);
     }
 
-    getHorarios(idProfissional: number, data: string, idServico: number): Observable<Array<Servico>> {
+    getHorarios(idProfissional: number, data: string, idServico: number): Observable<Array<string>> {
  
        const params = new HttpParams()
             .set('data', data)
             .set('servico', idServico.toString());
             
-        return this.httpClient.get<any>(`${this.baseUrl}/agendamento-cliente/profissional/${idProfissional}/horarios`, {
+        return this.httpClient.get<Array<string>>(`${this.baseUrl}/agendamento-cliente/profissional/${idProfissional}/horarios`, {
             params: params
         });
     }
