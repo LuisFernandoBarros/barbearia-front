@@ -14,8 +14,8 @@ export class AgendamentoService {
 
     }
 
-    get(): Observable<Barbearia> {
-        return this.httpClient.get<Barbearia>(`${this.baseUrl}/agendamento-cliente/barbearia/123/`);
+    get(barbeariaId: string): Observable<Barbearia> {
+        return this.httpClient.get<Barbearia>(`${this.baseUrl}/agendamento-cliente/barbearia/${barbeariaId}/`);
     }
 
     getServicos(id: number): Observable<Array<Servico>> {

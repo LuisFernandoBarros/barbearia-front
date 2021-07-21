@@ -9,6 +9,12 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group" *ngIf="!isLoading">
+
+                            <div class="alert alert-primary" role="alert">
+                                Link agendamento:<br>
+                                {{linkAgendamento()}}
+                            </div>
+
                             <!-- ID -->
                             <input type="text" class="form-control" formControlName="id" readonly hidden>
 
@@ -20,7 +26,7 @@
                         <div class="form-group">
                             <label>Cep</label>&nbsp;
                             <span class="spinner-grow spinner-grow-sm text-warning" role="status"
-                            *ngIf="isLoadingCep"></span>
+                                *ngIf="isLoadingCep"></span>
                             <input type="text" class="form-control" formControlName="cep" (blur)="onBlurCep()"
                                 mask="00.000-0*" maxlength="15">
 
@@ -43,7 +49,7 @@
                         <div class="form-group">
                             <label>Bairro</label>
                             <input type="text" class="form-control" formControlName="bairro" readonly>
-                        </div>                        
+                        </div>
 
                         <div class="form-group">
                             <label>Complemento</label>

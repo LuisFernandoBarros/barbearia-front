@@ -4,7 +4,7 @@ import { AgendaComponent } from './agenda/agenda.component';
 
 const routes: Routes = [
     {
-        path: '',
+        path: ':id',
         component: AgendaComponent
     }
 ];

@@ -13,6 +13,7 @@ import { Barbearia } from '../../barbearia';
 import { Observable } from 'rxjs';
 import { LocalStorageService } from '../.../../../../../../shared/services/local-storage.service';
 import { Router } from '@angular/router';
+import { environment } from '../../../../../../environments/environment';
 
 @Component({
   selector: 'app-cadastro-barbearia',
@@ -24,7 +25,7 @@ export class CadastroBarbeariaComponent implements OnInit {
   public formulario: FormGroup;
   public isLoadingCep = false;
   public isLoading = false;
-  public barbearia = new Barbearia(null, null, null, null, null, null, null, null, null, null, null);
+  public barbearia = new Barbearia(null, null, null, null, null, null, null, null, null, null, null, null);
 
   constructor(private formBuilder: FormBuilder,
     private service: CadastroBarbeariaService,
@@ -141,5 +142,9 @@ export class CadastroBarbeariaComponent implements OnInit {
       complemento: consultaCepResponse.complemento,
       bairro: consultaCepResponse.bairro
     });
+  }
+
+  linkAgendamento(){    
+    return `${environment.DOMINIO}/agendamento/${this.barbearia.linkAgendamento}`;
   }
 }
