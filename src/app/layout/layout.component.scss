@@ -33,3 +33,20 @@
         margin-left: 0px !important;
     }
 }
+@media (max-width: 1080px) {
+    .menu-mobile {
+      display: block;
+    }
+    .menu-desktop {
+       display: none;
+    }
+}
+
+@media (min-width: 1081px) {
+    .menu-desktop {
+      display: block;
+    }
+    .menu-mobile {
+        display: none;
+    }    
+}

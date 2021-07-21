@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MSG_PADRAO } from '../../../../../../shared/services/msg-padrao.enum';
 import { ExtractMessageService } from '../../../../../../shared/services/extract-message.service';
 import { AgendaConfigService } from '../agenda-config.service';
-import { Horario } from '../horario';
+import { Expediente } from '../expediente';
 import { DiaSemana } from '../../../../../../shared/services/dia-semana';
 
 @Component({
@@ -17,8 +17,8 @@ export class DiaSemanaComponent implements OnInit {
   public showCollapse = false;
   private formulario: FormGroup;
   public isLoading = false;
-  public horario: Horario;
-  @Input() horarios: Array<Horario>;
+  public expediente: Expediente;
+  @Input() expedientes: Array<Expediente>;
   @Input() diaSemana: DiaSemana
 
 
@@ -28,18 +28,18 @@ export class DiaSemanaComponent implements OnInit {
     private toastService: ToastrService) { }
 
   ngOnInit(): void {
-    this.setHorario();
+    this.setExpediente();
     this.formulario = this.formBuilder.group({
-      inicioManha: [this.horario.inicioManha],
-      fimManha: [this.horario.fimManha],
-      inicioTarde: [this.horario.inicioTarde],
-      fimTarde: [this.horario.fimTarde],
+      inicioManha: [this.expediente.inicioManha],
+      fimManha: [this.expediente.fimManha],
+      inicioTarde: [this.expediente.inicioTarde],
+      fimTarde: [this.expediente.fimTarde],
       diaSemana: this.diaSemana.id
     });
   }
 
-  setHorario() {
-    this.horario = this.horarios.find((it) => {
+  setExpediente() {
+    this.expediente = this.expedientes.find((it) => {
       return it.diaSemana == this.diaSemana.id;
     });
   }
@@ -71,7 +71,7 @@ export class DiaSemanaComponent implements OnInit {
     let isToClose = event.target.checked;
     this.service.closeAtendimento(this.diaSemana.id, isToClose).subscribe(
       (resp) => {
-        this.horario = resp;
+        this.expediente = resp;
         this.toastService.success(MSG_PADRAO.SAVE_SUCCESS);
         this.isLoading = false;
       },

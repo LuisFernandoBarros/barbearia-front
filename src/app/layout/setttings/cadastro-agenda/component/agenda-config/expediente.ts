@@ -1,4 +1,4 @@
-export class Horario {
+export class Expediente {
     id: number;
     inicioManha: string;
     fimManha: string;

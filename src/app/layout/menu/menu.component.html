@@ -2,18 +2,18 @@
 
     <div class="col col-md-4">
 
-        <div class="col-md-12">
-            <img class="img-fluid" src="assets/images/logo.png"/>
+        <div class="col-md-12 mt-2">
+            <img class="img-fluid user-avatar" src="assets/images/logo.png"/>
         </div>
 
         <div class="row mt-4">
-            <div class="col mr-2 item-menu">
+            <div class="col mr-2 item-menu" [routerLink]="['/dashboard']">
                 <span class="menu-icon"><i class="fa fa-lg fa-address-book-o"></i></span>
                 <span class="center-text">
                     Agenda
                 </span>
             </div>
-            <div class="col mr-2 item-menu">
+            <div class="col mr-2 item-menu" [routerLink]="['/barbearia']">
                 <span class="menu-icon"><i class="fa fa-lg fa-home"></i></span>
                 <span class="center-text">
                     Barbearia
@@ -22,13 +22,13 @@
         </div>
 
         <div class="row mt-2">
-            <div class="col mr-2 item-menu">
+            <div class="col mr-2 item-menu" [routerLink]="['/profissional']">
                 <span class="menu-icon"><i class="fa fa-lg fa-user"></i></span>
                 <span class="center-text">
                     Profissionais
                 </span>
             </div>
-            <div class="col mr-2 item-menu">
+            <div class="col mr-2 item-menu" [routerLink]="['/servicos']">
                 <span class="menu-icon"><i class="fa fa-lg fa-scissors"></i></span>
                 <span class="center-text">
                     Serviços
@@ -37,13 +37,13 @@
         </div>
         
         <div class="row mt-2">
-            <div class="col mr-2 item-menu">
+            <div class="col mr-2 item-menu" [routerLink]="['/config-agenda']">
                 <span class="menu-icon"><i class="fa fa-lg fa-wrench"></i></span>
                 <span class="center-text">
                     Configurar
                 </span>
             </div>
-            <div class="col mr-2 item-menu-reverse">
+            <div class="col mr-2 item-menu-reverse" (click)="logout()">
                 <span class="menu-icon"><i class="fa fa-lg fa-sign-out"></i></span>
                 <span class="center-text">
                     Sair

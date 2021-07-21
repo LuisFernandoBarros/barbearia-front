@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { LocalStorageService } from '../../../shared/services/local-storage.service';
 
 @Component({
     selector: 'app-sidebar',
@@ -15,7 +16,10 @@ export class SidebarComponent implements OnInit {
 
     @Output() collapsedEvent = new EventEmitter<boolean>();
 
-    constructor(private cookieService: CookieService, public router: Router) {
+    constructor(private cookieService: CookieService,
+        public router: Router,
+        private localStorageService: LocalStorageService) {
+
         this.router.events.subscribe((val) => {
             if (val instanceof NavigationEnd && window.innerWidth <= 992 && this.isToggled()) {
                 this.toggleSidebar();
@@ -52,12 +56,9 @@ export class SidebarComponent implements OnInit {
         dom.classList.toggle(this.pushRightClass);
     }
 
-    onLoggedout() {
-        localStorage.removeItem('isLoggedin');
-    }
-
-    logout(){
+    logout() {        
         this.cookieService.delete('token');
-        this.router.navigate(['/login']);        
+        this.localStorageService.clear();
+        this.router.navigate(['/login']);
     }
 }

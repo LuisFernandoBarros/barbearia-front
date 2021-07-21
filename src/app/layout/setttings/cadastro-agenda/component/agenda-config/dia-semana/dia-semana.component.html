@@ -51,9 +51,9 @@
                         <div class="input-group d-flex justify-content-between">
 
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" [checked]="horario.atendendo"
+                                <input class="form-check-input" type="checkbox" [checked]="expediente.atendendo"
                                     (change)="closeAtentimento($event)">
-                                <label class="form-check-label">{{ horario.atendendo ? 'Estou' : 'Não estou' }}
+                                <label class="form-check-label">{{ expediente.atendendo ? 'Estou' : 'Não estou' }}
                                     atendendo</label>
                             </div>
                             <button type="submit" class="btn btn-success btn-md"

@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "../../../../../../environments/environment";
-import { Horario } from "./horario";
+import { Expediente } from "./expediente";
 
 @Injectable({ providedIn: 'root' })
 export class AgendaConfigService {
@@ -11,11 +11,11 @@ export class AgendaConfigService {
     constructor(private httpClient: HttpClient) { }
 
     update(body: Object) {
-        return this.httpClient.patch<Horario>(`${this.url}/horario`, JSON.stringify(body))
+        return this.httpClient.patch<Expediente>(`${this.url}/expediente`, JSON.stringify(body))
     };    
 
     getAllDiasSemanaByUserLogado() {
-        return this.httpClient.get<Array<Horario>>(`${this.url}/horarios`);
+        return this.httpClient.get<Array<Expediente>>(`${this.url}/expedientes`);
     };
     
     closeAtendimento(diaSemana: number, isToClose: boolean) {

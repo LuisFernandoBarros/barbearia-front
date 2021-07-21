@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { ExtractMessageService } from '../../shared/services/extract-message.service';
+import { MSG_PADRAO } from '../../shared/services/msg-padrao.enum';
+import { Servico } from '../../layout/setttings/cadastro-servicos/servico'
 import { AgendamentoService } from '../agendamento.service';
+import { ActivatedRoute } from '@angular/router';
+import { Barbearia } from '../../layout/setttings/cadastro-barbearia/barbearia';
 
 @Component({
   selector: 'app-agenda',
@@ -8,12 +15,100 @@ import { AgendamentoService } from '../agendamento.service';
 })
 export class AgendaComponent implements OnInit {
 
-  constructor(private service: AgendamentoService) { }
+  private formulario: FormGroup;
+  public isLoading: boolean;
+  public isSalvandoAgendamento: boolean;
+  public isServicoEnable: boolean;
+  public isHorariosEnable: boolean;
+  public isDataEnable: boolean;
+  public profissionais: any = ['Florida', 'South Dakota', 'Tennessee', 'Michigan'];
+  public servicos: Array<Servico>;
+  public horarios: Array<string>;
+  public barbearia: Barbearia;
+
+  constructor(private service: AgendamentoService,
+    private formBuilder: FormBuilder,
+    private toastService: ToastrService,
+    private extractMsgService: ExtractMessageService,
+    private activedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.service.get().subscribe(
-      (resp) => console.log(resp)
+    this.isLoading = true;
+    this.isServicoEnable = false;
+    this.isHorariosEnable = false;
+    this.isDataEnable = false;
+
+    this.activedRoute.params.subscribe(
+      (param: any) => { this.getProfissionais(param['id']) }
+    )    
+
+  }
+
+  getProfissionais(barbeariaId: string){
+    this.service.get(barbeariaId).subscribe(
+      (resp) => {
+        this.formulario = this.formBuilder.group({
+          nome: [null, [Validators.required]],
+          profissonal: ['', [Validators.required]],
+          servico: ['', [Validators.required]],
+          data: [null, [Validators.required]],
+          horario: ['', [Validators.required]],
+          telefone: [null, [Validators.required]]
+        });
+        this.barbearia = resp;
+        this.profissionais = resp.profissionais;
+        this.isLoading = false;
+      }
     );
+  }
+
+  onChangeProfissional(): void {
+    let profissionalSelected = this.formulario.value["profissonal"];
+    this.service.getServicos(profissionalSelected).subscribe(
+      (resp) => {
+        this.servicos = resp;
+        this.isServicoEnable = true;
+      }
+    )
+  }
+
+  onChangeServico(): void {
+    this.isDataEnable = true;
+  }
+
+  onChangeData() {
+    let data = this.formulario.value['data'];
+    let idProfissional = this.formulario.value['profissonal'];
+    let isServico = this.formulario.value['servico'];
+    this.service.getHorarios(idProfissional, data, isServico).subscribe(
+      (resp) => {
+        this.horarios = resp;
+        this.isHorariosEnable = true;
+      }
+    )
+  }
+
+  onSubmit(): void {
+    if (this.formOk()) {
+      this.isSalvandoAgendamento = true;
+      this.service.save(this.formulario.value).subscribe(
+        (resp) => {
+          this.toastService.success(MSG_PADRAO.SAVE_SUCCESS)
+          this.isSalvandoAgendamento = false;
+        },
+        (err) => {
+          this.toastService.error(this.extractMsgService.extractMessageFromError(err, MSG_PADRAO.ERROR_SERVER));
+          this.isSalvandoAgendamento = false;
+        }
+      )
+    } else {
+      this.toastService.error(MSG_PADRAO.ALL_FIELDS_REQUIRED);
+    }
+  }
+
+  formOk() {
+    console.log(this.formulario);
+    return this.formulario.status != "INVALID";
   }
 
 }

@@ -1,9 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ExtractMessageService } from '../../../../../shared/services/extract-message.service';
 import { MSG_PADRAO } from '../../../../../shared/services/msg-padrao.enum';
 import { AgendaConfigService } from './agenda-config.service';
-import { Horario } from './horario';
+import { Expediente } from './expediente';
 import { DiaSemanaService } from '../../../../../shared/services/dia-semana.service';
 
 @Component({
@@ -13,19 +13,19 @@ import { DiaSemanaService } from '../../../../../shared/services/dia-semana.serv
 })
 export class AgendaConfigComponent implements OnInit {
 
-  public horarios: Array<Horario>;
+  public expedientes: Array<Expediente>;
   public isLoading: boolean;
 
   constructor(private service: AgendaConfigService,
     private extractErrorMessage: ExtractMessageService,
     private toastService: ToastrService,
-    private diaSemanaService: DiaSemanaService) { }
+    public diaSemanaService: DiaSemanaService) { }
 
   ngOnInit(): void {
     this.isLoading = true;
     this.service.getAllDiasSemanaByUserLogado().subscribe(
       (resp) => {
-        this.horarios = resp;
+        this.expedientes = resp;
         this.isLoading = false;
       },
       (err) => {

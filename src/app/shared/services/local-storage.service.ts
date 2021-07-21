@@ -9,22 +9,27 @@ export class LocalStorageService {
     constructor() { }
 
     setProfissional(profissional: Profissional) {
-        this.setConfiguracoes(profissional.configuracoesProfissional);        
+        this.setConfiguracoes(profissional.configuracoesProfissional);
     }
 
-    hasConfig(config: string): boolean {        
-        return localStorage.getItem(config) != null
+    hasConfig(config: string): boolean {
+        return localStorage.getItem(config) != null &&
+            localStorage.getItem(config) != "null"
     }
 
-    removeConfig(config: string){
+    removeConfig(config: string) {
         localStorage.removeItem(config);
     }
 
-    private setConfiguracoes(configuracoes: Array<ConfiguracaoProfissional>){
+    clear() {
+        localStorage.clear();
+    }
+
+    private setConfiguracoes(configuracoes: Array<ConfiguracaoProfissional>) {
         configuracoes.forEach(
             it => {
-                if(it.vistoEm == null){
-                    localStorage.setItem(it.configuracao, null)
+                if (it.vistoEm == null) {
+                    localStorage.setItem(it.configuracao, "precisa_configurar")
                 }
             }
         )
