@@ -47,7 +47,7 @@ export class CadastroBarbeariaComponent implements OnInit {
       (err) => {
         this.isLoading = false;
         if (err.status == 404) {
-          this.toastr.info("Cadastre sua barbearia.");
+          // NAO FAZER NADA, BARBEARIA NAO CADASTRADA
         } else {
           this.toastr.error(this.extractService.extractMessageFromError(err, MSG_PADRAO.ERROR_SERVER));
         }
