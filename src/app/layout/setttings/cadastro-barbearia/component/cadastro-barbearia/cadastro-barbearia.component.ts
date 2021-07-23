@@ -42,7 +42,7 @@ export class CadastroBarbeariaComponent implements OnInit {
       (resp) => {
         this.barbearia = resp;
         this.updateForm();
-        this.isLoading = false;        
+        this.isLoading = false;
       },
       (err) => {
         this.isLoading = false;
@@ -144,7 +144,10 @@ export class CadastroBarbeariaComponent implements OnInit {
     });
   }
 
-  linkAgendamento(){    
+  linkAgendamento() {
+    if (this.barbearia.linkAgendamento == null || this.barbearia.linkAgendamento.length <= 0) {
+      return "Primeiro cadastre a barbearia para gerar o link";
+    }
     return `${environment.DOMINIO}/agendamento/${this.barbearia.linkAgendamento}`;
   }
 }
