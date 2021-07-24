@@ -7,6 +7,7 @@ import { Servico } from '../../layout/setttings/cadastro-servicos/servico'
 import { AgendamentoService } from '../agendamento.service';
 import { ActivatedRoute } from '@angular/router';
 import { Barbearia } from '../../layout/setttings/cadastro-barbearia/barbearia';
+import { AgendamentoAgendado } from '../agendamento-agendado';
 
 @Component({
   selector: 'app-agenda',
@@ -21,10 +22,12 @@ export class AgendaComponent implements OnInit {
   public isServicoEnable: boolean;
   public isHorariosEnable: boolean;
   public isDataEnable: boolean;
-  public profissionais: any = ['Florida', 'South Dakota', 'Tennessee', 'Michigan'];
+  public isAgendamentoAgendado: boolean;
+  public profissionais: Array<any>;
   public servicos: Array<Servico>;
   public horarios: Array<string>;
   public barbearia: Barbearia;
+  public agendamento: AgendamentoAgendado;
 
   constructor(private service: AgendamentoService,
     private formBuilder: FormBuilder,
@@ -37,6 +40,7 @@ export class AgendaComponent implements OnInit {
     this.isServicoEnable = false;
     this.isHorariosEnable = false;
     this.isDataEnable = false;
+    this.isAgendamentoAgendado = false;
 
     this.activedRoute.params.subscribe(
       (param: any) => { this.getProfissionais(param['id']) }
@@ -93,8 +97,10 @@ export class AgendaComponent implements OnInit {
       this.isSalvandoAgendamento = true;
       this.service.save(this.formulario.value).subscribe(
         (resp) => {
+          this.agendamento = resp;
           this.toastService.success(MSG_PADRAO.SAVE_SUCCESS)
-          this.isSalvandoAgendamento = false;
+          this.isSalvandoAgendamento = false;          
+          this.isAgendamentoAgendado = true
         },
         (err) => {
           this.toastService.error(this.extractMsgService.extractMessageFromError(err, MSG_PADRAO.ERROR_SERVER));
@@ -106,8 +112,7 @@ export class AgendaComponent implements OnInit {
     }
   }
 
-  formOk() {
-    console.log(this.formulario);
+  formOk() {    
     return this.formulario.status != "INVALID";
   }
 
