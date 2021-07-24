@@ -21,7 +21,6 @@ export class ModalService {
     close(id: string) {
         let modal: any = this.modals.filter(x => x.id === id)[0];
         modal.close();
-
     }
 
 }

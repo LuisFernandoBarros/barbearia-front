@@ -16,6 +16,7 @@ export class AgendamentoDetalhesComponent implements OnInit {
 
   @Input() id: string;
   @Input() agendamento: Agendamento;
+  @Input() refreshAgenda: () => void;
   @ViewChild("detalhes") detalhes;
 
   constructor(private modalService: ModalService, private ngModal: NgbModal, 
@@ -32,7 +33,8 @@ export class AgendamentoDetalhesComponent implements OnInit {
     this.modal = this.ngModal.open(this.detalhes, { windowClass: 'dark-modal' });
   }
 
-  close() {    
+  close() {
+    this.refreshAgenda();
     this.modal.close();
   }
   
@@ -40,8 +42,7 @@ export class AgendamentoDetalhesComponent implements OnInit {
   compareceu(id: number) {
     this.agendamentoDetalhesService.atender(id)
       .subscribe(
-        response => {
-          console.log(response);          
+        response => {        
           this.toastr.success('Salvo com Sucesso', '');
           this.modalService.close(this.id);
         },
@@ -53,7 +54,6 @@ export class AgendamentoDetalhesComponent implements OnInit {
     this.agendamentoDetalhesService.cancelar(id)
       .subscribe(
         response => {
-          console.log(response);
           this.toastr.success('Salvo com Sucesso', '');
           this.modalService.close(this.id);
         },

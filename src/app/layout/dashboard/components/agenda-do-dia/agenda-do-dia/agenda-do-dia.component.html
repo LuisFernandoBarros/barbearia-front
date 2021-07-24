@@ -22,7 +22,7 @@
                     <tbody>
                         <ng-container *ngFor="let agendamento of agendamentos">
                             <tr (click)="openModal(agendamento.id)" app-item-agendamento [agendamento]="agendamento"></tr>
-                            <app-agendamento-detalhes id="{{agendamento.id}}" [agendamento]="agendamento"></app-agendamento-detalhes>                            
+                            <app-agendamento-detalhes id="{{agendamento.id}}" [agendamento]="agendamento" [refreshAgenda]="boundedRefreshAgenda"></app-agendamento-detalhes>
                         </ng-container>
                         
                     </tbody>

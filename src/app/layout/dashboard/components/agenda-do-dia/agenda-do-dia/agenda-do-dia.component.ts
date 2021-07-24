@@ -32,7 +32,13 @@ export class AgendaDoDiaComponent implements OnInit {
     let month = (this.data.getMonth() + 1) < 10 ? ('0' +(this.data.getMonth() + 1)) : (this.data.getMonth() + 1);
     let day = (this.data.getDate()) < 10 ? '0' + this.data.getDate() : this.data.getDate();    
     return ((this.data.getFullYear())) + "-" + month + "-" + day;
-  }
+  }  
+
+  // INDICA QUE O METODO refreshAgenda() DEVE SER EXECUTADO NO CONTEXTO DESTE COMPONENTE
+  public boundedRefreshAgenda= this.refreshAgenda.bind(this);  
+  refreshAgenda(): void {
+    this.specificDay();
+  }    
 
   nextDay() {
     const tomorrow = new Date(this.data);
