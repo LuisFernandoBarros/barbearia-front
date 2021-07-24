@@ -18,7 +18,7 @@
         </tr>
         <tr>
           <th>Dia</th>
-          <td>{{agendamento.dataHora | date:"MM/dd/yyyy"}}</td>
+          <td>{{agendamento.dataHora | date:"dd/MM/yyyy"}}</td>
         </tr>        
         <tr>
           <th>Hora</th>
@@ -35,9 +35,9 @@
       </tbody>
     </table>
     <div class="col text-center">
-      <button type="button" class="btn btn-success btn-sm"
-        (click)="compareceu(agendamento.id)">Compareceu</button>&nbsp;
-      <button type="button" class="btn btn-danger btn-sm fixed-size" (click)="cancelou(agendamento.id)"> Cancelou
+      <button type="button" class="btn btn-success btn-sm"  *ngIf="!isAgendamentoAtendido()"
+        (click)="compareceu(agendamento.id)">Atender</button>&nbsp;
+      <button type="button" class="btn btn-danger btn-sm fixed-size" (click)="cancelou(agendamento.id)"> Apagar
       </button>
     </div>
   </div>  

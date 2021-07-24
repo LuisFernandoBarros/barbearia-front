@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Agendamento } from './agendamento';
 
 @Component({
   selector: '[app-item-agendamento]',
@@ -6,12 +7,13 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./item-agendamento.component.scss']
 })
 export class ItemAgendamentoComponent implements OnInit {
-  @Input() 
+  @Input()
   agendamento: any;
   constructor() { }
 
-  ngOnInit(): void {
-    console.log(this.agendamento);
-  }
+  ngOnInit(): void { }
 
+  isAtendido(): boolean {
+    return this.agendamento.atendidoEm != null
+  }
 }
