@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AgendamentoAgendado } from '../agendamento-agendado';
 
 
@@ -12,10 +13,14 @@ export class ProntoComponent implements OnInit {
 
 
   @Input() agendamento: AgendamentoAgendado;
-  constructor() { }
+  @Input() callbackFazerOutroAgendamento: () => void;
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
-    console.log(this.agendamento);
+  }
+
+  fazerOutroAgendamento() {
+    this.callbackFazerOutroAgendamento();
   }
 
 }

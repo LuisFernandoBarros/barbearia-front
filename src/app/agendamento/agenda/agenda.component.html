@@ -62,7 +62,8 @@
                 </button>
             </form>
 
-            <app-pronto [agendamento]="agendamento" *ngIf="isAgendamentoAgendado"></app-pronto>
+            <app-pronto [agendamento]="agendamento" *ngIf="isAgendamentoAgendado"
+            [callbackFazerOutroAgendamento]="boundedCallbackFazerOutroAgendamento"></app-pronto>
         </div>
     </div>
 </div>

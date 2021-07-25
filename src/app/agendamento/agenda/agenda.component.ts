@@ -44,11 +44,19 @@ export class AgendaComponent implements OnInit {
 
     this.activedRoute.params.subscribe(
       (param: any) => { this.getProfissionais(param['id']) }
-    )    
+    )
+
 
   }
 
-  getProfissionais(barbeariaId: string){
+  // INDICA QUE O METODO callbackFazerOutroAgendamento() DEVE SER EXECUTADO NO CONTEXTO DESTE COMPONENTE
+  public boundedCallbackFazerOutroAgendamento = this.callbackFazerOutroAgendamento.bind(this);
+  callbackFazerOutroAgendamento(): void {
+    this.isAgendamentoAgendado = false;
+    this.resetForm();
+  }
+
+  getProfissionais(barbeariaId: string) {
     this.service.get(barbeariaId).subscribe(
       (resp) => {
         this.formulario = this.formBuilder.group({
@@ -99,7 +107,7 @@ export class AgendaComponent implements OnInit {
         (resp) => {
           this.agendamento = resp;
           this.toastService.success(MSG_PADRAO.SAVE_SUCCESS)
-          this.isSalvandoAgendamento = false;          
+          this.isSalvandoAgendamento = false;
           this.isAgendamentoAgendado = true
         },
         (err) => {
@@ -112,8 +120,23 @@ export class AgendaComponent implements OnInit {
     }
   }
 
-  formOk() {    
+  formOk() {
     return this.formulario.status != "INVALID";
+  }
+
+  resetForm() {
+    this.formulario.patchValue({
+      nome: [null],
+      profissonal: [''],
+      servico: [''],
+      data: [''],
+      horario: [''],
+      telefone: ['']
+    });
+    this.isServicoEnable = false;
+    this.isHorariosEnable = false;
+    this.isDataEnable = false;
+    this.isAgendamentoAgendado = false;
   }
 
 }
