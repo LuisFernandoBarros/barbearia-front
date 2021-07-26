@@ -21,7 +21,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <ng-container *ngFor="let agendamento of agendamentos">
+                        <ng-container *ngFor="let agendamento of agendamentos; trackBy: trackById">
                             <tr (click)="openModal(agendamento.id)" app-item-agendamento [agendamento]="agendamento"></tr>
                             <app-agendamento-detalhes id="{{agendamento.id}}" [agendamento]="agendamento" [refreshAgenda]="boundedRefreshAgenda"></app-agendamento-detalhes>
                         </ng-container>

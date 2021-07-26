@@ -29,7 +29,7 @@ export class AgendaDoDiaComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAgendamentos();
-    this.updateSubscription = interval(1000).subscribe(
+    this.updateSubscription = interval(10000).subscribe(
       (val) => {
         this.refreshAgendamentos()
       });
@@ -80,8 +80,8 @@ export class AgendaDoDiaComponent implements OnInit {
     this.isLoading = true;
     this.agendaDoDiaService.getAgendamentosDia(this.getDataIso())
       .subscribe(response => {
-        this.agendamentos = response,
-          this.dataAgenda = this.getDataIso();
+        this.agendamentos = response;
+        this.dataAgenda = this.getDataIso();
         this.hasError = false;
         this.isLoading = false;
       },
@@ -113,8 +113,10 @@ export class AgendaDoDiaComponent implements OnInit {
   }
 
   hasNewAgendamento(agendamentos: Array<Agendamento>): boolean {
-    if (this.totalAgendamento > 0 && agendamentos.length > this.totalAgendamento) {
-      return true;
-    }
+    return this.totalAgendamento > 0 && agendamentos.length > this.totalAgendamento;
+  }
+
+  trackById(agendamento: Agendamento): string {
+    return agendamento.atendidoEm
   }
 }
