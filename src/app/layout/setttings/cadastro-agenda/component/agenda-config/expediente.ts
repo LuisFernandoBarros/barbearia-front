@@ -6,7 +6,8 @@ export class Expediente {
     fimTarde: string;
     diaSemana: number;
     atendendo: boolean;
-    constructor(id: number, inicioManha: string, fimManha: string, inicioTarde: string, fimTarde: string, diaSemana: number, atendendo: boolean) {
+    diaSemanaDescricao: string
+    constructor(id: number, inicioManha: string, fimManha: string, inicioTarde: string, fimTarde: string, diaSemana: number, atendendo: boolean, diaSemanaDescricao: string) {
         this.id = id;
         this.inicioManha = inicioManha;
         this.fimManha = fimManha;
@@ -14,5 +15,6 @@ export class Expediente {
         this.fimTarde = fimTarde;
         this.diaSemana = diaSemana;
         this.atendendo = atendendo;
+        this.diaSemanaDescricao = diaSemanaDescricao
     }
 }

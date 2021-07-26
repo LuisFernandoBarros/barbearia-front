@@ -5,7 +5,6 @@ import { MSG_PADRAO } from '../../../../../../shared/services/msg-padrao.enum';
 import { ExtractMessageService } from '../../../../../../shared/services/extract-message.service';
 import { AgendaConfigService } from '../agenda-config.service';
 import { Expediente } from '../expediente';
-import { DiaSemana } from '../../../../../../shared/services/dia-semana';
 
 @Component({
   selector: 'app-dia-semana',
@@ -16,10 +15,8 @@ export class DiaSemanaComponent implements OnInit {
 
   public showCollapse = false;
   private formulario: FormGroup;
-  public isLoading = false;
-  public expediente: Expediente;
-  @Input() expedientes: Array<Expediente>;
-  @Input() diaSemana: DiaSemana
+  public isLoading = false;  
+  @Input() expediente: Expediente;
 
 
   constructor(private formBuilder: FormBuilder,
@@ -27,20 +24,13 @@ export class DiaSemanaComponent implements OnInit {
     private extractMsgService: ExtractMessageService,
     private toastService: ToastrService) { }
 
-  ngOnInit(): void {
-    this.setExpediente();
+  ngOnInit(): void {        
     this.formulario = this.formBuilder.group({
       inicioManha: [this.expediente.inicioManha],
       fimManha: [this.expediente.fimManha],
       inicioTarde: [this.expediente.inicioTarde],
       fimTarde: [this.expediente.fimTarde],
-      diaSemana: this.diaSemana.id
-    });
-  }
-
-  setExpediente() {
-    this.expediente = this.expedientes.find((it) => {
-      return it.diaSemana == this.diaSemana.id;
+      diaSemana: this.expediente.diaSemana
     });
   }
 
@@ -69,7 +59,7 @@ export class DiaSemanaComponent implements OnInit {
   closeAtentimento(event) {
     this.isLoading = true;
     let isToClose = event.target.checked;
-    this.service.closeAtendimento(this.diaSemana.id, isToClose).subscribe(
+    this.service.closeAtendimento(this.expediente.diaSemana, isToClose).subscribe(
       (resp) => {
         this.expediente = resp;
         this.toastService.success(MSG_PADRAO.SAVE_SUCCESS);

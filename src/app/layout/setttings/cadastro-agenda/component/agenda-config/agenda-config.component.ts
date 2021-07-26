@@ -4,7 +4,6 @@ import { ExtractMessageService } from '../../../../../shared/services/extract-me
 import { MSG_PADRAO } from '../../../../../shared/services/msg-padrao.enum';
 import { AgendaConfigService } from './agenda-config.service';
 import { Expediente } from './expediente';
-import { DiaSemanaService } from '../../../../../shared/services/dia-semana.service';
 
 @Component({
   selector: 'app-agenda-config',
@@ -18,8 +17,7 @@ export class AgendaConfigComponent implements OnInit {
 
   constructor(private service: AgendaConfigService,
     private extractErrorMessage: ExtractMessageService,
-    private toastService: ToastrService,
-    public diaSemanaService: DiaSemanaService) { }
+    private toastService: ToastrService) { }
 
   ngOnInit(): void {
     this.isLoading = true;
