@@ -6,14 +6,9 @@
                 <div class="card-header">
                     Editar
                 </div>
-                <!--  ASSIM QUE TODOS OS DIAS TIVEREM DADOS NO BACK, DA PRA LIBERAR OS OUTROS DIAS -->
-                <app-dia-semana [expedientes]="expedientes" [diaSemana]="diaSemanaService.diasSemana[1]"></app-dia-semana>
-                <app-dia-semana [expedientes]="expedientes" [diaSemana]="diaSemanaService.diasSemana[2]"></app-dia-semana>
-                <app-dia-semana [expedientes]="expedientes" [diaSemana]="diaSemanaService.diasSemana[3]"></app-dia-semana>
-                <app-dia-semana [expedientes]="expedientes" [diaSemana]="diaSemanaService.diasSemana[4]"></app-dia-semana>
-                <app-dia-semana [expedientes]="expedientes" [diaSemana]="diaSemanaService.diasSemana[5]"></app-dia-semana>
-                <app-dia-semana [expedientes]="expedientes" [diaSemana]="diaSemanaService.diasSemana[6]"></app-dia-semana>
-                <app-dia-semana [expedientes]="expedientes" [diaSemana]="diaSemanaService.diasSemana[7]"></app-dia-semana>
+                <ng-container *ngFor="let expediente of expedientes">
+                    <app-dia-semana [expediente]="expediente"></app-dia-semana>
+                </ng-container>
             </div>
                         
         </div>

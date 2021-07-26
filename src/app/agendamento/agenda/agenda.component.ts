@@ -7,6 +7,7 @@ import { Servico } from '../../layout/setttings/cadastro-servicos/servico'
 import { AgendamentoService } from '../agendamento.service';
 import { ActivatedRoute } from '@angular/router';
 import { Barbearia } from '../../layout/setttings/cadastro-barbearia/barbearia';
+import { AgendamentoAgendado } from '../agendamento-agendado';
 
 @Component({
   selector: 'app-agenda',
@@ -21,10 +22,12 @@ export class AgendaComponent implements OnInit {
   public isServicoEnable: boolean;
   public isHorariosEnable: boolean;
   public isDataEnable: boolean;
-  public profissionais: any = ['Florida', 'South Dakota', 'Tennessee', 'Michigan'];
+  public isAgendamentoAgendado: boolean;
+  public profissionais: Array<any>;
   public servicos: Array<Servico>;
   public horarios: Array<string>;
   public barbearia: Barbearia;
+  public agendamento: AgendamentoAgendado;
 
   constructor(private service: AgendamentoService,
     private formBuilder: FormBuilder,
@@ -37,14 +40,23 @@ export class AgendaComponent implements OnInit {
     this.isServicoEnable = false;
     this.isHorariosEnable = false;
     this.isDataEnable = false;
+    this.isAgendamentoAgendado = false;
 
     this.activedRoute.params.subscribe(
       (param: any) => { this.getProfissionais(param['id']) }
-    )    
+    )
+
 
   }
 
-  getProfissionais(barbeariaId: string){
+  // INDICA QUE O METODO callbackFazerOutroAgendamento() DEVE SER EXECUTADO NO CONTEXTO DESTE COMPONENTE
+  public boundedCallbackFazerOutroAgendamento = this.callbackFazerOutroAgendamento.bind(this);
+  callbackFazerOutroAgendamento(): void {
+    this.isAgendamentoAgendado = false;
+    this.resetForm();
+  }
+
+  getProfissionais(barbeariaId: string) {
     this.service.get(barbeariaId).subscribe(
       (resp) => {
         this.formulario = this.formBuilder.group({
@@ -82,19 +94,26 @@ export class AgendaComponent implements OnInit {
     let isServico = this.formulario.value['servico'];
     this.service.getHorarios(idProfissional, data, isServico).subscribe(
       (resp) => {
-        this.horarios = resp;
-        this.isHorariosEnable = true;
+        if (resp.length == 0) {
+          this.toastService.error("Sem horários disponíves. Selecione outra data.");
+        } else {
+          this.horarios = resp;
+          this.isHorariosEnable = true;
+        }
       }
     )
   }
+
 
   onSubmit(): void {
     if (this.formOk()) {
       this.isSalvandoAgendamento = true;
       this.service.save(this.formulario.value).subscribe(
         (resp) => {
+          this.agendamento = resp;
           this.toastService.success(MSG_PADRAO.SAVE_SUCCESS)
           this.isSalvandoAgendamento = false;
+          this.isAgendamentoAgendado = true
         },
         (err) => {
           this.toastService.error(this.extractMsgService.extractMessageFromError(err, MSG_PADRAO.ERROR_SERVER));
@@ -107,8 +126,22 @@ export class AgendaComponent implements OnInit {
   }
 
   formOk() {
-    console.log(this.formulario);
     return this.formulario.status != "INVALID";
+  }
+
+  resetForm() {
+    this.formulario.patchValue({
+      nome: [null],
+      profissonal: [''],
+      servico: [''],
+      data: [''],
+      horario: [''],
+      telefone: ['']
+    });
+    this.isServicoEnable = false;
+    this.isHorariosEnable = false;
+    this.isDataEnable = false;
+    this.isAgendamentoAgendado = false;
   }
 
 }

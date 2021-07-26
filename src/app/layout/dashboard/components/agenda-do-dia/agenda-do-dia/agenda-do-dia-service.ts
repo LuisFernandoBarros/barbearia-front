@@ -14,9 +14,10 @@ export class AgendaDoDiaService {
     public agendamentos: Array<Observable<Agendamento>> = [];
 
     getAgendamentosDia(data: string) {        
-        return this.httpClient.get<Agendamento[]>(this.agendamentosUrl + "/" + data,
-            {
-                withCredentials: true
-            });
+        return this.httpClient.get<Agendamento[]>(this.agendamentosUrl + "/" + data);
+    }
+
+    getAllAgendamentos(){
+        return this.httpClient.get<Agendamento[]>(this.agendamentosUrl);
     }
 }

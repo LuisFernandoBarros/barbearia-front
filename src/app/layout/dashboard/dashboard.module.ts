@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NgbAlertModule, NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedPipesModule, StatModule } from '../../shared';
@@ -21,6 +21,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         FormsModule,
         ReactiveFormsModule,
     ],
-    declarations: [DashboardComponent, AgendaDoDiaComponent, ItemAgendamentoComponent, AgendamentoDetalhesComponent]
+    declarations: [DashboardComponent, AgendaDoDiaComponent, ItemAgendamentoComponent, AgendamentoDetalhesComponent],
+    providers: [
+        DatePipe
+    ]
 })
 export class DashboardModule { }
