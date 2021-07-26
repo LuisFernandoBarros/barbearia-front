@@ -94,11 +94,16 @@ export class AgendaComponent implements OnInit {
     let isServico = this.formulario.value['servico'];
     this.service.getHorarios(idProfissional, data, isServico).subscribe(
       (resp) => {
-        this.horarios = resp;
-        this.isHorariosEnable = true;
+        if (resp.length == 0) {
+          this.toastService.error("Sem horários disponíves. Selecione outra data.");
+        } else {
+          this.horarios = resp;
+          this.isHorariosEnable = true;
+        }
       }
     )
   }
+
 
   onSubmit(): void {
     if (this.formOk()) {
