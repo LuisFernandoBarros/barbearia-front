@@ -1,4 +1,8 @@
+import { DatePipe } from '@angular/common';
+import { templateJitUrl } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { interval, Subscription } from 'rxjs';
 import { Agendamento } from '../item-agendamento/agendamento';
 import { ModalService } from '../service/modal-service';
 import { AgendaDoDiaService } from './agenda-do-dia-service';
@@ -11,16 +15,24 @@ import { AgendaDoDiaService } from './agenda-do-dia-service';
 export class AgendaDoDiaComponent implements OnInit {
 
   constructor(private agendaDoDiaService: AgendaDoDiaService,
-    private modalService: ModalService) { }
+    private modalService: ModalService,
+    private toastService: ToastrService,
+    private datePipe: DatePipe) { }
 
   public agendamentos: Array<Agendamento> = [];
   public data = new Date();
   public hasError = false;
   public isLoading = true;
   public dataAgenda: string;
+  private totalAgendamento = 0;
+  private updateSubscription: Subscription;
 
   ngOnInit(): void {
     this.getAgendamentos();
+    this.updateSubscription = interval(1000).subscribe(
+      (val) => {
+        this.refreshAgendamentos()
+      });
     this.dataAgenda = this.getDataIso();
   }
 
@@ -28,17 +40,15 @@ export class AgendaDoDiaComponent implements OnInit {
     this.modalService.open(id.toString());
   }
 
-  getDataIso() {
-    let month = (this.data.getMonth() + 1) < 10 ? ('0' +(this.data.getMonth() + 1)) : (this.data.getMonth() + 1);
-    let day = (this.data.getDate()) < 10 ? '0' + this.data.getDate() : this.data.getDate();    
-    return ((this.data.getFullYear())) + "-" + month + "-" + day;
-  }  
+  getDataIso(): string {
+    return this.datePipe.transform(this.data, "yyyy-MM-dd");
+  }
 
   // INDICA QUE O METODO refreshAgenda() DEVE SER EXECUTADO NO CONTEXTO DESTE COMPONENTE
-  public boundedRefreshAgenda= this.refreshAgenda.bind(this);  
+  public boundedRefreshAgenda = this.refreshAgenda.bind(this);
   refreshAgenda(): void {
     this.specificDay();
-  }    
+  }
 
   nextDay() {
     const tomorrow = new Date(this.data);
@@ -54,14 +64,14 @@ export class AgendaDoDiaComponent implements OnInit {
     this.getAgendamentos();
   }
 
-  specificDay(){
-    const specificDate = new Date(this.dataAgenda);    
-    specificDate.setDate(specificDate.getDate()+1);
+  specificDay() {
+    const specificDate = new Date(this.dataAgenda);
+    specificDate.setDate(specificDate.getDate() + 1);
     this.data = specificDate;
     this.getAgendamentos();
   }
 
-  isEmptyAgendamentos(){
+  isEmptyAgendamentos() {
     return !this.hasError && !this.isLoading && this.agendamentos.length == 0;
   }
 
@@ -72,12 +82,39 @@ export class AgendaDoDiaComponent implements OnInit {
       .subscribe(response => {
         this.agendamentos = response,
           this.dataAgenda = this.getDataIso();
-          this.hasError = false;
-          this.isLoading = false;
+        this.hasError = false;
+        this.isLoading = false;
       },
         (err) => {
           this.hasError = true;
           this.isLoading = false;
         });
+  }
+
+  refreshAgendamentos(): void {
+    this.agendaDoDiaService.getAllAgendamentos()
+      .subscribe(response => {
+        response.forEach(it => {
+          if (this.isAgendamentoTodayAndNewAgendamento(it)) {
+            this.agendamentos.push(it);
+          }
+        });
+        if (this.hasNewAgendamento(response)) {
+          this.toastService.info("Novo agendamento!");
+        }
+        this.totalAgendamento = response.length;
+      });
+  }
+
+  isAgendamentoTodayAndNewAgendamento(newAgendamento: Agendamento): boolean {
+    let isTodayAgendamento = this.datePipe.transform(newAgendamento.dataHora, "yyyy-MM-dd") == this.getDataIso();
+    let isNewAgendamento = this.agendamentos.filter(it => it.id == newAgendamento.id).length == 0;
+    return isTodayAgendamento && isNewAgendamento;
+  }
+
+  hasNewAgendamento(agendamentos: Array<Agendamento>): boolean {
+    if (this.totalAgendamento > 0 && agendamentos.length > this.totalAgendamento) {
+      return true;
+    }
   }
 }
