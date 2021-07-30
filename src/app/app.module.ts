@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -41,7 +41,10 @@ import { ConfiguracaoBarbeariaGuard } from './shared/guard/configuracao-barbeari
             provide: HTTP_INTERCEPTORS,
             useClass: RequestInterceptor,
             multi: true,
-        }],
+        },
+        { provide: LocationStrategy, useClass: HashLocationStrategy }
+    ],
+
     bootstrap: [AppComponent]
 })
 export class AppModule { }
