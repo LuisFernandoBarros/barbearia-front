@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { ExtractMessageService } from '../../../shared/services/extract-message.service';
-import { MSG_PADRAO } from '../../../shared/services/msg-padrao.enum';
-import { Servico } from '../../../layout/setttings/cadastro-servicos/servico'
+import { ExtractMessageService } from '../../../../shared/services/extract-message.service';
+import { MSG_PADRAO } from '../../../../shared/services/msg-padrao.enum';
+import { Servico } from '../../../../layout/setttings/cadastro-servicos/servico'
 import { AgendamentoService } from '../agendamento.service';
 import { ActivatedRoute } from '@angular/router';
-import { Barbearia } from '../../../layout/setttings/cadastro-barbearia/barbearia';
+import { Barbearia } from '../../../../layout/setttings/cadastro-barbearia/barbearia';
 import { AgendamentoAgendado } from '../agendamento-agendado';
 
 @Component({
