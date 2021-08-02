@@ -86,6 +86,12 @@ export class AgendaComponent implements OnInit {
 
   onChangeServico(): void {
     this.isDataEnable = true;
+    this.formulario.patchValue({      
+      data: [''],
+      horario: ['']
+    });    
+    this.isHorariosEnable = false;    
+    this.isAgendamentoAgendado = false;    
   }
 
   onChangeData() {
