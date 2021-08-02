@@ -1,9 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from '../../../src/environments/environment';
-import { Barbearia } from '../layout/setttings/cadastro-barbearia/barbearia';
-import { Servico } from '../layout/setttings/cadastro-servicos/servico';
+import { environment } from '../../../../src/environments/environment';
+import { Barbearia } from '../../layout/setttings/cadastro-barbearia/barbearia';
+import { Servico } from '../../layout/setttings/cadastro-servicos/servico';
 import { AgendamentoAgendado } from './agendamento-agendado';
 
 @Injectable({ providedIn: 'root' })

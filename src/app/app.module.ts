@@ -14,6 +14,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie-service';
 import { RequestInterceptor } from './shared/services/request-interceptor';
 import { ConfiguracaoBarbeariaGuard } from './shared/guard/configuracao-barbearia.guard';
+import { ProfissionaisListComponent } from './profissionais/profissionais-list/profissionais-list.component';
 
 
 
@@ -31,7 +32,7 @@ import { ConfiguracaoBarbeariaGuard } from './shared/guard/configuracao-barbeari
             progressBar: true
         })
     ],
-    declarations: [AppComponent],
+    declarations: [AppComponent, ProfissionaisListComponent],
     providers: [
         AuthGuard,
         NgbActiveModal,
