@@ -148,6 +148,7 @@ export class CadastroBarbeariaComponent implements OnInit {
     if (this.barbearia.linkAgendamento == null || this.barbearia.linkAgendamento.length <= 0) {
       return "Primeiro cadastre a barbearia para gerar o link";
     }
-    return `${environment.DOMINIO}/#/agendamento/${this.barbearia.linkAgendamento}`;
+    //http://localhost:4200/#/logout-contents/barbearia/MTM/agendamento
+    return `${environment.DOMINIO}/#/logout-contents/barbearia/${this.barbearia.linkAgendamento}/agendamento`;
   }
 }
