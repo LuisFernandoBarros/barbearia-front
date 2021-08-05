@@ -8,8 +8,8 @@ const routes: Routes = [
         loadChildren: () => import('./layout/layout.module').then((m) => m.LayoutModule),
         canActivate: [AuthGuard]
     },
-    { path: 'login', loadChildren: () => import('./login/login.module').then((m) => m.LoginModule) },
-    { path: 'agendamento', loadChildren: () => import('./agendamento/agendamento.module').then((m) => m.AgendamentoModule) },
+    { path: 'login', loadChildren: () => import('./login/login.module').then((m) => m.LoginModule) },    
+    { path: 'logout-contents', loadChildren: () => import('./logout-contents/logout-content.module').then((m) => m.LogoutcontentsModule) },
     { path: 'signup', loadChildren: () => import('./signup/signup.module').then((m) => m.SignupModule) },
     {
         path: 'error',

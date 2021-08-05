@@ -83,6 +83,7 @@ export class FormValidations {
       'maxlength': `${fieldName} precisa ter no máximo ${validatorValue.requiredLength} caracteres.`,
       'cepInvalido': 'CEP inválido.',
       'emailInvalido': 'Email já cadastrado!',
+      'email': 'Email inválido.',
       'equalsTo': 'Campos não são iguais',
       'senhaEqualsTo': 'Senhas não são iguais',
       'pattern': 'Campo inválido',

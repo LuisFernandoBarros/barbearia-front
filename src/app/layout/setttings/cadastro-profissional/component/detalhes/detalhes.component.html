@@ -18,8 +18,12 @@
             <div class="text-center mb-4">
                 <a class="btn btn-primary btn-lg" [routerLink]="['editar']">Editar</a>
                 &nbsp;
+                <button type="button" (click)="deletar()" class="btn btn-danger btn-lg">
+                    Remover
+                </button>
+                &nbsp;
                 <a class="btn btn-light btn-lg" [routerLink]="['/profissional']">Voltar</a>
-            </div>            
+            </div>
         </div>
     </div>
 </div>

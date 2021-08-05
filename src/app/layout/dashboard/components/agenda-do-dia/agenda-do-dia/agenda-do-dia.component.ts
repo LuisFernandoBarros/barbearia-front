@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { templateJitUrl } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { ToastrService } from 'ngx-toastr';
 import { interval, Subscription } from 'rxjs';
 import { Agendamento } from '../item-agendamento/agendamento';
@@ -17,7 +18,8 @@ export class AgendaDoDiaComponent implements OnInit {
   constructor(private agendaDoDiaService: AgendaDoDiaService,
     private modalService: ModalService,
     private toastService: ToastrService,
-    private datePipe: DatePipe) { }
+    private datePipe: DatePipe,
+    private cookieService: CookieService) { }
 
   public agendamentos: Array<Agendamento> = [];
   public data = new Date();
@@ -31,7 +33,10 @@ export class AgendaDoDiaComponent implements OnInit {
     this.getAgendamentos();
     this.updateSubscription = interval(10000).subscribe(
       (val) => {
-        this.refreshAgendamentos()
+        if (this.cookieService.check('token')) {
+          this.refreshAgendamentos()
+        }
+
       });
     this.dataAgenda = this.getDataIso();
   }

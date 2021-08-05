@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -14,6 +14,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie-service';
 import { RequestInterceptor } from './shared/services/request-interceptor';
 import { ConfiguracaoBarbeariaGuard } from './shared/guard/configuracao-barbearia.guard';
+import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
+
 
 
 
@@ -26,6 +28,7 @@ import { ConfiguracaoBarbeariaGuard } from './shared/guard/configuracao-barbeari
         LanguageTranslationModule,
         AppRoutingModule,
         NgbModalModule,
+        ModalModule.forRoot(),
         BrowserAnimationsModule,
         ToastrModule.forRoot({
             progressBar: true
@@ -36,12 +39,16 @@ import { ConfiguracaoBarbeariaGuard } from './shared/guard/configuracao-barbeari
         AuthGuard,
         NgbActiveModal,
         CookieService,
+        BsModalService,
         ConfiguracaoBarbeariaGuard,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: RequestInterceptor,
             multi: true,
-        }],
+        },
+        { provide: LocationStrategy, useClass: HashLocationStrategy }
+    ],
+
     bootstrap: [AppComponent]
 })
 export class AppModule { }
