@@ -1,16 +1,14 @@
 $topnav-background-color: #000;
+
  
 .login-page {
-    position: relative;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    overflow: auto;
+    position: fixed;       
     background: $topnav-background-color;
     text-align: center;
     color: #fff;
-    padding: 1em;
+    
+    height: 100%;
+    width: 100%;
 
     h1 {
         font-weight: 300;
@@ -22,9 +20,9 @@ $topnav-background-color: #000;
             color: rgba(255, 255, 255, 0.7);
         }
     }
-    .user-avatar {
-        -webkit-border-radius: 50%;
-        border-radius: 50%;
-        border: 2px solid #fff;
-    }
+}
+
+.title{
+    font-size: 18px;
+    margin-bottom: 10px;
 }

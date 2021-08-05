@@ -6,7 +6,7 @@ import { BarbeariaService } from '../../barbearia.service';
 @Component({
   selector: 'app-profissionais-list',
   templateUrl: './profissionais-list.component.html',
-  styleUrls: ['./profissionais-list.component.css']
+  styleUrls: ['./profissionais-list.component.scss']
 })
 export class ProfissionaisListComponent implements OnInit {
 
