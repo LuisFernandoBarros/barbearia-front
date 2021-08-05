@@ -1,11 +1,9 @@
-<div class="login-page">
+<app-barbearia-header [barbearia]="barbearia" *ngIf="!isLoading"></app-barbearia-header>
+<div class="login-page" *ngIf="!isLoading">
     <div class="row justify-content-md-center">
-        <div class="col-md-4" *ngIf="!isLoading">
-            <img class="user-avatar" src="assets/images/logo.png" width="200px" />
-            <h1>Barbearia {{barbearia.nome}}</h1>
+        <div class="col-md-4">
             <form role="form" [formGroup]="formulario" (ngSubmit)="onSubmit()" *ngIf="!isAgendamentoAgendado">
                 <div class="form-content">
-
                     <!-- NOME -->
                     <div class="form-group">
                         <input placeholder="Digite seu nome" class="form-control input-underline input-lg" type="text"
@@ -24,7 +22,8 @@
                             formControlName="profissonal" (change)="onChangeProfissional()">
                             <option value="" disabled selected>Selecione um barbeiro</option>
                             <option [ngValue]="profissonal.id" class="dropdown-item"
-                                *ngFor="let profissonal of profissionais">{{profissonal.nome}}</option>
+                                *ngFor="let profissonal of barbearia.profissionais">
+                                {{profissonal.nome}}</option>
                         </select>
                     </div>
 
@@ -55,7 +54,6 @@
                         </select>
                     </div>
                 </div>
-                
                 <button type="submit" class="btn rounded-btn">Agendar
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
                         *ngIf="isSalvandoAgendamento"></span>
@@ -63,7 +61,7 @@
             </form>
 
             <app-pronto [agendamento]="agendamento" *ngIf="isAgendamentoAgendado"
-            [callbackFazerOutroAgendamento]="boundedCallbackFazerOutroAgendamento"></app-pronto>
+                [callbackFazerOutroAgendamento]="boundedCallbackFazerOutroAgendamento"></app-pronto>
         </div>
     </div>
 </div>

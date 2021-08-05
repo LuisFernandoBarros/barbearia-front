@@ -8,6 +8,7 @@ import { AgendamentoService } from '../agendamento.service';
 import { ActivatedRoute } from '@angular/router';
 import { Barbearia } from '../../../../layout/setttings/cadastro-barbearia/barbearia';
 import { AgendamentoAgendado } from '../agendamento-agendado';
+import { BarbeariaService } from '../../barbearia.service';
 
 @Component({
   selector: 'app-agenda',
@@ -22,8 +23,7 @@ export class AgendaComponent implements OnInit {
   public isServicoEnable: boolean;
   public isHorariosEnable: boolean;
   public isDataEnable: boolean;
-  public isAgendamentoAgendado: boolean;
-  public profissionais: Array<any>;
+  public isAgendamentoAgendado: boolean;  
   public servicos: Array<Servico>;
   public horarios: Array<string>;
   public barbearia: Barbearia;
@@ -33,7 +33,8 @@ export class AgendaComponent implements OnInit {
     private formBuilder: FormBuilder,
     private toastService: ToastrService,
     private extractMsgService: ExtractMessageService,
-    private activedRoute: ActivatedRoute) { }
+    private activedRoute: ActivatedRoute,
+    private barbeariaService: BarbeariaService) { }
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -57,7 +58,7 @@ export class AgendaComponent implements OnInit {
   }
 
   getProfissionais(barbeariaId: string) {
-    this.service.get(barbeariaId).subscribe(
+    this.barbeariaService.get(barbeariaId).subscribe(
       (resp) => {
         this.formulario = this.formBuilder.group({
           nome: [null, [Validators.required]],
@@ -68,7 +69,6 @@ export class AgendaComponent implements OnInit {
           telefone: [null, [Validators.required]]
         });
         this.barbearia = resp;
-        this.profissionais = resp.profissionais;
         this.isLoading = false;
       }
     );

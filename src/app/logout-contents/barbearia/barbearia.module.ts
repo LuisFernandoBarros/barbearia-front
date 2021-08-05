@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask';
 import { AgendaComponent } from './agendamento/agenda/agenda.component';
 import { ProntoComponent } from './agendamento/pronto/pronto.component';
+import { BarbeariaHeaderComponent } from './barbearia-header/barbearia-header.component';
+import { ProfissionaisListComponent } from './profissionais/profissionais-list/profissionais-list.component';
 
 
 
@@ -11,7 +13,9 @@ import { ProntoComponent } from './agendamento/pronto/pronto.component';
 @NgModule({
   declarations: [    
     AgendaComponent,
-    ProntoComponent
+    ProntoComponent,
+    BarbeariaHeaderComponent,
+    ProfissionaisListComponent
   ],
   imports: [
     CommonModule,
