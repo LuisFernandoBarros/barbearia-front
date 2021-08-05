@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Barbearia } from '../../../../layout/setttings/cadastro-barbearia/barbearia';
 import { BarbeariaService } from '../../barbearia.service';
 
@@ -14,7 +15,8 @@ export class ProfissionaisListComponent implements OnInit {
   public barbearia: Barbearia;
 
   constructor(private barbeariaService: BarbeariaService,
-    private activedRoute: ActivatedRoute) { }
+    private activedRoute: ActivatedRoute,
+    private toastService: ToastrService) { }
 
   ngOnInit(): void {
     this.isLoadingBarbearia = true;
@@ -30,6 +32,10 @@ export class ProfissionaisListComponent implements OnInit {
         this.isLoadingBarbearia = false;
       }
     );
+  }
+
+  phoneCopied(e): void{
+    this.toastService.info("Telefone copiado!");
   }
 
 }

@@ -5,11 +5,16 @@
             <div class="title">
                 Profissionais
             </div>
-            <ul class="list-group">
-                <li class="list-group-item" *ngFor="let profissonal of barbearia.profissionais">
+            <ul class="list-group"  *ngFor="let profissonal of barbearia.profissionais">
+                <li class="list-group-item"
+                    (cbOnSuccess)="phoneCopied($event)" ngxClipboard [cbContent]="profissonal.telefone">
                     {{profissonal.nome}}
                     <br>
                     <span style="font-size: 12px">{{profissonal.telefone | mask: '(00) 00000-0*'}}</span>
+                    &nbsp;
+                    <span>
+                        <i class="fa fa-fw fa-copy"></i>
+                    </span>
                 </li>
             </ul>
         </div>
