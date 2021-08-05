@@ -11,4 +11,5 @@ export enum MSG_PADRAO {
 
     // SUCCESS
     SAVE_SUCCESS = "Salvo com sucesso!",
+    DELETED_SUCESSO = "Removido com sucesso!",
 };
