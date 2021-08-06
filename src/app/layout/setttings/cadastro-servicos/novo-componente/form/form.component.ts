@@ -1,12 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 import { ExtractMessageService } from '../../../../../shared/services/extract-message.service';
 import { MSG_PADRAO } from '../../../../../shared/services/msg-padrao.enum';
 import { FormValidations } from '../../../../../shared/form-validations';
 import { Service } from '../../service';
 import { Servico } from '../../servico';
+import { AlertModalService } from '../../../../../shared/alert-modal/alert-modal.service';
+import { switchMap, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-form',
@@ -24,7 +26,8 @@ export class FormComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private service: Service,
     private toast: ToastrService,
-    private extractMsgService: ExtractMessageService) { }
+    private extractMsgService: ExtractMessageService,
+    private alertService: AlertModalService) { }
 
   ngOnInit(): void {    
     this.formulario = this.formBuilder.group({
@@ -91,4 +94,21 @@ export class FormComponent implements OnInit {
   isFormValido() {
     return FormValidations.isFormValido(this.formulario);
   }
+
+  deletar(): void {
+    const result$ = this.alertService.showConfirm('Confirmação', 'Tem certeza que deseja remover este serviço?');
+    result$.asObservable()
+      .pipe(
+        take(1),
+        switchMap(result => result ? this.service.delete(this.servico) : EMPTY)
+      )
+      .subscribe(
+        resp => {
+          this.toast.success(MSG_PADRAO.DELETED_SUCESSO);          
+        },
+        error => {
+          this.toast.success(MSG_PADRAO.ERROR_SERVER);
+        }
+      );
+  }  
 }

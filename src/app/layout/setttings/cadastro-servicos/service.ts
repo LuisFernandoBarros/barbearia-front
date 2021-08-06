@@ -16,7 +16,11 @@ export class Service {
 
     update(servico: Servico) {
         return this.httpClient.patch<Servico>(`${this.url}/${servico.id}`, JSON.stringify(servico));
-    }    
+    }
+    
+    delete(servico: Servico) {
+        return this.httpClient.delete<Servico>(`${this.url}/${servico.id}`);
+    }
 
     getServico(id: number){
         return this.httpClient.get<Servico>(`${this.url}/${id}`);
