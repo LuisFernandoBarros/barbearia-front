@@ -115,7 +115,7 @@ export class FormComponent implements OnInit {
           this.toast.success(MSG_PADRAO.DELETED_SUCESSO);
         },
         error => {
-          this.toast.success(MSG_PADRAO.ERROR_SERVER);
+          this.toast.error(MSG_PADRAO.ERROR_SERVER);
         }
       );
   }
