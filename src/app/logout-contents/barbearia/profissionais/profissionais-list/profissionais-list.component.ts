@@ -11,7 +11,7 @@ import { BarbeariaService } from '../../barbearia.service';
 })
 export class ProfissionaisListComponent implements OnInit {
 
-  private isLoadingBarbearia: boolean;
+  public isLoadingBarbearia: boolean;
   public barbearia: Barbearia;
 
   constructor(private barbeariaService: BarbeariaService,
