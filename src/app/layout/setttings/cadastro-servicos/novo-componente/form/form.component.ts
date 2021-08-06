@@ -10,6 +10,7 @@ import { Servico } from '../../servico';
 import { AlertModalService } from '../../../../../shared/alert-modal/alert-modal.service';
 import { switchMap, take } from 'rxjs/operators';
 import { ServicoUtils } from '../../servico-utils';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -29,7 +30,8 @@ export class FormComponent implements OnInit {
     private toast: ToastrService,
     private extractMsgService: ExtractMessageService,
     private alertService: AlertModalService,
-    private servicoUtils: ServicoUtils) { }
+    private servicoUtils: ServicoUtils,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.formulario = this.formBuilder.group({
@@ -53,6 +55,9 @@ export class FormComponent implements OnInit {
       (resp) => {
         this.isLoading = false;
         this.toast.success(MSG_PADRAO.SAVE_SUCCESS);
+        if (!this.isUpdate()) {
+          this.router.navigate(['/servicos']);
+        }
       },
       (err) => {
         this.toast.error(this.extractMsgService.extractMessageFromError(err, MSG_PADRAO.ERROR_SERVER))
