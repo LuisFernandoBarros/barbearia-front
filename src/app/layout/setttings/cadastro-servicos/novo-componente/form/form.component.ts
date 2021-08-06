@@ -9,6 +9,7 @@ import { Service } from '../../service';
 import { Servico } from '../../servico';
 import { AlertModalService } from '../../../../../shared/alert-modal/alert-modal.service';
 import { switchMap, take } from 'rxjs/operators';
+import { ServicoUtils } from '../../servico-utils';
 
 @Component({
   selector: 'app-form',
@@ -27,9 +28,10 @@ export class FormComponent implements OnInit {
     private service: Service,
     private toast: ToastrService,
     private extractMsgService: ExtractMessageService,
-    private alertService: AlertModalService) { }
+    private alertService: AlertModalService,
+    private servicoUtils: ServicoUtils) { }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
     this.formulario = this.formBuilder.group({
       nome: [null, [Validators.required, FormValidations.onlyCharsValidator]],
       valor: [null, [Validators.required]],
@@ -52,8 +54,8 @@ export class FormComponent implements OnInit {
         this.isLoading = false;
         this.toast.success(MSG_PADRAO.SAVE_SUCCESS);
       },
-      (err) => { 
-        this.toast.error(this.extractMsgService.extractMessageFromError(err, MSG_PADRAO.ERROR_SERVER)) 
+      (err) => {
+        this.toast.error(this.extractMsgService.extractMessageFromError(err, MSG_PADRAO.ERROR_SERVER))
         this.isLoading = false;
       }
     );
@@ -70,7 +72,7 @@ export class FormComponent implements OnInit {
   }
 
   isUpdate(): boolean {
-    return  this.servico != undefined;
+    return this.servico != undefined;
   }
 
   getUpdateRequest(): Observable<Servico> {
@@ -104,11 +106,16 @@ export class FormComponent implements OnInit {
       )
       .subscribe(
         resp => {
-          this.toast.success(MSG_PADRAO.DELETED_SUCESSO);          
+          this.sendMessage();
+          this.toast.success(MSG_PADRAO.DELETED_SUCESSO);
         },
         error => {
           this.toast.success(MSG_PADRAO.ERROR_SERVER);
         }
       );
-  }  
+  }
+
+  sendMessage(): void {
+    this.servicoUtils.sendUpdate(this.servico);
+  }
 }

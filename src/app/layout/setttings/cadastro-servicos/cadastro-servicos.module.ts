@@ -10,6 +10,7 @@ import { Service } from './service';
 import { NgxMaskModule } from 'ngx-mask';
 import { ServicoComponent } from './novo-componente/servico/servico.component';
 import { ServicoListComponent } from './novo-componente/servico-list.component';
+import { ServicoUtils } from './servico-utils';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ServicoListComponent } from './novo-componente/servico-list.component';
     NgxMaskModule.forRoot()
   ],
   providers: [
-    Service
+    Service,
+    ServicoUtils
   ]
 })
 export class CadastroServicosModule { }
