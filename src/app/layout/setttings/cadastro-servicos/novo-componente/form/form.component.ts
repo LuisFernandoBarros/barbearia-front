@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { ExtractMessageService } from '../../../../../shared/services/extract-message.service';
@@ -17,12 +16,12 @@ import { Servico } from '../../servico';
 export class FormComponent implements OnInit {
 
   public formulario: FormGroup
+  public isLoading: boolean;
 
   @Input()
   servico: Servico;
 
   constructor(private formBuilder: FormBuilder,
-    private router: Router,
     private service: Service,
     private toast: ToastrService,
     private extractMsgService: ExtractMessageService) { }
@@ -37,6 +36,7 @@ export class FormComponent implements OnInit {
   }
 
   onSubmit() {
+    this.isLoading = true;
     let request;
     if (this.isUpdate()) {
       request = this.getUpdateRequest();
@@ -46,10 +46,13 @@ export class FormComponent implements OnInit {
 
     request.subscribe(
       (resp) => {
+        this.isLoading = false;
         this.toast.success(MSG_PADRAO.SAVE_SUCCESS);
-        this.router.navigate([`servicos`]);
       },
-      (err) => { this.toast.error(this.extractMsgService.extractMessageFromError(err, MSG_PADRAO.ERROR_SERVER)) }
+      (err) => { 
+        this.toast.error(this.extractMsgService.extractMessageFromError(err, MSG_PADRAO.ERROR_SERVER)) 
+        this.isLoading = false;
+      }
     );
   }
 

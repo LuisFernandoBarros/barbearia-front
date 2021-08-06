@@ -5,14 +5,8 @@
                 {{ servico.descricao }}
             </button>
         </h2>
-        <div class="accordion-collapse collapse {{showCollapse ? 'show': ''}}">
-            
-            <!-- SPINNER -->
-            <div class="text-center m-4" *ngIf="isLoading">
-                <div class="spinner-border text-warning"></div>
-            </div>
-
-            <div class="accordion-body" *ngIf="!isLoading">
+        <div class="accordion-collapse collapse {{showCollapse ? 'show': ''}}">            
+            <div class="accordion-body">
                 <app-form [servico]="servico"></app-form>
             </div>
         </div>

@@ -1,5 +1,10 @@
+<!-- SPINNER -->
+<div class="text-center m-4" *ngIf="isLoading">
+    <div class="spinner-border text-warning"></div>
+</div>
+
 <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
-    <div class="card-body">
+    <div class="card-body" *ngIf="!isLoading">
         <div class="form-group">
             <label>Nome</label>
             <input type="text" class="form-control" formControlName="nome">
