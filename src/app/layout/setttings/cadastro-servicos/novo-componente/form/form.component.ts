@@ -27,15 +27,12 @@ export class FormComponent implements OnInit {
     private toast: ToastrService,
     private extractMsgService: ExtractMessageService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     this.formulario = this.formBuilder.group({
       nome: [null, [Validators.required, FormValidations.onlyCharsValidator]],
       valor: [null, [Validators.required]],
       tempo: [null, [Validators.required]]
     });
-  }
-
-  ngOnChanges(): void {
     this.updateForm();
   }
 
@@ -79,7 +76,7 @@ export class FormComponent implements OnInit {
   }
 
   updateForm() {
-    if (this.formulario != undefined) {
+    if (this.formulario != undefined && this.servico != undefined) {
       this.formulario.patchValue({
         nome: this.servico.descricao,
         valor: this.servico.valor,
