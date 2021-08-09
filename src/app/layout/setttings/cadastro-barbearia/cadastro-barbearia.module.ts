@@ -5,6 +5,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { SharedModule } from '../../../shared/shared.module';
 import { CadastroBarbeariaRoutingModule } from './cadastro-barbearia-routing.module';
 import { CadastroBarbeariaComponent } from './component/cadastro-barbearia/cadastro-barbearia.component';
+import { ImagemUploadComponent } from './component/imagem-upload/imagem-upload.component';
 
 
 @NgModule({
@@ -16,6 +17,6 @@ import { CadastroBarbeariaComponent } from './component/cadastro-barbearia/cadas
         SharedModule,
         NgxMaskModule.forRoot()
     ],
-    declarations: [CadastroBarbeariaComponent]
+    declarations: [CadastroBarbeariaComponent, ImagemUploadComponent]
 })
 export class CadastroBarbeariaModule {}

@@ -1,0 +1,9 @@
+<form [formGroup]="uploadForm" (ngSubmit)="upload()" enctype="multipart/form-data">
+    <div class="form-group">        
+        <input type="file" class="form-control" id="file" formControlName="file" (change)="onImageChange($event)">
+        <div *ngIf="uf.file.touched && uf.file.invalid" class="alert alert-danger">
+            <div *ngIf="uf.file.errors.required">Uma image é obrigatório.</div>
+        </div>
+    </div>
+    <button class="btn btn-success" type="submit">Salvar Logo</button>
+</form>
