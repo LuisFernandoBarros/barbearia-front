@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { ExtractMessageService } from '../../../../../shared/services/extract-message.service';
+import { MSG_PADRAO } from '../../../../../shared/services/msg-padrao.enum';
 import { Barbearia } from '../../barbearia';
 import { CadastroBarbeariaService } from '../../cadastro-barbearia.service';
 
@@ -16,13 +19,15 @@ export class ImagemUploadComponent implements OnInit {
   @Input() barbearia: Barbearia;
   private file: File;
   public filePath: string;
+  public isLoading: boolean;
 
   uploadForm = new FormGroup({
-    file: new FormControl('', [Validators.required]),
-    imgSrc: new FormControl('', [Validators.required])
+    file: new FormControl('', [Validators.required])
   });
 
-  constructor(private service: CadastroBarbeariaService) { }
+  constructor(private service: CadastroBarbeariaService,
+    private toast: ToastrService,
+    private extractMsg: ExtractMessageService) { }
 
   ngOnInit(): void {
   }
@@ -41,10 +46,16 @@ export class ImagemUploadComponent implements OnInit {
   }
 
   upload() {
+    this.isLoading = true;
     this.service.uploadImg(this.file, this.barbearia.id)
       .subscribe(response => {
-        alert('Image has been uploaded.');
-      })
+        this.toast.success(MSG_PADRAO.SAVE_SUCCESS);
+        this.isLoading = false;
+      }),
+      (err) => {
+        this.toast.error(this.extractMsg.extractMessageFromError(err, MSG_PADRAO.ERROR_SERVER));
+        this.isLoading = false;
+      }
   }
 
   imagePreview() {
