@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
 import { LocalStorageService } from '../.../../../../../../shared/services/local-storage.service';
 import { Router } from '@angular/router';
 import { environment } from '../../../../../../environments/environment';
+import { ImageLogoService } from '../../../../../shared/services/image-logo.service';
 
 @Component({
   selector: 'app-cadastro-barbearia',
@@ -33,7 +34,8 @@ export class CadastroBarbeariaComponent implements OnInit {
     private cepService: ConsultaCepService,
     private extractService: ExtractMessageService,
     private localStorageService: LocalStorageService,
-    private router: Router) { }
+    private router: Router,
+    private logoService: ImageLogoService) { }
 
   ngOnInit(): void {
 
@@ -150,5 +152,9 @@ export class CadastroBarbeariaComponent implements OnInit {
     }
     //http://localhost:4200/#/logout-contents/barbearia/agendamento/c51ce410c124a10e0db5e4b97fc2af39
     return `${environment.DOMINIO}/#/logout-contents/barbearia/agendamento/${this.barbearia.linkAgendamento}`;
+  }
+
+  get urlLogo(): string {
+    return this.logoService.urlLogo("logo_old");
   }
 }

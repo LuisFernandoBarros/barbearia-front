@@ -87,10 +87,14 @@
         <div class="col col-sm-6">
             <div class="card mb-3">
                 <div class="card-header">
-                    Editar Logo
+                    Logo
                 </div>
-                <div class="card-body">                    
+                <div class="card-body row justify-content-md-center">
+                    <div class="text-center mb-3">
+                        <img [src]="urlLogo" width="150px">
+                    </div>
                     <app-imagem-upload [barbearia]="barbearia"></app-imagem-upload>
+
                 </div>
             </div>
         </div>
