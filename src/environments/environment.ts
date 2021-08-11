@@ -5,8 +5,7 @@
 export const environment = {
     production: false,
     API: "http://localhost:8050",
-    DOMINIO: "http://localhost:4200",
-    URL_LOGO_FOLDER: "assets/images"
+    DOMINIO: "http://localhost:4200"
 };
 
 /*

@@ -155,6 +155,6 @@ export class CadastroBarbeariaComponent implements OnInit {
   }
 
   get urlLogo(): string {
-    return this.logoService.urlLogo("logo_old");
+    return this.logoService.urlLogo(this.barbearia.id.toString());
   }
 }

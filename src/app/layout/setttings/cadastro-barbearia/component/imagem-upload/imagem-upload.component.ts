@@ -48,14 +48,15 @@ export class ImagemUploadComponent implements OnInit {
   upload() {
     this.isLoading = true;
     this.service.uploadImg(this.file, this.barbearia.id)
-      .subscribe(response => {
-        this.toast.success(MSG_PADRAO.SAVE_SUCCESS);
-        this.isLoading = false;
-      }),
-      (err) => {
-        this.toast.error(this.extractMsg.extractMessageFromError(err, MSG_PADRAO.ERROR_SERVER));
-        this.isLoading = false;
-      }
+      .subscribe(
+        (response) => {
+          this.toast.success(MSG_PADRAO.SAVE_SUCCESS);
+          this.isLoading = false;
+        },
+        (err) => {
+          this.toast.error(this.extractMsg.extractMessageFromError(err, MSG_PADRAO.ERROR_SERVER));
+          this.isLoading = false;
+        })
   }
 
   imagePreview() {

@@ -6,7 +6,7 @@ export class ImageLogoService {
 
     constructor() { }
 
-    urlLogo(logo: string): string {
-        return `${environment.URL_LOGO_FOLDER}/${logo}.png`        
+    urlLogo(id: string): string {
+        return `${environment.API}/barbearia/${id}/logo`;
     }
 }

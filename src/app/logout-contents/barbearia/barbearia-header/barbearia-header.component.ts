@@ -17,8 +17,6 @@ export class BarbeariaHeaderComponent implements OnInit {
   }
 
   get urlLogo(): string {
-    return this.logoService.urlLogo("logo_old");
-    //return environment.URL_LOGO_FOLDER + "logo_old" + ".png";
+    return this.logoService.urlLogo(this.barbearia.id.toString());    
   }
-
 }
