@@ -1,0 +1,18 @@
+<app-barbearia-header [barbearia]="barbearia" *ngIf="!isLoadingBarbearia"></app-barbearia-header>
+<div class="login-page" *ngIf="!isLoadingBarbearia">
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <div class="title">
+                Serviços
+            </div>
+            <ul class="list-group"  *ngFor="let profissonal of barbearia.profissionais">
+                <li class="list-group-item mr-3 ml-3 mt-3" (click)="openModal(profissonal.id)">
+                    {{profissonal.nome}}
+                    <br>
+                    <span style="font-size: 13px">Clique para ver serviços e valores</span>                    
+                </li>
+                <app-servico-item id="{{profissonal.id}}" [profissional]="profissonal"></app-servico-item>
+            </ul>
+        </div>
+    </div>
+</div>

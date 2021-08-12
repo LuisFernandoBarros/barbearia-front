@@ -3,7 +3,7 @@ import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstra
 import { ToastrService } from 'ngx-toastr';
 
 import { Agendamento } from '../item-agendamento/agendamento';
-import { ModalService } from '../service/modal-service';
+import { ModalService } from '../../../../../shared/services/modal-service';
 import { AgendamentoDetalhesService } from './agendamento-detlahes-service';
 
 @Component({

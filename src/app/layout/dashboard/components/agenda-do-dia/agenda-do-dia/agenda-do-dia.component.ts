@@ -5,7 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { ToastrService } from 'ngx-toastr';
 import { interval, Subscription } from 'rxjs';
 import { Agendamento } from '../item-agendamento/agendamento';
-import { ModalService } from '../service/modal-service';
+import { ModalService } from '../../../../../shared/services/modal-service';
 import { AgendaDoDiaService } from './agenda-do-dia-service';
 
 @Component({

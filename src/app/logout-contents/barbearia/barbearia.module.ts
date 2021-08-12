@@ -7,6 +7,8 @@ import { ProntoComponent } from './agendamento/pronto/pronto.component';
 import { BarbeariaHeaderComponent } from './barbearia-header/barbearia-header.component';
 import { ProfissionaisListComponent } from './profissionais/profissionais-list/profissionais-list.component';
 import { ClipboardModule } from 'ngx-clipboard';
+import { ServicosListComponent } from './servicos/servicos-list/servicos-list.component';
+import { ServicoItemComponent } from './servicos/servico-item/servico-item.component';
 
 
 
@@ -16,7 +18,9 @@ import { ClipboardModule } from 'ngx-clipboard';
     AgendaComponent,
     ProntoComponent,
     BarbeariaHeaderComponent,
-    ProfissionaisListComponent
+    ProfissionaisListComponent,
+    ServicosListComponent,
+    ServicoItemComponent
   ],
   imports: [
     CommonModule,
