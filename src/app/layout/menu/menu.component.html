@@ -3,7 +3,7 @@
     <div class="col col-md-4">
 
         <div class="col-md-12 mt-2">
-            <img class="img-fluid user-avatar" src="assets/images/logo.png"/>
+            <img class="img-fluid user-avatar" src="assets/images/logo.png" />
         </div>
 
         <div class="row mt-4">
@@ -13,35 +13,21 @@
                     Agenda
                 </span>
             </div>
-            <div class="col mr-2 item-menu" [routerLink]="['/barbearia']">
-                <span class="menu-icon"><i class="fa fa-lg fa-home"></i></span>
-                <span class="center-text">
-                    Barbearia
-                </span>
-            </div>
-        </div>
-
-        <div class="row mt-2">
-            <div class="col mr-2 item-menu" [routerLink]="['/profissional']">
-                <span class="menu-icon"><i class="fa fa-lg fa-user"></i></span>
-                <span class="center-text">
-                    Profissionais
-                </span>
-            </div>
-            <div class="col mr-2 item-menu" [routerLink]="['/servicos']">
-                <span class="menu-icon"><i class="fa fa-lg fa-scissors"></i></span>
-                <span class="center-text">
-                    Serviços
-                </span>
-            </div>
-        </div>
-        
-        <div class="row mt-2">
-            <div class="col mr-2 item-menu" [routerLink]="['/config-agenda']">
+            <div class="col mr-2 item-menu" [routerLink]="['settings']">
                 <span class="menu-icon"><i class="fa fa-lg fa-wrench"></i></span>
                 <span class="center-text">
-                    Configurar
+                    Configurações
                 </span>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col mr-2 item-menu">
+                <a [href]="linkSuporte" target="_blank" class="link-suporte">
+                    <span class="menu-icon"><i class="fa fa-lg fa-comments"></i></span>
+                    <span class="center-text">
+                        Suporte
+                    </span>
+                </a>
             </div>
             <div class="col mr-2 item-menu-reverse" (click)="logout()">
                 <span class="menu-icon"><i class="fa fa-lg fa-sign-out"></i></span>
@@ -49,6 +35,6 @@
                     Sair
                 </span>
             </div>
-        </div>        
+        </div>
     </div>
 </div>

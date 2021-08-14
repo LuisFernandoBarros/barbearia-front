@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../shared';
 import { ConfiguracaoBarbeariaGuard } from '../shared/guard/configuracao-barbearia.guard';
 import { LayoutComponent } from './layout.component';
+import { MenuSettingsComponent } from './menu/menu-settings/menu-settings.component';
 import { MenuComponent } from './menu/menu.component';
 
 const routes: Routes = [
@@ -44,6 +45,10 @@ const routes: Routes = [
             {
                 path: 'menu',
                 component: MenuComponent
+            },
+            {
+                path: 'menu/settings',
+                component: MenuSettingsComponent
             },
         ]
     }

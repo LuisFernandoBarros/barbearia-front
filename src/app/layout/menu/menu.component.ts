@@ -24,4 +24,8 @@ export class MenuComponent implements OnInit {
     this.localStorageService.clear();
     this.router.navigate(['/login']);
   }
+
+  get linkSuporte (){
+    return "https://api.whatsapp.com/send?phone=555185375881&text=Ol%C3%A1!%20Preciso%20de%20ajuda."
+  }
 }
