@@ -5,6 +5,7 @@ import { ConfiguracaoBarbeariaGuard } from '../shared/guard/configuracao-barbear
 import { LayoutComponent } from './layout.component';
 import { MenuSettingsComponent } from './menu/menu-settings/menu-settings.component';
 import { MenuComponent } from './menu/menu.component';
+import { CadastroSenhaComponent } from './setttings/cadastro-senha/cadastro-senha.component';
 
 const routes: Routes = [
     {
@@ -49,6 +50,10 @@ const routes: Routes = [
             {
                 path: 'menu/settings',
                 component: MenuSettingsComponent
+            },
+            {
+                path: 'trocar-senha',
+                component: CadastroSenhaComponent
             },
         ]
     }
