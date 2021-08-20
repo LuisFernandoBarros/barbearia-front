@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AgendaStepsComponent } from './barbearia/agendamento/agenda-steps/agenda-steps.component';
 import { AgendaComponent } from './barbearia/agendamento/agenda/agenda.component';
 import { ProfissionaisListComponent } from './barbearia/profissionais/profissionais-list/profissionais-list.component';
 import { ServicosListComponent } from './barbearia/servicos/servicos-list/servicos-list.component';
@@ -19,6 +20,11 @@ const routes: Routes = [
     {
         path: 'barbearia/servicos/:id',
         component: ServicosListComponent
+    },
+    {
+
+        path: 'barbearia/agendamento-steps/:id',
+        component: AgendaStepsComponent
     }
 ];
 

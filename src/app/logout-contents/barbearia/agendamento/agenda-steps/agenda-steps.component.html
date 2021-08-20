@@ -1,0 +1,87 @@
+<div class="row">
+    <div class="col-md-12 col-md-offset-3">
+
+        <!-- progressbar -->
+        <!-- <ul id="progressbar">
+            <li [ngClass]="step>=1 ? 'active ' : 'inactive'">Personal Details</li>
+            <li [ngClass]="step>=2 ? 'active' : 'inactive'">Social Profiles</li>
+            <li [ngClass]="step==3 ? 'active' : 'inactive'">Account Setup</li>
+        </ul>-->
+
+        <!-- IDENTIFICACAO -->
+        <form [formGroup]="identificacao" id="msform">
+            <fieldset *ngIf="step == 1">
+                <h2 class="fs-title">Identificação</h2>
+                <input type="text" formControlName="nome" placeholder="Seu nome"
+                    class="form-control ng-untouched ng-pristine ng-valid mb-3" />
+
+                <input type="text" formControlName="email" name="email" placeholder="Seu e-mail"
+                    class="form-control ng-untouched ng-pristine ng-valid mb-3" />
+
+                <input type="text" formControlName="telefone" name="phone" placeholder="Seu telefone"
+                    class="form-control ng-untouched ng-pristine ng-valid mb-3" />
+
+                <input (click)="next()" type="button" name="next" class="next action-button" value="Next" />
+            </fieldset>
+        </form>
+
+        <!-- SELECIONE BARBEIRO/SERVICO -->
+        <form [formGroup]="servico" id="msform">
+            <fieldset *ngIf="step == 2">
+                <h2 class="fs-title">SERVIÇO</h2>
+
+
+                <select class="form-control input-underline input-lg placeholder mb-3" formControlName="profissonal"
+                    (change)="onChangeProfissional()">
+                    <option value="" disabled selected>Selecione um barbeiro</option>
+                    <option [ngValue]="profissonal.id" class="dropdown-item"
+                        *ngFor="let profissonal of barbearia.profissionais">
+                        {{profissonal.nome}}</option>
+                </select>
+
+                <select class="form-control input-underline input-lg placeholder mb-3" formControlName="servico"
+                    (change)="onChangeServico()">
+                    <option value="" disabled selected>Selecione um Serviço</option>
+                    <option [ngValue]="servico.id" class="dropdown-item" *ngFor="let servico of servicos">
+                        {{servico.descricao}} ({{ servico.valor | currency:'R$ ' }})</option>
+                </select>
+
+                <input (click)="previous()" type="button" name="previous" class="previous action-button-previous"
+                    value="Previous" />
+                <input (click)="next()" type="button" name="next" class="next action-button" value="Next" />
+            </fieldset>
+        </form>
+
+
+
+        <!-- SELECIONE HORARIO -->
+        <form [formGroup]="horario" id="msform">
+            <fieldset *ngIf="step == 3">
+                <h2 class="fs-title">HORÁRIO</h2>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+
+
+                <input type="text" placeholder="Selecione uma data" formControlName="data"
+                    class="form-control input-underline input-lg placeholder" onfocus="(this.type = 'date')"
+                    (change)="onChangeData()" />
+
+                <select class="form-control input-underline input-lg placeholder" formControlName="horario">
+                    <option value="" disabled selected>Selecione um Horário</option>
+                    <option [ngValue]="horario" class="dropdown-item" *ngFor="let horario of horarios">
+                        {{horario | mask: '00:00'}}</option>
+                </select>
+
+
+                <input (click)="previous()" type="button" name="previous" class="previous action-button-previous"
+                    value="Previous" />
+                <input (click)="submit()" type="submit" name="submit" class="submit action-button" value="Submit" />
+            </fieldset>
+        </form>
+    </div>
+</div>

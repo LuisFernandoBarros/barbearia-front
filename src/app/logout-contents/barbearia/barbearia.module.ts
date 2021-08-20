@@ -9,6 +9,7 @@ import { ProfissionaisListComponent } from './profissionais/profissionais-list/p
 import { ClipboardModule } from 'ngx-clipboard';
 import { ServicosListComponent } from './servicos/servicos-list/servicos-list.component';
 import { ServicoItemComponent } from './servicos/servico-item/servico-item.component';
+import { AgendaStepsComponent } from './agendamento/agenda-steps/agenda-steps.component';
 
 
 
@@ -20,7 +21,8 @@ import { ServicoItemComponent } from './servicos/servico-item/servico-item.compo
     BarbeariaHeaderComponent,
     ProfissionaisListComponent,
     ServicosListComponent,
-    ServicoItemComponent
+    ServicoItemComponent,
+    AgendaStepsComponent
   ],
   imports: [
     CommonModule,
