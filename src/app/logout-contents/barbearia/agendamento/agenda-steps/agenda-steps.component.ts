@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Servico } from '../../../../layout/setttings/cadastro-servicos/servico';
@@ -6,6 +6,9 @@ import { Barbearia } from '../../../../layout/setttings/cadastro-barbearia/barbe
 import { BarbeariaService } from '../../barbearia.service';
 import { AgendamentoService } from '../agendamento.service';
 import { ToastrService } from 'ngx-toastr';
+import { Options } from 'ngx-animating-datepicker';
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-agenda-steps',
@@ -24,19 +27,36 @@ export class AgendaStepsComponent implements OnInit {
   barbearia: Barbearia
   servicos: Array<Servico>;
   horarios: Array<string>;
+  dates: Date;
+
+  // https://github.com/koenz/angular-datepicker
+  datepickerOptions: Options = {
+    selectMultiple: false, // Select multiple dates
+    closeOnSelect: false, // Close datepicker when date(s) selected
+    animationSpeed: 400, // Animation speed in ms
+    easing: 'ease-in', // Easing type string
+    hideRestDays: false, // Hide the rest days
+    disableRestDays: true, // Disable the click on rest days
+    hideNavigation: false, // Hide the navigation
+    range: false, // Use range functionality
+    currentDate: new Date(), // Tne current displayed date (month, year)
+    timeoutBeforeClosing: 5000, // The timeout / delay before closing
+    weekdayFormat: 'short', // "narrow", "short", "long"
+    weekStart: 'monday', // Set the week start day,
+  };
+
   constructor(private formBuilder: FormBuilder,
     private activedRoute: ActivatedRoute,
     private barbeariaService: BarbeariaService,
     private service: AgendamentoService,
     private toastService: ToastrService) { }
 
-
   ngOnInit() {
+    moment.locale('pt-BR');
 
     this.activedRoute.params.subscribe(
       (param: any) => { this.getProfissionais(param['id']) }
     )
-
 
     this.identificacao = this.formBuilder.group({
       nome: ['', Validators.required],
@@ -78,7 +98,7 @@ export class AgendaStepsComponent implements OnInit {
   }
 
   onChangeData() {
-    let data = this.horario.value['data'];
+    let data = moment(this.dates[0]).format('YYYY-MM-DD');
     let idProfissional = this.servico.value['profissonal'];
     let isServico = this.servico.value['servico'];
     this.service.getHorarios(idProfissional, data, isServico).subscribe(
@@ -96,6 +116,7 @@ export class AgendaStepsComponent implements OnInit {
   get personal() { return this.identificacao.controls; }
   get education() { return this.horario.controls; }
   get address() { return this.servico.controls; }
+
   next() {
     /*if (this.step == 1) {
       this.personal_step = true;
@@ -126,7 +147,7 @@ export class AgendaStepsComponent implements OnInit {
 
 
     const toSave = {
-      data: this.horario.value['data'],
+      data: moment(this.dates[0]).format('YYYY-MM-DD'),
       horario: this.horario.value['horario'],
       profissional: this.servico.value["profissonal"],
       servico: this.servico.value["servico"],

@@ -10,6 +10,7 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { ServicosListComponent } from './servicos/servicos-list/servicos-list.component';
 import { ServicoItemComponent } from './servicos/servico-item/servico-item.component';
 import { AgendaStepsComponent } from './agendamento/agenda-steps/agenda-steps.component';
+import { AaDatepickerModule } from 'ngx-animating-datepicker';
 
 
 
@@ -29,7 +30,8 @@ import { AgendaStepsComponent } from './agendamento/agenda-steps/agenda-steps.co
     FormsModule,
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
-    ClipboardModule
+    ClipboardModule,
+    AaDatepickerModule
   ]
 })
 export class BarbeariaModule { }
