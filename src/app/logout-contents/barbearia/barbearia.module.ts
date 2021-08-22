@@ -11,6 +11,7 @@ import { ServicosListComponent } from './servicos/servicos-list/servicos-list.co
 import { ServicoItemComponent } from './servicos/servico-item/servico-item.component';
 import { AgendaStepsComponent } from './agendamento/agenda-steps/agenda-steps.component';
 import { AaDatepickerModule } from 'ngx-animating-datepicker';
+import { SharedModule } from '../../shared/shared.module';
 
 
 
@@ -31,7 +32,8 @@ import { AaDatepickerModule } from 'ngx-animating-datepicker';
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
     ClipboardModule,
-    AaDatepickerModule
+    AaDatepickerModule,
+    SharedModule
   ]
 })
 export class BarbeariaModule { }

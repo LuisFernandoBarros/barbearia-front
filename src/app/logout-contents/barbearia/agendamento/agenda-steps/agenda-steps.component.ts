@@ -19,15 +19,17 @@ export class AgendaStepsComponent implements OnInit {
 
   identificacao!: FormGroup;
   servico!: FormGroup;
-  horario!: FormGroup;
   personal_step = false;
   address_step = false;
   education_step = false;
   step = 1;
   barbearia: Barbearia
   servicos: Array<Servico>;
-  horarios: Array<string>;
   dates: Date;
+  horarioSelected: string
+  horarioWtihClasses = [];
+  isServicoEnable = false;
+  isSalvandoAgendamento = false;
 
   // https://github.com/koenz/angular-datepicker
   datepickerOptions: Options = {
@@ -60,17 +62,20 @@ export class AgendaStepsComponent implements OnInit {
 
     this.identificacao = this.formBuilder.group({
       nome: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       telefone: ['', Validators.required]
     });
     this.servico = this.formBuilder.group({
       profissonal: ['', [Validators.required]],
       servico: ['', [Validators.required]],
     });
-    this.horario = this.formBuilder.group({
-      data: ['', [Validators.required]],
-      horario: ['', [Validators.required]],
-    });
+  }
+
+  get isValidHorario() {
+    return this.dates != undefined &&
+      this.dates[0] != null &&
+      this.horarioSelected != null &&
+      this.horarioSelected != undefined;
   }
 
   getProfissionais(barbeariaId: string) {
@@ -86,69 +91,55 @@ export class AgendaStepsComponent implements OnInit {
     this.service.getServicos(profissionalSelected).subscribe(
       (resp) => {
         this.servicos = resp;
+        this.isServicoEnable = true;
       }
     )
   }
 
-  onChangeServico(): void {
-    this.horario.patchValue({
-      data: [''],
-      horario: ['']
-    });
-  }
-
   onChangeData() {
+    this.horarioWtihClasses = [];
     let data = moment(this.dates[0]).format('YYYY-MM-DD');
     let idProfissional = this.servico.value['profissonal'];
-    let isServico = this.servico.value['servico'];
-    this.service.getHorarios(idProfissional, data, isServico).subscribe(
+    let idServico = this.servico.value['servico'];
+    this.service.getHorarios(idProfissional, data, idServico).subscribe(
       (resp) => {
         if (resp.length == 0) {
           this.toastService.error("Sem horários disponíves. Selecione outra data.");
         } else {
-          this.horarios = resp;
+          resp.forEach(horario => {
+            this.horarioWtihClasses.push({ horario: horario, classe: "" })
+          });
         }
       }
     )
   }
 
-
-  get personal() { return this.identificacao.controls; }
-  get education() { return this.horario.controls; }
-  get address() { return this.servico.controls; }
+  
+  onChangeHorario(horarioSelected: string) {
+    this.horarioWtihClasses.forEach(it => {
+      if (it.horario != horarioSelected) {
+        it.classe = "horario-disabled"
+      } else {
+        it.classe = "";
+      }
+    });
+  }
 
   next() {
-    /*if (this.step == 1) {
-      this.personal_step = true;
-      if (this.identificacao.invalid) { return }
-      this.step++
-    }
-    if (this.step == 2) {
-      this.address_step = true;
-      if (this.servico.invalid) { return }
-      this.step++;
-    }*/
     this.step++;
   }
   previous() {
-    this.step--
-    /*if (this.step == 1) {
-      this.personal_step = false;
-    }
-    if (this.step == 2) {
-      this.education_step = false;
-    }*/
+    this.dates = undefined;
+    this.horarioSelected = undefined;
+    this.step--;
   }
-  submit() {
-    if (this.step == 3) {
-      //this.education_step = true;
-      if (this.horario.invalid) { return }
-    }
 
+  submit() {
+    this.isSalvandoAgendamento = true;
 
     const toSave = {
       data: moment(this.dates[0]).format('YYYY-MM-DD'),
-      horario: this.horario.value['horario'],
+      horario: this.horarioSelected,
       profissional: this.servico.value["profissonal"],
       servico: this.servico.value["servico"],
       nome: this.identificacao.value["nome"],
@@ -158,9 +149,4 @@ export class AgendaStepsComponent implements OnInit {
 
     console.log(toSave);
   }
-
-
-
-
-
 }
