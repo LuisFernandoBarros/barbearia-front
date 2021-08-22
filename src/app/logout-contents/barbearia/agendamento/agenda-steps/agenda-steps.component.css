@@ -1,3 +1,9 @@
+.page{
+    position: absolute; 
+    height: 100%;
+    width: 100%;
+}
+
 /*form styles*/
 #msform {
     text-align: center;
@@ -5,14 +11,14 @@
     margin-top: 30px;
 }
 #msform fieldset {
-    background: white;
+    background: #FFF;
     border: 0 none;
     border-radius: 0px;
-    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.4);
+    /*box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.4);*/
     padding: 20px 30px;
-    box-sizing: border-box;
-    width: 98%;
-    margin: 0 1% 0 1%;
+    /*box-sizing: border-box;*/
+    width: 100%;
+    margin: 0 0% 0 0%;
     /*stacking fieldsets above each other*/
     position: relative;
 }
@@ -36,7 +42,7 @@
     -moz-box-shadow: none !important;
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
-    border: 1px solid #ee0979;
+    border: 1px solid #FAB927;
     outline-width: 0;
     transition: All 0.5s ease-in;
     -webkit-transition: All 0.5s ease-in;
@@ -46,7 +52,7 @@
 /*buttons*/
 #msform .action-button {
     width: 100px;
-    background: #ee0979;
+    background: #FAB927;
     font-weight: bold;
     color: white;
     border: 0 none;
@@ -56,7 +62,7 @@
     margin: 10px 5px;
 }
 #msform .action-button:hover, #msform .action-button:focus {
-    box-shadow: 0 0 0 2px white, 0 0 0 3px #ee0979;
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #FAB927;
 }
 #msform .action-button-previous {
     width: 100px;
@@ -70,13 +76,13 @@
     margin: 10px 5px;
 }
 #msform .action-button-previous:hover, #msform .action-button-previous:focus {
-    box-shadow: 0 0 0 2px white, 0 0 0 3px #C5C5F1;
+    box-shadow: 0 0 0 0px white, 0 0 0 0px #C5C5F1;
 }
 /*headings*/
 .fs-title {
     font-size: 18px;
     text-transform: uppercase;
-    color: #2C3E50;
+    color: #666;
     margin-bottom: 10px;
     letter-spacing: 2px;
     font-weight: bold;
@@ -88,7 +94,7 @@
     margin-bottom: 20px;
 }
 .horario-disabled{
-    background-color: #ee0979;
+    background-color: #ddd;
 }
 /*progressbar*/
 #progressbar {
