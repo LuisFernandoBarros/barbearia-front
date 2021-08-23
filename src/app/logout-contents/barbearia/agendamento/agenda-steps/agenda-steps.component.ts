@@ -114,8 +114,9 @@ export class AgendaStepsComponent implements OnInit {
     )
   }
 
-  
+
   onChangeHorario(horarioSelected: string) {
+    this.horarioSelected = horarioSelected;
     this.horarioWtihClasses.forEach(it => {
       if (it.horario != horarioSelected) {
         it.classe = "horario-disabled"
@@ -131,6 +132,7 @@ export class AgendaStepsComponent implements OnInit {
   previous() {
     this.dates = undefined;
     this.horarioSelected = undefined;
+    this.horarioWtihClasses = [];
     this.step--;
   }
 
