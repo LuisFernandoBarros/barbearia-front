@@ -8,6 +8,8 @@ import { AgendamentoService } from '../agendamento.service';
 import { ToastrService } from 'ngx-toastr';
 import { Options } from 'ngx-animating-datepicker';
 import * as moment from 'moment';
+import { ExtractMessageService } from '../../../../shared/services/extract-message.service';
+import { MSG_PADRAO } from '../../../../shared/services/msg-padrao.enum';
 
 
 @Component({
@@ -30,6 +32,7 @@ export class AgendaStepsComponent implements OnInit {
   horarioWtihClasses = [];
   isServicoEnable = false;
   isSalvandoAgendamento = false;
+  isAgendado = false;
 
   // https://github.com/koenz/angular-datepicker
   datepickerOptions: Options = {
@@ -51,7 +54,8 @@ export class AgendaStepsComponent implements OnInit {
     private activedRoute: ActivatedRoute,
     private barbeariaService: BarbeariaService,
     private service: AgendamentoService,
-    private toastService: ToastrService) { }
+    private toastService: ToastrService,
+    private extractMsgService: ExtractMessageService) { }
 
   ngOnInit() {
     moment.locale('pt-BR');
@@ -110,6 +114,9 @@ export class AgendaStepsComponent implements OnInit {
             this.horarioWtihClasses.push({ horario: horario, classe: "" })
           });
         }
+      },
+      (err) => {
+        this.toastService.error(this.extractMsgService.extractMessageFromError(err, MSG_PADRAO.ERROR_SERVER))
       }
     )
   }
@@ -136,6 +143,11 @@ export class AgendaStepsComponent implements OnInit {
     this.step--;
   }
 
+  onAgendarNovamente(){
+    this.isAgendado = false;
+    this.step = 1;    
+  }
+
   submit() {
     this.isSalvandoAgendamento = true;
 
@@ -149,6 +161,18 @@ export class AgendaStepsComponent implements OnInit {
       //email: this.identificacao.value["email"], //AINDA NAO SALVA BANCO
     }
 
-    console.log(toSave);
+    this.service.save(toSave).subscribe(
+      (resp) => {
+        this.toastService.success("Agendando com sucesso! Aguardamos você, obrigado.");        
+        this.dates = undefined;
+        this.horarioSelected = undefined;
+        this.horarioWtihClasses = [];
+        this.isAgendado = true;
+        this.isSalvandoAgendamento = false;
+      },
+      (err) => {
+        this.toastService.error("Ocorreu um erro, tente mais tarde!");
+        this.isSalvandoAgendamento = false;
+      });
   }
 }

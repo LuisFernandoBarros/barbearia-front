@@ -1,5 +1,4 @@
 .page {
-    position: absolute;
     height: 100%;
     width: 100%;
 }
@@ -8,6 +7,7 @@
 #msform {
     text-align: center;
     position: relative;
+    background: #000;
 }
 #msform fieldset {
     background: #fff;
@@ -50,7 +50,8 @@
     -o-transition: All 0.5s ease-in;
 }
 /*buttons*/
-#msform .action-button {
+/*#msform .action-button {*/
+.action-button {
     width: 100px;
     background: #fab927;
     font-weight: bold;
@@ -159,7 +160,8 @@
     background: burlywood;
     color: #000;
 }
-fieldset {
+/*fieldset {*/
+.main-background {
     /* for chrome and safari*/
     -webkit-animation-duration: 0.25ms;
     -webkit-animation-name: slidein;

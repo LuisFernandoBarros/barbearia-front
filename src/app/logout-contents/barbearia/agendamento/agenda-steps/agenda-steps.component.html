@@ -1,7 +1,7 @@
 <app-barbearia-header [barbearia]="barbearia"></app-barbearia-header>
 <div>
     <div class="page" style="background-color: black;">
-        <div class="col d-flex justify-content-center">
+        <div class="col d-flex justify-content-center main-background" style="background-color: #FFF;">
 
             <!-- progressbar -->
             <!-- <ul id="progressbar">
@@ -12,7 +12,7 @@
 
             <!-- IDENTIFICACAO -->
             <form [formGroup]="identificacao" id="msform">
-                <fieldset *ngIf="step == 1">
+                <fieldset *ngIf="step == 1 && !isAgendado">
                     <h2 class="fs-title">IDENTIFICAÇÃO</h2>
                     <input type="text" formControlName="nome" placeholder="Seu nome"
                         class="form-control ng-untouched ng-pristine ng-valid mt-3" maxlength="100" />
@@ -34,7 +34,7 @@
 
             <!-- SELECIONE BARBEIRO/SERVICO -->
             <form [formGroup]="servico" id="msform">
-                <fieldset *ngIf="step == 2">
+                <fieldset *ngIf="step == 2 && !isAgendado">
                     <h2 class="fs-title">SERVIÇO</h2>
 
 
@@ -45,7 +45,7 @@
                             *ngFor="let profissonal of barbearia.profissionais">
                             {{profissonal.nome}}</option>
                     </select>
-                    
+
                     <h6> Selecione um horário </h6>
                     <select class="form-control input-underline input-lg mb-3" formControlName="servico"
                         *ngIf="isServicoEnable">
@@ -68,21 +68,22 @@
 
             <!-- SELECIONE HORARIO -->
             <form id="msform">
-                <fieldset *ngIf="step == 3">
+                <fieldset *ngIf="step == 3 && !isAgendado">
                     <h2 class="fs-title">HORÁRIO</h2>
 
                     <aa-animatepicker [options]="datepickerOptions" language="pt-BR" [(selectedDates)]="dates"
                         (click)="onChangeData()">
                     </aa-animatepicker>
 
-
-                    <div class="mt-3">
-                        <h6 *ngIf="horarioWtihClasses.length > 0">Selecione um horário</h6>
-                        <span *ngFor="let horario of horarioWtihClasses"
-                            class="badge badge-warning m-1 p-3 {{horario.classe}}"
-                            (click)="onChangeHorario(horario.horario)">
-                            {{horario.horario | mask: '00:00'}}
-                        </span>
+                    <div class="row justify-content-md-center">
+                        <div class="mt-3 col-sm-6">
+                            <h6 *ngIf="horarioWtihClasses.length > 0">Selecione um horário</h6>
+                            <span *ngFor="let horario of horarioWtihClasses"
+                                class="badge badge-warning m-1 p-3 {{horario.classe}}"
+                                (click)="onChangeHorario(horario.horario)">
+                                {{horario.horario | mask: '00:00'}}
+                            </span>
+                        </div>
                     </div>
 
                     <button (click)="previous()" type="button" name="previous" class="previous action-button-previous"
@@ -97,6 +98,18 @@
                     </button>
                 </fieldset>
             </form>
+
+            <!-- AGENDADO COM SUCESSO -->
+            <div *ngIf="isAgendado" style="background-color: #FFF; width: 100%;" class="p-3 text-center">
+                <h2 class="fs-title">AGENDADO</h2>
+                <i class="fa fa-3x fa-check-circle" aria-hidden="true" style="color:forestgreen;"></i>
+                <div class="mt-3">
+                    <h6>Obrigado!</h6>
+                </div>
+                <button (click)="onAgendarNovamente()" class="submit action-button">
+                    Agendar novamente
+                </button>
+            </div>
         </div>
     </div>
 </div>
