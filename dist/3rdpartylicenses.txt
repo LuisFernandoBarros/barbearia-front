@@ -220,6 +220,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 ng2-charts
 ISC
 
+ngx-animating-datepicker
+MIT
+
 ngx-bootstrap
 MIT
 The MIT License (MIT)
