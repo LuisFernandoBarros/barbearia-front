@@ -158,7 +158,7 @@ export class AgendaStepsComponent implements OnInit {
       servico: this.servico.value["servico"],
       nome: this.identificacao.value["nome"],
       telefone: this.identificacao.value["telefone"],
-      //email: this.identificacao.value["email"], //AINDA NAO SALVA BANCO
+      email: this.identificacao.value["email"],
     }
 
     this.service.save(toSave).subscribe(
