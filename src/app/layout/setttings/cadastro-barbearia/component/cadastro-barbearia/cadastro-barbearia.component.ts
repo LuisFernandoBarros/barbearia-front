@@ -151,7 +151,7 @@ export class CadastroBarbeariaComponent implements OnInit {
       return "Primeiro cadastre a barbearia para gerar o link";
     }
     //http://localhost:4200/#/logout-contents/barbearia/agendamento/c51ce410c124a10e0db5e4b97fc2af39
-    return `${environment.DOMINIO}/#/logout-contents/barbearia/agendamento/${this.barbearia.linkAgendamento}`;
+    return `${environment.DOMINIO}/#/logout-contents/barbearia/agendamento-steps/${this.barbearia.linkAgendamento}`;
   }
 
   get urlLogo(): string {
