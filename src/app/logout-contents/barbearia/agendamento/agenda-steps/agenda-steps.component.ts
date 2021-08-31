@@ -169,6 +169,7 @@ export class AgendaStepsComponent implements OnInit {
         this.horarioWtihClasses = [];
         this.isAgendado = true;
         this.isSalvandoAgendamento = false;
+        window.scroll(0,0);
       },
       (err) => {
         this.toastService.error("Ocorreu um erro, tente mais tarde!");
