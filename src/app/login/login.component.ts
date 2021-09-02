@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
                 (resp) => {                    
                     this.toastService.info("Bem vindo!");
                     this.localStoreService.setProfissional(resp);
-                    this.router.navigate(['dashboard']);
+                    this.router.navigate(['agenda']);
                     this.isLoading = false;
                 },
                 (err) => {

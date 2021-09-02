@@ -91,7 +91,7 @@ export class CadastroBarbeariaComponent implements OnInit {
         .subscribe(resp => {
           this.toastr.success(MSG_PADRAO.SAVE_SUCCESS);
           this.localStorageService.removeConfig("CADASTRAR_BARBEARIA");
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/agenda']);
         },
           (err) => { this.toastr.error(this.extractService.extractMessageFromError((err), MSG_PADRAO.ERROR_SERVER)) });
     } else {

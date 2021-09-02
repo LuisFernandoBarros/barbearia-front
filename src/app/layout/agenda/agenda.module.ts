@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { NgbAlertModule, NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedPipesModule, StatModule } from '../../shared';
 
-import { DashboardRoutingModule } from './dashboard-routing.module';
-import { DashboardComponent } from './dashboard.component';
+import { AgendaRoutingModule } from './agenda-routing.module';
+import { AgendaComponent } from './agenda.component';
 import { AgendaDoDiaComponent } from './components/agenda-do-dia/agenda-do-dia/agenda-do-dia.component';
 import { ItemAgendamentoComponent } from './components/agenda-do-dia/item-agendamento/item-agendamento.component';
 import { AgendamentoDetalhesComponent } from './components/agenda-do-dia/agendamento-detalhes/agendamento-detalhes.component';
@@ -15,15 +15,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         CommonModule, 
         NgbCarouselModule, 
         NgbAlertModule, 
-        DashboardRoutingModule, 
+        AgendaRoutingModule, 
         StatModule, 
         SharedPipesModule,
         FormsModule,
         ReactiveFormsModule,
     ],
-    declarations: [DashboardComponent, AgendaDoDiaComponent, ItemAgendamentoComponent, AgendamentoDetalhesComponent],
+    declarations: [AgendaComponent, AgendaDoDiaComponent, ItemAgendamentoComponent, AgendamentoDetalhesComponent],
     providers: [
         DatePipe
     ]
 })
-export class DashboardModule { }
+export class AgendaModule { }

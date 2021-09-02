@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 
 @Component({
-    selector: 'app-dashboard',
-    templateUrl: './dashboard.component.html',
-    styleUrls: ['./dashboard.component.scss'],
+    selector: 'app-agenda',
+    templateUrl: './agenda.component.html',
+    styleUrls: ['./agenda.component.scss'],
     animations: [routerTransition()]
 })
-export class DashboardComponent implements OnInit {
+export class AgendaComponent implements OnInit {
 
     constructor() { }
 
