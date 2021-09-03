@@ -1,0 +1,25 @@
+<div class="accordion">
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button {{showCollapse ? '': 'collapsed'}}" (click)="toogleCollapse()">
+                Top Serviços
+            </button>
+        </h2>
+        <div class="accordion-collapse collapse {{showCollapse ? 'show': ''}}">
+
+            <!-- SPINNER -->
+            <div class="text-center m-4" *ngIf="isLoading">
+                <div class="spinner-border text-warning"></div>
+            </div>
+
+            <div class="accordion-body m-0 p-0" *ngIf="!isLoading">
+                <div class="col col-sm-12">
+                    <canvas (chartClick)="chartClicked($event)" (chartHover)="chartHovered($event)"
+                        [chartType]="pieChartType" [data]="pieChartData" [labels]="pieChartLabels" baseChart
+                        height="250px" [options]="pieChartOptions">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

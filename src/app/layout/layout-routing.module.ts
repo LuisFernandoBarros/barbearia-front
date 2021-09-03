@@ -39,10 +39,15 @@ const routes: Routes = [
                 canActivate: [AuthGuard, ConfiguracaoBarbeariaGuard]
             },
             {
+                path: 'dashboard',
+                loadChildren: () => import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+                canActivate: [AuthGuard, ConfiguracaoBarbeariaGuard]
+            },
+            {
                 path: 'charts',
                 loadChildren: () => import('./charts/charts.module').then((m) => m.ChartsModule),
                 canActivate: [AuthGuard, ConfiguracaoBarbeariaGuard]
-            },            
+            },
             {
                 path: 'menu',
                 component: MenuComponent
