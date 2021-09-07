@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartOptions } from 'chart.js';
+import { DirectiveOptions, Options } from 'ngx-animating-datepicker';
+import * as moment from 'moment';
+import { DashboardService } from '../dashboard.service';
+import { ToastrService } from 'ngx-toastr';
+import { ExtractMessageService } from  '../../../shared/services/extract-message.service';
+import { MSG_PADRAO } from '../../../shared/services/msg-padrao.enum';
+
 
 @Component({
   selector: 'app-grafico-top-servicos',
@@ -9,24 +16,55 @@ import { ChartOptions } from 'chart.js';
 export class GraficoTopServicosComponent implements OnInit {
 
   public showCollapse = false;
+  public dataIni: Date[] = [new Date()];
+  public dataFim: Date[] = [new Date()];
+  public isLoading: boolean;
 
 
-  // Pie
-  public pieChartLabels: string[] = ['Download Sales', 'In-Store Sales', 'Mail Sales'];
-  public pieChartData: number[] = [300, 500, 100];
-  public pieChartType: string;
+  // https://github.com/koenz/angular-datepicker
+  directiveOptions: DirectiveOptions = {
+    appendToBody: true, // Append Datepicker to body
+    openDirection: 'bottom', // The direction it should open to
+    closeOnBlur: true,  // Close the datepicker onBlur
+    useAnimatePicker: true, // Use the regular datepicker or the animating one
+  };
+
+  datepickerOptions: Options = {
+    selectMultiple: false, // Select multiple dates
+    closeOnSelect: true, // Close datepicker when date(s) selected
+    animationSpeed: 400, // Animation speed in ms
+    easing: 'ease-in', // Easing type string
+    hideRestDays: false, // Hide the rest days
+    disableRestDays: true, // Disable the click on rest days
+    hideNavigation: false, // Hide the navigation
+    range: false, // Use range functionality
+    currentDate: new Date(), // Tne current displayed date (month, year)
+    timeoutBeforeClosing: 200, // The timeout / delay before closing
+    weekdayFormat: 'short', // "narrow", "short", "long"
+    weekStart: 'monday', // Set the week start day,
+  };
+
+
+  public labels: string[] = [];
+  public dados: number[] = [];
+  public tipo: string;
 
   public pieChartOptions: ChartOptions = {
     responsive: true,
-    legend: {
-      position: 'right',
+    legend: {      
+      position: 'bottom',
     }
-  };  
+  };
 
-  constructor() { }
+  constructor(private service: DashboardService,
+    private toastService: ToastrService,
+    private msgErrorService: ExtractMessageService) { }
 
   ngOnInit(): void {
-    this.pieChartType = 'pie';
+    moment.locale('pt-BR');
+    this.tipo = 'pie';
+    this.dataIni[0].setDate(this.dataIni[0].getDate()-30);
+    this.onSubmit();    
   }
 
   toogleCollapse() {
@@ -37,4 +75,30 @@ export class GraficoTopServicosComponent implements OnInit {
     };
   }
 
+  onSubmit() {
+    this.isLoading = true;
+    let dataIniString = moment(this.dataIni[0]).format('YYYY-MM-DD');
+    let dataFimString = moment(this.dataFim[0]).format('YYYY-MM-DD');
+    this.labels = [];
+    this.dados = [];    
+
+    this.service.getTopServicos(dataIniString, dataFimString).subscribe(
+      (resp) => {        
+        Object.keys(resp).forEach((key) => {          
+          this.labels.push(`${key} (${resp[key]})`);
+          this.dados.push(resp[key]);
+        }),
+        this.isLoading = false;
+      },
+      (err) => { 
+        this.toastService.error(this.msgErrorService.extractMessageFromError(err, MSG_PADRAO.ERROR_SERVER));        
+        this.isLoading = false;
+      }
+    )    
+  }
+
+  hasDados() {
+    return this.labels.length > 0 &&
+      this.dados.length > 0
+  }
 }

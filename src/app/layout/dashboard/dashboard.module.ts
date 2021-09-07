@@ -7,6 +7,7 @@ import { DashboardMenuComponent } from './dashboard-menu/dashboard-menu.componen
 import { GraficoTopServicosComponent } from './grafico-top-servicos/grafico-top-servicos.component';
 import { ChartsRoutingModule } from '../charts/charts-routing.module';
 import { ChartsModule as Ng2Charts } from 'ng2-charts';
+import { AaDatepickerModule } from 'ngx-animating-datepicker';
 
 @NgModule({
     imports: [
@@ -14,6 +15,7 @@ import { ChartsModule as Ng2Charts } from 'ng2-charts';
         DashboardRoutingModule,
         Ng2Charts, 
         ChartsRoutingModule,
+        AaDatepickerModule
     ],
     declarations: [
         DashboardMenuComponent,
