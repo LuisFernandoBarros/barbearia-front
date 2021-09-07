@@ -1,56 +1,46 @@
-<div class="accordion">
-    <div class="accordion-item">
-        <h2 class="accordion-header">
-            <button class="accordion-button {{showCollapse ? '': 'collapsed'}}" (click)="toogleCollapse()">
-                Serviços mais agendados
-            </button>
-        </h2>
-        <div class="accordion-collapse collapse {{showCollapse ? 'show': ''}}">
-
-            <div class="accordion-body m-0 p-0">
-                <div class="row m-1 mt-2">
-                    <div class="col-5">
-                        <label>Início</label>
-                        <input aaDatepicker="directiveOptions" [value]="dataIni | date: 'dd/MM/yyyy'"
-                            [(selectedDates)]="dataIni" [options]="datepickerOptions" language="pt-BR"
-                            class="form-control" />
-                    </div>
-                    <div class="col-7">
-                        <div class="row">
-                            <label>Fim</label>
-                            <div class="col-8">
-                                <input aaDatepicker="directiveOptions" [value]="dataFim | date: 'dd/MM/yyyy'"
-                                    [(selectedDates)]="dataFim" [options]="datepickerOptions" language="pt-BR"
-                                    class="form-control" />
-
-                            </div>
-                            <div class="col-4">
-                                <button (click)="onSubmit()" class="btn btn-secondary btn-sm" disabled="isLoading">
-                                    <i class="fa fa-fw fa-refresh"></i></button>
-                            </div>
-                        </div>
-                    </div>
+<div class="card-header">
+    Serviços mais agendados
+</div>
+<div class="card-body p-0">
+    <div class="row m-1 mt-2">
+        <div class="col-5">
+            <label>Início</label>
+            <input aaDatepicker="directiveOptions" [value]="dataIni | date: 'dd/MM/yyyy'" [(selectedDates)]="dataIni"
+                [options]="datepickerOptions" language="pt-BR" class="form-control" />
+        </div>
+        <div class="col-7">
+            <div class="row">
+                <label>Fim</label>
+                <div class="col-8">
+                    <input aaDatepicker="directiveOptions" [value]="dataFim | date: 'dd/MM/yyyy'"
+                        [(selectedDates)]="dataFim" [options]="datepickerOptions" language="pt-BR"
+                        class="form-control" />
 
                 </div>
-                <div class="row m-1 mt-3">
-                    <div class="col-12">
-
-                        <!-- SPINNER -->
-                        <div class="text-center m-4" *ngIf="isLoading">
-                            <div class="spinner-border text-warning"></div>
-                        </div>
-
-                        <div class="alert alert-info" role="alert" *ngIf="!hasDados() && !isLoading">
-                            Sem dados para o período selecionado.
-                        </div>
-
-
-                        <canvas *ngIf="hasDados() && !isLoading" [chartType]="tipo" [data]="dados" [labels]="labels" baseChart
-                            height="200px" [options]="pieChartOptions">
-                        </canvas>
-                    </div>
+                <div class="col-4">
+                    <button (click)="onSubmit()" class="btn btn-secondary btn-sm" disabled="isLoading">
+                        <i class="fa fa-fw fa-refresh"></i></button>
                 </div>
             </div>
+        </div>
+
+    </div>
+    <div class="row m-1 mt-3">
+        <div class="col-12">
+
+            <!-- SPINNER -->
+            <div class="text-center m-4" *ngIf="isLoading">
+                <div class="spinner-border text-warning"></div>
+            </div>
+
+            <div class="alert alert-info" role="alert" *ngIf="!hasDados() && !isLoading">
+                Sem dados para o período selecionado.
+            </div>
+
+
+            <canvas *ngIf="hasDados() && !isLoading" [chartType]="tipo" [data]="dados" [labels]="labels" baseChart
+                height="200px" [options]="pieChartOptions">
+            </canvas>
         </div>
     </div>
 </div>
