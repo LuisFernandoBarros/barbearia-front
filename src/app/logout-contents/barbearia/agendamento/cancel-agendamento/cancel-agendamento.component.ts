@@ -89,4 +89,8 @@ export class CancelAgendamentoComponent implements OnInit {
       );
   }
 
+  trackById(agendamento: any): string {
+    return agendamento.id
+  }  
+
 }
