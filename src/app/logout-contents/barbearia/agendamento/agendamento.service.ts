@@ -32,4 +32,17 @@ export class AgendamentoService {
     save(body: Object) {
         return this.httpClient.post<AgendamentoAgendado>(`${this.baseUrl}/agendamento-cliente/novo`, JSON.stringify(body))
     };
+
+    cancelar(id: string, telefone: string) {
+        return this.httpClient.post<any>(`${this.baseUrl}/agendamento-cliente/cancelar/${id}`, JSON.stringify(telefone))
+    };
+
+    getByCelularCliente(celular: string) {
+        const params = new HttpParams()
+            .set('celular', celular);
+
+        return this.httpClient.get<Array<any>>(`${this.baseUrl}/agendamento-cliente`, {
+            params: params
+        });
+    };
 }

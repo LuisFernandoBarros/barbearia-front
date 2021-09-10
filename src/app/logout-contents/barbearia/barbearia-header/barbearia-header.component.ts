@@ -9,14 +9,17 @@ import { Barbearia } from '../../../layout/setttings/cadastro-barbearia/barbeari
 })
 export class BarbeariaHeaderComponent implements OnInit {
 
-  @Input() barbearia: Barbearia;
-
+  @Input() barbearia: Barbearia;  
   constructor(private logoService: ImageLogoService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
   }
 
   get urlLogo(): string {
-    return this.logoService.urlLogo(this.barbearia.id.toString());    
+    return this.logoService.urlLogo(this.barbearia.id.toString());
+  }
+
+  get isLoading(): boolean {
+    return this.barbearia == undefined;
   }
 }
