@@ -1,0 +1,28 @@
+$topnav-background-color: #000;
+
+ 
+.login-page {
+    position: absolute;    
+    background: $topnav-background-color;
+    text-align: center;
+    color: #fff;
+    
+    height: 100%;
+    width: 100%;
+
+    h1 {
+        font-weight: 300;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        font-size: 36px;
+
+        small {
+            color: rgba(255, 255, 255, 0.7);
+        }
+    }
+}
+
+.title{
+    font-size: 18px;
+    margin-bottom: 10px;
+}

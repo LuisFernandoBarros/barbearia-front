@@ -1,5 +1,6 @@
 import { ConfiguracaoProfissional } from "../../../shared/configuracao-profissional";
 import { Expediente } from "../cadastro-agenda/component/agenda-config/expediente";
+import { Servico } from "../cadastro-servicos/servico";
 
 export class Profissional {
     id: number;
@@ -9,8 +10,10 @@ export class Profissional {
     senha: string;
     telefone: string;
     expedientes: Array<Expediente>;
+    servicos: Array<Servico>
     configuracoesProfissional: Array<ConfiguracaoProfissional>;
-    constructor(id: number, nome: string, email: string, isDono: boolean, senha: string, telefone: string, expedientes: Array<Expediente>) {
+    constructor(id: number, nome: string, email: string, isDono: boolean, senha: string, telefone: string, expedientes: Array<Expediente>,
+        servicos: Array<Servico>) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -18,5 +21,6 @@ export class Profissional {
         this.senha = senha;
         this.telefone = telefone;
         this.expedientes = expedientes;
+        this.servicos = servicos;
     }
 }

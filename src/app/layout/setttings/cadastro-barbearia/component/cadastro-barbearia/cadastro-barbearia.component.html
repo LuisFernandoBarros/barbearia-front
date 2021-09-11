@@ -1,6 +1,14 @@
 <div class="container">
     <h4 class="text-muted mb-4">Minha Barbearia</h4>
-    <div class="row">
+
+    <!-- SPINNER -->
+    <div class="row" *ngIf="isLoading">
+        <div class="text-center m-4">
+            <div class="spinner-border text-warning"></div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="!isLoading">
         <div class="col col-sm-6">
             <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
                 <div class="card mb-3">
@@ -8,7 +16,7 @@
                         Editar Informações
                     </div>
                     <div class="card-body">
-                        <div class="form-group" *ngIf="!isLoading">
+                        <div class="form-group">
 
                             <div class="alert alert-primary" role="alert">
                                 Link agendamento:<br>
@@ -78,10 +86,25 @@
                     </div>
 
                 </div>
-                <div class="d-flex justify-content-center">
+                <div class="d-flex justify-content-center mb-4">
                     <button type="submit" class="btn btn-success btn-lg" [disabled]="!formulario.valid">Salvar</button>
                 </div>
             </form>
+        </div>
+
+        <div class="col col-sm-6">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Logo
+                </div>
+                <div class="card-body row justify-content-md-center">
+                    <div class="text-center mb-3">
+                        <img [src]="urlLogo" width="150px">
+                    </div>
+                    <app-imagem-upload [barbearia]="barbearia"></app-imagem-upload>
+
+                </div>
+            </div>
         </div>
     </div>
 </div>

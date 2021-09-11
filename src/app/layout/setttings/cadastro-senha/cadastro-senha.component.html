@@ -1,0 +1,40 @@
+<div class="container">
+    <h4 class="text-muted mb-4">Alterar Senha</h4>
+    <div class="row">
+        <div class="col col-sm-6">
+            <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Editar
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <!-- ID -->
+                            <label>Senha atual</label>
+                            <input type="password" class="form-control" formControlName="senhaAtual">
+                            <app-error-msg [control]="formulario.get('senhaAtual')" label="Senha atual">
+                            </app-error-msg>
+                        </div>
+                        <div class="form-group">
+                            <label>Nova Senha</label>
+                            <input type="password" class="form-control" formControlName="senhaNova">
+                            <app-error-msg [control]="formulario.get('senhaNova')" label="Senha"></app-error-msg>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Repita Nova senha</label>
+                            <input type="password" class="form-control" formControlName="senhaRepeat">
+                            <app-error-msg [control]="formulario.get('senhaRepeat')" label="Senha"></app-error-msg>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center mb-4">
+                    <button type="submit" class="btn btn-success btn-lg" [disabled]="!formulario.valid || isSaving">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+                            *ngIf="isSaving"></span>
+                        Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

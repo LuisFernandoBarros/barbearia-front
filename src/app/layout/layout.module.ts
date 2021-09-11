@@ -9,12 +9,30 @@ import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
 import { MenuComponent } from './menu/menu.component';
 import { SimpleHeaderComponent } from './components/simple-header/simple-header.component';
+import { MenuSettingsComponent } from './menu/menu-settings/menu-settings.component';
+import { CadastroSenhaComponent } from './setttings/cadastro-senha/cadastro-senha.component';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
+import { ChangePasswordService } from './setttings/cadastro-senha/change-password.service';
 
 @NgModule({
-    imports: [CommonModule, LayoutRoutingModule, TranslateModule, NgbDropdownModule],
-    declarations: [LayoutComponent, SidebarComponent, HeaderComponent, MenuComponent, SimpleHeaderComponent],
-    providers:[
-        
+    imports: [CommonModule,
+        LayoutRoutingModule, 
+        TranslateModule, 
+        NgbDropdownModule, 
+        SharedModule, 
+        ReactiveFormsModule],
+    declarations: [
+        LayoutComponent, 
+        SidebarComponent, 
+        HeaderComponent, 
+        MenuComponent, 
+        SimpleHeaderComponent, 
+        MenuSettingsComponent, 
+        CadastroSenhaComponent],
+    providers: [
+        FormBuilder,
+        ChangePasswordService
     ]
 })
-export class LayoutModule {}
+export class LayoutModule { }

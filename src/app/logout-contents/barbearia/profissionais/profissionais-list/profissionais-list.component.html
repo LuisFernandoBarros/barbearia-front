@@ -1,1 +1,22 @@
-<p>profissionais-list works!</p>
+<app-barbearia-header [barbearia]="barbearia" *ngIf="!isLoadingBarbearia"></app-barbearia-header>
+<div class="login-page" *ngIf="!isLoadingBarbearia">
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <div class="title">
+                Profissionais
+            </div>
+            <ul class="list-group"  *ngFor="let profissonal of barbearia.profissionais">
+                <li class="list-group-item mr-3 ml-3 mt-3"
+                    (cbOnSuccess)="phoneCopied($event)" ngxClipboard [cbContent]="profissonal.telefone">
+                    {{profissonal.nome}}
+                    <br>
+                    <span style="font-size: 12px">{{profissonal.telefone | mask: '(00) 00000-0*'}}</span>
+                    &nbsp;
+                    <span>
+                        <i class="fa fa-fw fa-copy"></i>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

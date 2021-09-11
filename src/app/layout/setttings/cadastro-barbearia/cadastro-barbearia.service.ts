@@ -21,4 +21,10 @@ export class CadastroBarbeariaService {
     get() {
         return this.httpClient.get<Barbearia>(`${this.baseUrl}/barbearia`);
     }
+
+    uploadImg(img: File, id: number) {
+        const formData = new FormData();
+        formData.append('file', img);
+        return this.httpClient.post<any>(`${this.baseUrl}/barbearia/${id}/upload-img`, formData);
+    }
 }

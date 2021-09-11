@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
 import { LocalStorageService } from '../.../../../../../../shared/services/local-storage.service';
 import { Router } from '@angular/router';
 import { environment } from '../../../../../../environments/environment';
+import { ImageLogoService } from '../../../../../shared/services/image-logo.service';
 
 @Component({
   selector: 'app-cadastro-barbearia',
@@ -33,7 +34,8 @@ export class CadastroBarbeariaComponent implements OnInit {
     private cepService: ConsultaCepService,
     private extractService: ExtractMessageService,
     private localStorageService: LocalStorageService,
-    private router: Router) { }
+    private router: Router,
+    private logoService: ImageLogoService) { }
 
   ngOnInit(): void {
 
@@ -89,7 +91,7 @@ export class CadastroBarbeariaComponent implements OnInit {
         .subscribe(resp => {
           this.toastr.success(MSG_PADRAO.SAVE_SUCCESS);
           this.localStorageService.removeConfig("CADASTRAR_BARBEARIA");
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/agenda']);
         },
           (err) => { this.toastr.error(this.extractService.extractMessageFromError((err), MSG_PADRAO.ERROR_SERVER)) });
     } else {
@@ -148,7 +150,11 @@ export class CadastroBarbeariaComponent implements OnInit {
     if (this.barbearia.linkAgendamento == null || this.barbearia.linkAgendamento.length <= 0) {
       return "Primeiro cadastre a barbearia para gerar o link";
     }
-    //http://localhost:4200/#/logout-contents/barbearia/MTM/agendamento
-    return `${environment.DOMINIO}/#/logout-contents/barbearia/${this.barbearia.linkAgendamento}/agendamento`;
+    //http://localhost:4200/#/logout-contents/barbearia/agendamento/c51ce410c124a10e0db5e4b97fc2af39
+    return `${environment.DOMINIO}/#/logout-contents/barbearia/agendamento-steps/${this.barbearia.linkAgendamento}`;
+  }
+
+  get urlLogo(): string {
+    return this.logoService.urlLogo(this.barbearia.id.toString());
   }
 }

@@ -20,5 +20,9 @@ export class AgendaConfigService {
     
     closeAtendimento(diaSemana: number, isToClose: boolean) {
         return this.httpClient.patch<any>(`${this.url}/close/${diaSemana}`, {isToClose});
-    };      
+    };
+    
+    saveEstenderAtendimento(diaSemana: number, estender: boolean) {
+        return this.httpClient.patch<any>(`${this.url}/estender-expediente/${diaSemana}`, {estender});
+    };     
 }

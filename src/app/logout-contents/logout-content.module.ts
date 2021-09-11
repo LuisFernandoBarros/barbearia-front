@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask';
 import { LogoutContentsRoutingModule } from './logout-contents-routing.module';
-import { BarbeariaComponent } from './barbearia/barbearia.component';
 import { BarbeariaModule } from './barbearia/barbearia.module';
 
 
@@ -11,7 +10,6 @@ import { BarbeariaModule } from './barbearia/barbearia.module';
 
 @NgModule({
   declarations: [    
-    BarbeariaComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,14 @@
+<form [formGroup]="uploadForm" (ngSubmit)="upload()" enctype="multipart/form-data">
+    <div class="col mb-2 text-center">
+        <img [src]="filePath" class="img-thumbnail" width="150px">
+    </div>
+    <div class="form-group">
+        <input type="file" class="form-control" id="file" formControlName="file" (change)="onImageChange($event)">
+        <div *ngIf="uf.file.touched && uf.file.invalid" class="alert alert-danger">
+            <div *ngIf="uf.file.errors.required">Uma imagem é obrigatório.</div>
+        </div>
+    </div>
+    <button class="btn btn-success" type="submit" [disabled]="!uploadForm.valid">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="isLoading"></span>
+        Salvar Logo</button>
+</form>

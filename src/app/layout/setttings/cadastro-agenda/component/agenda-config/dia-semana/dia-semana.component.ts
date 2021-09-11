@@ -71,4 +71,20 @@ export class DiaSemanaComponent implements OnInit {
       }
     );
   }
+
+  estenderExpediente(event){
+    this.isLoading = true;
+    let isEstenderExpediente = event.target.checked;
+    this.service.saveEstenderAtendimento(this.expediente.diaSemana, isEstenderExpediente).subscribe(
+      (resp) => {
+        this.expediente = resp;
+        this.toastService.success(MSG_PADRAO.SAVE_SUCCESS);
+        this.isLoading = false;
+      },
+      (err) => {
+        this.toastService.error(this.extractMsgService.extractMessageFromError(err, MSG_PADRAO.ERROR_SERVER));
+        this.isLoading = false;
+      }
+    );    
+  }
 }
