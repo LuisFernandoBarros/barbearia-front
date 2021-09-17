@@ -56,6 +56,7 @@ export class AgendaDoDiaComponent implements OnInit {
   }
 
   nextDay() {
+    this.agendamentos = [];
     const tomorrow = new Date(this.data);
     tomorrow.setDate(tomorrow.getDate() + 1);
     this.data = tomorrow;
@@ -63,6 +64,7 @@ export class AgendaDoDiaComponent implements OnInit {
   }
 
   previusDay() {
+    this.agendamentos = [];
     const yesterday = new Date(this.data);
     yesterday.setDate(yesterday.getDate() - 1);
     this.data = yesterday;
@@ -70,6 +72,7 @@ export class AgendaDoDiaComponent implements OnInit {
   }
 
   specificDay() {
+    this.agendamentos = [];
     const specificDate = new Date(this.dataAgenda);
     specificDate.setDate(specificDate.getDate() + 1);
     this.data = specificDate;
@@ -121,7 +124,9 @@ export class AgendaDoDiaComponent implements OnInit {
     return this.totalAgendamento > 0 && agendamentos.length > this.totalAgendamento;
   }
 
-  trackById(agendamento: Agendamento): string {
-    return agendamento.atendidoEm
+
+  // ESTE PRIMEIRO PARAMETRO É OBRIGATÓRIO, MESMO NAO USADO, (NAO APAGAR)
+  trackById(index: number, agendamento: Agendamento): number {    
+    return agendamento.id
   }
 }
