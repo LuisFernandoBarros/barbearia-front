@@ -1,5 +1,5 @@
 export const environment = {
     production: true,    
-    API: "https://sistema.barbeiroagenda.com.br:8050",    
-    DOMINIO: "https://sistema.barbeiroagenda.com.br"
+    API: "https://www.sistema.barbeiroagenda.com.br:8050",    
+    DOMINIO: "https://www.sistema.barbeiroagenda.com.br"
 };
