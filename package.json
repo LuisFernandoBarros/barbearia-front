@@ -3,8 +3,8 @@
   "version": "10.0.0",
   "license": "Apache",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
+    "ng": "ng",    
+    "start": "ng serve --ssl --ssl-key c:\\certificados\\localhost.key  --ssl-cert c:\\certificados\\localhost.crt",
     "build": "ng build --prod",
     "gitbuild": "ng build --prod --base-href /start-angular/SB-Admin-BS4-Angular-7/master/dist/",
     "test": "ng test",
