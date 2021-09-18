@@ -10,6 +10,9 @@ import { ItemAgendamentoComponent } from './components/agenda-do-dia/item-agenda
 import { AgendamentoDetalhesComponent } from './components/agenda-do-dia/agendamento-detalhes/agendamento-detalhes.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AgendamentoManualComponent } from './components/agenda-do-dia/agendamento-manual/agendamento-manual.component';
+import { SharedModule } from '../../shared/shared.module';
+import { NgxMaskModule } from 'ngx-mask';
+import { AaDatepickerModule } from 'ngx-animating-datepicker';
 
 @NgModule({
     imports: [
@@ -21,6 +24,9 @@ import { AgendamentoManualComponent } from './components/agenda-do-dia/agendamen
         SharedPipesModule,
         FormsModule,
         ReactiveFormsModule,
+        SharedModule,
+        NgxMaskModule.forRoot(),
+        AaDatepickerModule,
     ],
     declarations: [AgendaComponent, AgendaDoDiaComponent, ItemAgendamentoComponent, AgendamentoDetalhesComponent, AgendamentoManualComponent],
     providers: [
