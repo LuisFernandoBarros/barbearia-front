@@ -3,8 +3,8 @@
   "version": "10.0.0",
   "license": "Apache",
   "scripts": {
-    "ng": "ng",    
-    "start": "ng serve --ssl --ssl-key c:\\certificados\\localhost.key  --ssl-cert c:\\certificados\\localhost.crt",
+    "ng": "ng",
+    "start": "ng serve",
     "build": "ng build --prod",
     "gitbuild": "ng build --prod --base-href /start-angular/SB-Admin-BS4-Angular-7/master/dist/",
     "test": "ng test",
@@ -37,6 +37,7 @@
     "ngx-clipboard": "^14.0.1",
     "ngx-cookie-service": "^12.0.0",
     "ngx-mask": "^12.0.0",
+    "ngx-smart-popover": "^1.4.0",
     "ngx-toastr": "^14.0.0",
     "rxjs": "6.6.3",
     "tslib": "^2.0.0",

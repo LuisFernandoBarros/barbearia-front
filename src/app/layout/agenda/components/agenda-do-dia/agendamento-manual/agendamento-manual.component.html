@@ -1,0 +1,84 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row justify-content-between">
+                        <div class="col-10">
+                            Agendamento Manual
+                        </div>
+                        <div class="col-2">
+                            <!-- https://www.npmjs.com/package/ngx-smart-popover -->
+                            <span [popover]="myPopover">
+                                <i class="fa fa-fw fa-question-circle"></i>&nbsp;
+                            </span>
+                            <popover-content #myPopover placement="bottom" [animation]="true"
+                                [closeOnClickOutside]="true">
+                                Aqui você poderá inserir agendamentos manualmente.<br>
+                                É importante preencher corretamente as informações do cliente (nome, telefone e
+                                email).<br>
+                                <strong>Em breve</strong> você poderá gerar relatórios e otimizar o gerenciamento da sua
+                                barbearia com estas informações.
+                            </popover-content>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="card-body text-center">
+                    <span>Informações do Cliente</span>
+                    <form [formGroup]="form">
+                        <input type="text" formControlName="nome" placeholder="Nome"
+                            class="form-control ng-untouched ng-pristine ng-valid mt-3" maxlength="100" />
+                        <app-error-msg [control]="form.get('nome')" label="Nome"></app-error-msg>
+
+                        <input type="text" formControlName="email" name="email" placeholder="E-mail"
+                            class="form-control ng-untouched ng-pristine ng-valid mt-3" />
+                        <app-error-msg [control]="form.get('email')" label="Email"></app-error-msg>
+
+                        <input type="text" formControlName="telefone" name="telefone" placeholder="Telefone"
+                            class="form-control ng-untouched ng-pristine ng-valid mt-3" mask="(00) 0*" maxlength="20"
+                            minlength="11" />
+                        <app-error-msg [control]="form.get('telefone')" label="Telefone"></app-error-msg>
+
+                        <select class="form-control input-underline input-lg mt-3" formControlName="servico">
+                            <option value="" disabled selected>Serviço</option>
+                            <option [ngValue]="servico.id" class="dropdown-item" *ngFor="let servico of servicos">
+                                {{servico.descricao}} ({{ servico.valor | currency:'R$ ' }})</option>
+                        </select>
+                    </form>
+                </div>
+                <div class="col-12 text-center p-0">
+                    <div>
+                        <label>Data</label>
+                    </div>
+                    <aa-animatepicker [options]="datepickerOptions" language="pt-BR" [(selectedDates)]="dates"
+                        (click)="onChangeData()">
+                    </aa-animatepicker>
+
+                    <div class="row justify-content-md-center">
+                        <div class="col-12">
+                            <h6 class="fs-subtitle" *ngIf="horarioWtihClasses.length > 0">Selecione um horário
+                            </h6>
+                            <span *ngFor="let horario of horarioWtihClasses"
+                                class="badge badge-warning m-1 p-3 {{horario.classe}}"
+                                (click)="onChangeHorario(horario.horario)">
+                                {{horario.horario | mask: '00:00'}}
+                            </span>
+                        </div>
+                    </div>
+                    <a class="btn btn-light btn-lg" [routerLink]="['/agenda']">Voltar</a>
+                    &nbsp;&nbsp;
+                    <button type="submit" class="btn btn-success btn-lg mt-3 mb-3"
+                        [disabled]="!form.valid || horarioSelected==undefined" (click)="submit()">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"
+                            *ngIf="isSalvandoAgendamento"></span>
+                        Salvar</button>
+
+                </div>
+            </div>
+        </div>
+
+    </div>

@@ -45,4 +45,23 @@ export class AgendamentoService {
             params: params
         });
     };
+
+    getAllServicosByUserLogado() {
+        return this.httpClient.get<Array<Servico>>(`${this.baseUrl}/servicos`);
+    };
+
+    getEmptyHorariosByUserLogado(data: string, idServico: number): Observable<Array<string>> {
+
+        const params = new HttpParams()
+            .set('data', data)
+            .set('servico', idServico.toString());
+
+        return this.httpClient.get<Array<string>>(`${this.baseUrl}/profissional/horarios`, {
+            params: params
+        });
+    };
+
+    saveManualAgendamento(body: Object) {
+        return this.httpClient.post<AgendamentoAgendado>(`${this.baseUrl}/agendamento-cliente/novo`, JSON.stringify(body))
+    };    
 }
