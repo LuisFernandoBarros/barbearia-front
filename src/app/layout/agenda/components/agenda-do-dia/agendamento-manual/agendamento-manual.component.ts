@@ -118,7 +118,7 @@ export class AgendamentoManualComponent implements OnInit {
 
     this.service.saveManualAgendamento(toSave).subscribe(
       (resp) => {
-        this.toastService.success("Agendando com sucesso! Aguardamos você, obrigado.");
+        this.toastService.success(MSG_PADRAO.SAVE_SUCCESS);
         this.isSalvandoAgendamento = false;
         this.router.navigate(['/agenda']);
       },

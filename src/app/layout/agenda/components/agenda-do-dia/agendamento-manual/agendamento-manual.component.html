@@ -3,10 +3,32 @@
         <div class="col-sm-6 col-12">
             <div class="card">
                 <div class="card-header">
-                    Agendamento Manual
+                    <div class="row justify-content-between">
+                        <div class="col-10">
+                            Agendamento Manual
+                        </div>
+                        <div class="col-2">
+                            <!-- https://www.npmjs.com/package/ngx-smart-popover -->
+                            <span [popover]="myPopover">
+                                <i class="fa fa-fw fa-question-circle"></i>&nbsp;
+                            </span>
+                            <popover-content #myPopover placement="bottom" [animation]="true"
+                                [closeOnClickOutside]="true">
+                                Aqui você poderá inserir agendamentos manualmente.<br>
+                                É importante preencher corretamente as informações do cliente (nome, telefone e
+                                email).<br>
+                                <strong>Em breve</strong> você poderá gerar relatórios e otimizar o gerenciamento da sua
+                                barbearia com estas informações.
+                            </popover-content>
+                        </div>
+                    </div>
                 </div>
 
+
+
+
                 <div class="card-body text-center">
+                    <span>Informações do Cliente</span>
                     <form [formGroup]="form">
                         <input type="text" formControlName="nome" placeholder="Nome"
                             class="form-control ng-untouched ng-pristine ng-valid mt-3" maxlength="100" />
@@ -47,7 +69,8 @@
                             </span>
                         </div>
                     </div>
-
+                    <a class="btn btn-light btn-lg" [routerLink]="['/agenda']">Voltar</a>
+                    &nbsp;&nbsp;
                     <button type="submit" class="btn btn-success btn-lg mt-3 mb-3"
                         [disabled]="!form.valid || horarioSelected==undefined" (click)="submit()">
                         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"

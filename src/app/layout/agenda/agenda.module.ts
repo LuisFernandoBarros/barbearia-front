@@ -13,6 +13,7 @@ import { AgendamentoManualComponent } from './components/agenda-do-dia/agendamen
 import { SharedModule } from '../../shared/shared.module';
 import { NgxMaskModule } from 'ngx-mask';
 import { AaDatepickerModule } from 'ngx-animating-datepicker';
+import { PopoverModule } from 'ngx-smart-popover';
 
 @NgModule({
     imports: [
@@ -27,6 +28,7 @@ import { AaDatepickerModule } from 'ngx-animating-datepicker';
         SharedModule,
         NgxMaskModule.forRoot(),
         AaDatepickerModule,
+        PopoverModule
     ],
     declarations: [AgendaComponent, AgendaDoDiaComponent, ItemAgendamentoComponent, AgendamentoDetalhesComponent, AgendamentoManualComponent],
     providers: [
