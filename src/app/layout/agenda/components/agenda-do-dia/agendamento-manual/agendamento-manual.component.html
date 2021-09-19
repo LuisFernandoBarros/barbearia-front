@@ -3,11 +3,11 @@
         <div class="col-sm-6 col-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="row justify-content-between">
+                    <div class="row">
                         <div class="col-10">
                             Agendamento Manual
                         </div>
-                        <div class="col-2">
+                        <div class="col-2 text-right">
                             <!-- https://www.npmjs.com/package/ngx-smart-popover -->
                             <span [popover]="myPopover">
                                 <i class="fa fa-fw fa-question-circle"></i>&nbsp;
@@ -27,7 +27,7 @@
 
 
 
-                <div class="card-body text-center">
+                <div class="card-body text-left">
                     <span>Informações do Cliente</span>
                     <form [formGroup]="form">
                         <input type="text" formControlName="nome" placeholder="Nome"
@@ -69,7 +69,7 @@
                             </span>
                         </div>
                     </div>
-                    <a class="btn btn-light btn-lg" [routerLink]="['/agenda']">Voltar</a>
+                    <a class="btn btn-light btn-lg" [routerLink]="['/']">Voltar</a>
                     &nbsp;&nbsp;
                     <button type="submit" class="btn btn-success btn-lg mt-3 mb-3"
                         [disabled]="!form.valid || horarioSelected==undefined" (click)="submit()">

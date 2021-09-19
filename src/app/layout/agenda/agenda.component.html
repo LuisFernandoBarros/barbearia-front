@@ -1,4 +1,13 @@
 <div [@routerTransition]>
-    <h2 class="text-muted">Agenda</h2>
+    <div class="row mb-1">
+        <div class="col-10">
+            <h2 class="text-muted">Agenda</h2>
+        </div>
+        <div class="col-2 text-right">
+            <button type="button" class="btn btn-success btn-sm" [routerLink]="['/manual']">
+                <i class="fa fa-fw fa-plus-circle" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
     <app-agenda-do-dia></app-agenda-do-dia>
 </div>
