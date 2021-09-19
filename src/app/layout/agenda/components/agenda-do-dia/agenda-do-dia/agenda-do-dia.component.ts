@@ -31,13 +31,13 @@ export class AgendaDoDiaComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAgendamentos();
-    this.updateSubscription = interval(10000).subscribe(
+    /*this.updateSubscription = interval(10000).subscribe(
       (val) => {
         if (this.cookieService.check('token')) {
           this.refreshAgendamentos()
         }
 
-      });
+      });*/
     this.dataAgenda = this.getDataIso();
   }
 
