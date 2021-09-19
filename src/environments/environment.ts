@@ -4,8 +4,8 @@
 
 export const environment = {
     production: false,
-    API: "https://localhost:8050",
-    DOMINIO: "https://localhost:4200"
+    API: "http://localhost:8050",
+    DOMINIO: "http://localhost:4200"
 };
 
 /*
