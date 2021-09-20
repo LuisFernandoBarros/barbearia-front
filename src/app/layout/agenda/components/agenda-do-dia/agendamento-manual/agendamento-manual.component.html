@@ -15,8 +15,7 @@
                             <popover-content #myPopover placement="bottom" [animation]="true"
                                 [closeOnClickOutside]="true">
                                 Aqui você poderá inserir agendamentos manualmente.<br>
-                                É importante preencher corretamente as informações do cliente (nome, telefone e
-                                email).<br>
+                                É importante preencher corretamente as informações do cliente (nome e telefone).<br>
                                 <strong>Em breve</strong> você poderá gerar relatórios e otimizar o gerenciamento da sua
                                 barbearia com estas informações.
                             </popover-content>
@@ -33,10 +32,6 @@
                         <input type="text" formControlName="nome" placeholder="Nome"
                             class="form-control ng-untouched ng-pristine ng-valid mt-3" maxlength="100" />
                         <app-error-msg [control]="form.get('nome')" label="Nome"></app-error-msg>
-
-                        <input type="text" formControlName="email" name="email" placeholder="E-mail"
-                            class="form-control ng-untouched ng-pristine ng-valid mt-3" />
-                        <app-error-msg [control]="form.get('email')" label="Email"></app-error-msg>
 
                         <input type="text" formControlName="telefone" name="telefone" placeholder="Telefone"
                             class="form-control ng-untouched ng-pristine ng-valid mt-3" mask="(00) 0*" maxlength="20"
