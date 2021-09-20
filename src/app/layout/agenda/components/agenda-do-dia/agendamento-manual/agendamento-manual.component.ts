@@ -51,7 +51,6 @@ export class AgendamentoManualComponent implements OnInit {
     this.setServicos();
     this.form = this.formBuilder.group({
       nome: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
       telefone: ['', Validators.required],
       servico: ['', [Validators.required]]
     });
@@ -113,7 +112,6 @@ export class AgendamentoManualComponent implements OnInit {
       servico: this.form.value["servico"],
       nome: this.form.value["nome"],
       telefone: this.form.value["telefone"],
-      email: this.form.value["email"],
     };
 
     this.service.saveManualAgendamento(toSave).subscribe(
