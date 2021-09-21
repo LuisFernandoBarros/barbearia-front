@@ -14,12 +14,12 @@
         </tr>
         <tr>
           <th>Telefone</th>
-          <td>{{agendamento.telefone | formatar}}</td>
+          <td>{{ agendamento.telefone == null ? 'Não informado' : agendamento.telefone | formatar }}</td>
         </tr>
         <tr>
           <th>Dia</th>
           <td>{{agendamento.dataHora | date:"dd/MM/yyyy"}}</td>
-        </tr>        
+        </tr>
         <tr>
           <th>Hora</th>
           <td>{{agendamento.dataHora | date:"HH:mm"}}</td>
@@ -35,10 +35,10 @@
       </tbody>
     </table>
     <div class="col text-center">
-      <button type="button" class="btn btn-success btn-sm"  *ngIf="!isAgendamentoAtendido()"
+      <button type="button" class="btn btn-success btn-sm" *ngIf="!isAgendamentoAtendido()"
         (click)="compareceu(agendamento.id)">Atender</button>&nbsp;
       <button type="button" class="btn btn-danger btn-sm fixed-size" (click)="cancelou(agendamento.id)"> Apagar
       </button>
     </div>
-  </div>  
+  </div>
 </ng-template>
