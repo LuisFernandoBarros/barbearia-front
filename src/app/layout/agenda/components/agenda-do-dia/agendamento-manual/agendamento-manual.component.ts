@@ -51,7 +51,7 @@ export class AgendamentoManualComponent implements OnInit {
     this.setServicos();
     this.form = this.formBuilder.group({
       nome: ['', Validators.required],
-      telefone: ['', Validators.required],
+      telefone: [null],
       servico: ['', [Validators.required]]
     });
   }
