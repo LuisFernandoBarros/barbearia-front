@@ -91,6 +91,11 @@ export class AgendamentoManualComponent implements OnInit {
     )
   };
 
+  onChangeServico(){
+    this.horarioWtihClasses = [];
+    this.horarioSelected = undefined;
+  }
+
   onChangeHorario(horarioSelected: string) {
     this.horarioSelected = horarioSelected;
     this.horarioWtihClasses.forEach(it => {

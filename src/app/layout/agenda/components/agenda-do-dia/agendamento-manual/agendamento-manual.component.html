@@ -38,7 +38,8 @@
                             minlength="11" />
                         <app-error-msg [control]="form.get('telefone')" label="Telefone"></app-error-msg>
 
-                        <select class="form-control input-underline input-lg mt-3" formControlName="servico">
+                        <select class="form-control input-underline input-lg mt-3" formControlName="servico"
+                            (change)="onChangeServico()">
                             <option value="" disabled selected>Serviço</option>
                             <option [ngValue]="servico.id" class="dropdown-item" *ngFor="let servico of servicos">
                                 {{servico.descricao}} ({{ servico.valor | currency:'R$ ' }})</option>
