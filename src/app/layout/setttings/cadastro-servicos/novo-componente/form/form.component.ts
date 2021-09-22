@@ -54,7 +54,8 @@ export class FormComponent implements OnInit {
     request.subscribe(
       (resp) => {
         this.isLoading = false;
-        this.toast.success(MSG_PADRAO.SAVE_SUCCESS);
+        this.toast.success(MSG_PADRAO.SAVE_SUCCESS);                
+        this.servico.descricao = resp.descricao;        
         if (!this.isUpdate()) {
           this.router.navigate(['/servicos']);
         }
