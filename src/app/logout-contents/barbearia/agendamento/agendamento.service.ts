@@ -37,11 +37,11 @@ export class AgendamentoService {
         return this.httpClient.post<any>(`${this.baseUrl}/agendamento-cliente/cancelar/${id}`, JSON.stringify(telefone))
     };
 
-    getByCelularCliente(celular: string) {
+    getByCelularClienteAndBarbearia(celular: string, barbeariaId: number) {
         const params = new HttpParams()
             .set('celular', celular);
 
-        return this.httpClient.get<Array<any>>(`${this.baseUrl}/agendamento-cliente`, {
+        return this.httpClient.get<Array<any>>(`${this.baseUrl}/agendamento-cliente/${barbeariaId}`, {
             params: params
         });
     };
