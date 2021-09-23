@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ImageLogoService } from '../../../shared/services/image-logo.service';
 import { Barbearia } from '../../../layout/setttings/cadastro-barbearia/barbearia';
+import { APP_INFO } from '../../../shared/services/app-info.enum';
 
 @Component({
   selector: 'app-barbearia-header',
@@ -9,7 +10,8 @@ import { Barbearia } from '../../../layout/setttings/cadastro-barbearia/barbeari
 })
 export class BarbeariaHeaderComponent implements OnInit {
 
-  @Input() barbearia: Barbearia;  
+  @Input() barbearia: Barbearia;
+  public appInfo = APP_INFO;  
   constructor(private logoService: ImageLogoService) { }
 
   ngOnInit(): void {    
