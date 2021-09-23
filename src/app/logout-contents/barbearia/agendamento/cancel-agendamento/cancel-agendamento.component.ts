@@ -57,7 +57,7 @@ export class CancelAgendamentoComponent implements OnInit {
   }
 
   getAgendamentoByCelular() {
-    this.service.getByCelularCliente(this.identificacao.value["telefone"]).subscribe(
+    this.service.getByCelularClienteAndBarbearia(this.identificacao.value["telefone"], this.barbearia.id).subscribe(
       (resp) => {
         if (resp.length == 0) {
           this.toastService.info("Nenhum agendamento encontrado para este telefone.");
